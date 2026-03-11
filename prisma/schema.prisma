@@ -4,26 +4,57 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+    provider  = "postgresql"
+    url       = env("DATABASE_URL")
+}
+
+model UserProfile {
+    id                String   @id @default(cuid())
+    clerkId           String   @unique
+    userId            String   @unique
+    firstName         String
+    lastName          String
+    otherNames        String?
+    displayName       String
+    username          String   @unique
+    primaryEmail      String
+    alternateEmail    String?
+    phoneNumber       String?
+    workPhone         String?
+    alternatePhone    String?
+    profilePhoto      String?
+    country           String?
+    stateRegion       String?
+    cityTown          String?
+    streetAddress     String?
+    postalCode        String?
+    emergencyName     String?
+    emergencyPhone    String?
+    emergencyRelation String?
+    profileComplete   Int      @default(0)
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+
+    @@index([clerkId])
+    @@index([username])
 }
 
 model Workspace {
-    id          String   @id @default(cuid())
+    id          String    @id @default(cuid())
     name        String
-    type        String   // "business", "organization", "project"
+    type        String
     industry    String?
     country     String?
     employees   String?
     currency    String?
     description String?
-    status      String?  // for projects: "planning", "in_progress", "on_hold"
+    status      String?
     startDate   DateTime?
     endDate     DateTime?
-    ownerId     String   // Clerk user ID
-    slug        String   @unique
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
+    ownerId     String
+    slug        String    @unique
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
 
     members     WorkspaceMember[]
     invites     WorkspaceInvite[]
@@ -34,8 +65,8 @@ model Workspace {
 model WorkspaceMember {
     id          String    @id @default(cuid())
     workspaceId String
-    userId      String    // Clerk user ID
-    role        String    // "owner", "co-owner", "admin", "manager", "employee", "guest"
+    userId      String
+    role        String
     createdAt   DateTime  @default(now())
 
     workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
@@ -48,7 +79,7 @@ model WorkspaceInvite {
     id          String    @id @default(cuid())
     workspaceId String
     email       String
-    role        String    // "co-owner", "admin", "manager", "employee", "guest"
+    role        String
     token       String    @unique @default(cuid())
     accepted    Boolean   @default(false)
     createdAt   DateTime  @default(now())
