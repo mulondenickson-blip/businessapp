@@ -12,8 +12,8 @@ export default async function SignUpPage() {
         path="/sign-up"
         routing="path"
         signInUrl="/sign-in"
-        forceRedirectUrl="/dashboard"
-        fallbackRedirectUrl="/dashboard"
+        forceRedirectUrl="/setup-profile"
+        fallbackRedirectUrl="/setup-profile"
         signInForceRedirectUrl="/dashboard"
         signInFallbackRedirectUrl="/dashboard"
       />
