@@ -121,11 +121,41 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.PostScalarFieldEnum = {
+exports.Prisma.WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  type: 'type',
+  industry: 'industry',
+  country: 'country',
+  employees: 'employees',
+  currency: 'currency',
+  description: 'description',
+  status: 'status',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  ownerId: 'ownerId',
+  slug: 'slug',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WorkspaceMemberScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  role: 'role',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WorkspaceInviteScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  email: 'email',
+  role: 'role',
+  token: 'token',
+  accepted: 'accepted',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -138,9 +168,16 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  Post: 'Post'
+  Workspace: 'Workspace',
+  WorkspaceMember: 'WorkspaceMember',
+  WorkspaceInvite: 'WorkspaceInvite'
 };
 
 /**

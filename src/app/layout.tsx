@@ -17,7 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
+      afterSignOutUrl="/"
+    >
       <html lang="en">
         <body className={geist.className}>{children}</body>
       </html>

@@ -93,11 +93,41 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.PostScalarFieldEnum = {
+exports.Prisma.WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  type: 'type',
+  industry: 'industry',
+  country: 'country',
+  employees: 'employees',
+  currency: 'currency',
+  description: 'description',
+  status: 'status',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  ownerId: 'ownerId',
+  slug: 'slug',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WorkspaceMemberScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  role: 'role',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WorkspaceInviteScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  email: 'email',
+  role: 'role',
+  token: 'token',
+  accepted: 'accepted',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -110,9 +140,16 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  Post: 'Post'
+  Workspace: 'Workspace',
+  WorkspaceMember: 'WorkspaceMember',
+  WorkspaceInvite: 'WorkspaceInvite'
 };
 /**
  * Create the Client
@@ -161,13 +198,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Post {\n  id        Int      @id @default(autoincrement())\n  name      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([name])\n}\n",
-  "inlineSchemaHash": "4dfee2d805d63053d5ae63a6ff65a5c68e353713bdd4147909d9158ea83d8e0f",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Workspace {\n  id          String    @id @default(cuid())\n  name        String\n  type        String // \"business\", \"organization\", \"project\"\n  industry    String?\n  country     String?\n  employees   String?\n  currency    String?\n  description String?\n  status      String? // for projects: \"planning\", \"in_progress\", \"on_hold\"\n  startDate   DateTime?\n  endDate     DateTime?\n  ownerId     String // Clerk user ID\n  slug        String    @unique\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n\n  members WorkspaceMember[]\n  invites WorkspaceInvite[]\n\n  @@index([ownerId])\n}\n\nmodel WorkspaceMember {\n  id          String   @id @default(cuid())\n  workspaceId String\n  userId      String // Clerk user ID\n  role        String // \"owner\", \"co-owner\", \"admin\", \"manager\", \"employee\", \"guest\"\n  createdAt   DateTime @default(now())\n\n  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n\n  @@unique([workspaceId, userId])\n  @@index([userId])\n}\n\nmodel WorkspaceInvite {\n  id          String   @id @default(cuid())\n  workspaceId String\n  email       String\n  role        String // \"co-owner\", \"admin\", \"manager\", \"employee\", \"guest\"\n  token       String   @unique @default(cuid())\n  accepted    Boolean  @default(false)\n  createdAt   DateTime @default(now())\n  expiresAt   DateTime\n\n  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)\n\n  @@index([email])\n  @@index([token])\n}\n",
+  "inlineSchemaHash": "801dc4d4c436387759aaa5f21961f532fe6dc0f69d06e533c4ba4070ad65ded5",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Post\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Workspace\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"industry\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"country\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"employees\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"currency\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"startDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"endDate\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"ownerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"members\",\"kind\":\"object\",\"type\":\"WorkspaceMember\",\"relationName\":\"WorkspaceToWorkspaceMember\"},{\"name\":\"invites\",\"kind\":\"object\",\"type\":\"WorkspaceInvite\",\"relationName\":\"WorkspaceToWorkspaceInvite\"}],\"dbName\":null},\"WorkspaceMember\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"WorkspaceToWorkspaceMember\"}],\"dbName\":null},\"WorkspaceInvite\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"token\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"accepted\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"Workspace\",\"relationName\":\"WorkspaceToWorkspaceInvite\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
