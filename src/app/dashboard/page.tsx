@@ -1,26 +1,25 @@
 import { UserButton } from "@clerk/nextjs";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
+import { PrismaClient } from "../../../generated/prisma";
 
-async function getWorkspaces(userId: string) {
+const prisma = new PrismaClient();
+
+async function getWorkspaces() {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3001"}/api/workspaces`,
-      {
-        headers: {
-          "Content-Type": "application/json",
+    const { userId } = await auth();
+    if (!userId) return [];
+
+    const workspaces = await prisma.workspace.findMany({
+      where: {
+        members: {
+          some: { userId },
         },
-        cache: "no-store",
-      }
-    );
-    if (!response.ok) return [];
-    const data = await response.json() as { workspaces: Array<{
-      id: string;
-      name: string;
-      type: string;
-      createdAt: string;
-    }> };
-    return data.workspaces ?? [];
+      },
+      orderBy: { createdAt: "desc" },
+    });
+
+    return workspaces;
   } catch {
     return [];
   }
@@ -28,7 +27,7 @@ async function getWorkspaces(userId: string) {
 
 export default async function DashboardPage() {
   const user = await currentUser();
-  const workspaces = user ? await getWorkspaces(user.id) : [];
+  const workspaces = await getWorkspaces();
 
   const activity: Array<{
     id: string;

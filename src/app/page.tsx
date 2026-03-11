@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function LandingPage() {
   return (
     <main className="min-h-screen bg-white text-gray-900">
@@ -12,8 +14,8 @@ export default function LandingPage() {
           <a href="#about" className="hover:text-indigo-600 transition">About</a>
         </div>
         <div className="flex items-center gap-3">
-          <a href="/sign-in" className="text-sm text-gray-600 hover:text-indigo-600 transition">Login</a>
-          <a href="/sign-up" className="text-sm bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Get Started</a>
+          <Link href="/sign-in" className="text-sm text-gray-600 hover:text-indigo-600 transition">Login</Link>
+          <Link href="/sign-up" className="text-sm bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">Get Started</Link>
         </div>
       </nav>
 
@@ -30,9 +32,9 @@ export default function LandingPage() {
           MUNIX gives businesses, teams, and project managers a powerful workspace to collaborate, track progress, manage people, and grow — all in one platform.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          <a href="/sign-up" className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">
+          <Link href="/sign-up" className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">
             Get Started Free
-          </a>
+          </Link>
           <a href="#features" className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg text-sm font-semibold hover:border-indigo-400 transition">
             See How It Works
           </a>
@@ -85,9 +87,9 @@ export default function LandingPage() {
                   </li>
                 ))}
               </ul>
-              <a href="/sign-up" className={`block text-center py-2 rounded-lg text-sm font-semibold transition ${tier.highlight ? "bg-indigo-600 text-white hover:bg-indigo-700" : "border border-indigo-600 text-indigo-600 hover:bg-indigo-50"}`}>
+              <Link href="/sign-up" className={`block text-center py-2 rounded-lg text-sm font-semibold transition ${tier.highlight ? "bg-indigo-600 text-white hover:bg-indigo-700" : "border border-indigo-600 text-indigo-600 hover:bg-indigo-50"}`}>
                 Get Started
-              </a>
+              </Link>
             </div>
           ))}
         </div>
@@ -97,9 +99,9 @@ export default function LandingPage() {
       <section className="px-8 py-24 text-center">
         <h2 className="text-4xl font-bold text-gray-900 mb-4">Ready to Get Started?</h2>
         <p className="text-gray-500 mb-8 max-w-xl mx-auto">Join thousands of teams already using MUNIX to manage their work smarter.</p>
-        <a href="/sign-up" className="bg-indigo-600 text-white px-10 py-3 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">
+        <Link href="/sign-up" className="bg-indigo-600 text-white px-10 py-3 rounded-lg text-sm font-semibold hover:bg-indigo-700 transition">
           Create Your Free Account
-        </a>
+        </Link>
       </section>
 
       {/* Footer */}
