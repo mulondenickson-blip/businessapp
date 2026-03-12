@@ -2,17 +2,32 @@
 
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+
+function generateUserId() {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let result = "USR-";
+  for (let i = 0; i < 6; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
 
 export default function SetupProfilePage() {
   const { user, isLoaded } = useUser();
   const router = useRouter();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const [userId] = useState(() => generateUserId());
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [otherNames, setOtherNames] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [username, setUsername] = useState("");
+  const [profilePhoto, setProfilePhoto] = useState<string | null>(null);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
   const [usernameStatus, setUsernameStatus] = useState<"idle" | "checking" | "available" | "taken">("idle");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -25,7 +40,7 @@ export default function SetupProfilePage() {
       setFirstName(fn);
       setLastName(ln);
       setDisplayName(fn);
-      const suggested = `${fn.toLowerCase()}.${ln.toLowerCase()}`.replace(/\s+/g, "");
+      const suggested = `${fn.toLowerCase()}.${ln.toLowerCase()}`.replace(/\s+/g, "").replace(/[^a-z0-9._]/g, "");
       setUsername(suggested);
     }
   }, [isLoaded, user]);
@@ -56,6 +71,35 @@ export default function SetupProfilePage() {
     return () => clearTimeout(timeout);
   }, [username, checkUsername]);
 
+  async function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Show preview immediately
+    const reader = new FileReader();
+    reader.onload = (ev) => setPhotoPreview(ev.target?.result as string);
+    reader.readAsDataURL(file);
+
+    // Upload to Cloudinary
+    setIsUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await res.json() as { url?: string; error?: string };
+      if (data.url) {
+        setProfilePhoto(data.url);
+      }
+    } catch {
+      console.error("Upload failed");
+    } finally {
+      setIsUploading(false);
+    }
+  }
+
   const errors = {
     firstName: !firstName.trim(),
     lastName: !lastName.trim(),
@@ -63,7 +107,7 @@ export default function SetupProfilePage() {
     displayName: !displayName.trim(),
   };
 
-  const canSubmit = !Object.values(errors).some(Boolean) && usernameStatus !== "checking";
+  const canSubmit = !Object.values(errors).some(Boolean) && usernameStatus !== "checking" && !isUploading;
 
   async function handleSubmit() {
     setAttempted(true);
@@ -77,12 +121,14 @@ export default function SetupProfilePage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          userId,
           firstName: firstName.trim(),
           lastName: lastName.trim(),
           otherNames: otherNames.trim() || undefined,
           displayName: displayName.trim(),
           username: username.trim(),
           primaryEmail: user?.primaryEmailAddress?.emailAddress ?? "",
+          profilePhoto: profilePhoto ?? undefined,
         }),
       });
 
@@ -106,9 +152,13 @@ export default function SetupProfilePage() {
     );
   }
 
+  const initials = `${firstName[0] ?? ""}${lastName[0] ?? ""}`.toUpperCase();
+
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 py-12">
       <div className="w-full max-w-lg">
+
+        {/* Header */}
         <div className="text-center mb-8">
           <div className="text-2xl font-bold text-indigo-600 mb-2">MUNIX</div>
           <h1 className="text-2xl font-bold text-gray-900">Set Up Your Profile</h1>
@@ -118,17 +168,45 @@ export default function SetupProfilePage() {
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
+
+          {/* User ID */}
+          <div className="mb-6 rounded-lg bg-indigo-50 border border-indigo-100 px-4 py-3 flex items-center justify-between">
+            <span className="text-xs text-indigo-500 font-medium">Your MUNIX User ID</span>
+            <span className="text-sm font-bold text-indigo-700 tracking-widest">{userId}</span>
+          </div>
+
+          {/* Profile Photo */}
           <div className="flex flex-col items-center mb-8">
-            <div className="h-20 w-20 rounded-full bg-indigo-100 flex items-center justify-center text-2xl font-bold text-indigo-600 mb-3">
-              {firstName ? firstName[0]?.toUpperCase() : "?"}
-              {lastName ? lastName[0]?.toUpperCase() : ""}
+            <div
+              className="h-24 w-24 rounded-full bg-indigo-100 flex items-center justify-center text-2xl font-bold text-indigo-600 mb-3 overflow-hidden cursor-pointer border-2 border-indigo-200 hover:border-indigo-400 transition"
+              onClick={() => fileInputRef.current?.click()}
+            >
+              {photoPreview ? (
+                <img src={photoPreview} alt="Profile" className="h-full w-full object-cover" />
+              ) : (
+                <span>{initials || "?"}</span>
+              )}
             </div>
-            <button type="button" className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
-              Upload photo (coming soon)
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handlePhotoChange}
+            />
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition"
+            >
+              {isUploading ? "Uploading..." : photoPreview ? "Change photo" : "Upload profile photo"}
             </button>
+            <p className="text-xs text-gray-400 mt-1">Optional. JPG, PNG up to 10MB.</p>
           </div>
 
           <div className="space-y-5">
+
+            {/* First Name */}
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-sm font-medium text-gray-900">First Name</label>
@@ -145,6 +223,7 @@ export default function SetupProfilePage() {
               )}
             </div>
 
+            {/* Last Name */}
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-sm font-medium text-gray-900">Last Name</label>
@@ -161,6 +240,7 @@ export default function SetupProfilePage() {
               )}
             </div>
 
+            {/* Other Names */}
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-sm font-medium text-gray-900">Other Names</label>
@@ -174,6 +254,7 @@ export default function SetupProfilePage() {
               />
             </div>
 
+            {/* Display Name */}
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-sm font-medium text-gray-900">Display Name</label>
@@ -193,6 +274,7 @@ export default function SetupProfilePage() {
               )}
             </div>
 
+            {/* Username */}
             <div>
               <div className="flex items-center justify-between mb-1">
                 <label className="text-sm font-medium text-gray-900">Username</label>
@@ -202,7 +284,7 @@ export default function SetupProfilePage() {
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">@</span>
                 <input
                   value={username}
-                  onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/\s+/g, ""))}
+                  onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9._]/g, ""))}
                   className={[
                     "w-full rounded-lg border px-3 py-2 pl-7 text-sm outline-none focus:ring-2",
                     usernameStatus === "taken"
@@ -224,12 +306,13 @@ export default function SetupProfilePage() {
                 )}
               </div>
               <p className="mt-1 text-xs text-gray-400">
-                Your unique identifier on MUNIX.
+                Your unique identifier on MUNIX. Lowercase letters, numbers, dots and underscores only.
               </p>
               {attempted && !username.trim() && (
                 <p className="mt-1 text-xs text-rose-600">This field is required</p>
               )}
             </div>
+
           </div>
 
           {submitError && (
@@ -241,17 +324,17 @@ export default function SetupProfilePage() {
           <button
             type="button"
             onClick={handleSubmit}
-            disabled={isSubmitting}
+            disabled={isSubmitting || isUploading}
             className={[
               "mt-8 w-full rounded-lg px-5 py-3 text-sm font-semibold text-white transition",
-              isSubmitting ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700",
+              isSubmitting || isUploading ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700",
             ].join(" ")}
           >
             {isSubmitting ? "Saving..." : "Complete Setup →"}
           </button>
 
           <p className="mt-4 text-center text-xs text-gray-400">
-            You can update these details anytime from your profile settings.
+            You can complete your full profile anytime from settings.
           </p>
         </div>
       </div>

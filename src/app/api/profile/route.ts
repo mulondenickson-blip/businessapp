@@ -26,6 +26,7 @@ export async function POST(request: Request) {
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const body = await request.json() as {
+      userId: string;
       firstName: string;
       lastName: string;
       otherNames?: string;
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
       },
       create: {
         clerkId: userId,
-        userId: userId,
+        userId: body.userId,
         firstName: body.firstName,
         lastName: body.lastName,
         otherNames: body.otherNames,

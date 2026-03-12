@@ -25,9 +25,27 @@ async function getWorkspaces() {
   }
 }
 
+async function getUserProfile() {
+  try {
+    const { userId } = await auth();
+    if (!userId) return null;
+
+    const profile = await prisma.userProfile.findUnique({
+      where: { clerkId: userId },
+    });
+
+    return profile;
+  } catch {
+    return null;
+  }
+}
+
 export default async function DashboardPage() {
   const user = await currentUser();
   const workspaces = await getWorkspaces();
+  const profile = await getUserProfile();
+
+  const displayName = profile?.displayName ?? user?.firstName ?? "User";
 
   const activity: Array<{
     id: string;
@@ -57,7 +75,7 @@ export default async function DashboardPage() {
         <div className="text-xl font-bold text-indigo-600">MUNIX</div>
         <div className="flex items-center gap-4">
           <span className="text-sm text-gray-600">
-            Welcome, {user?.firstName ?? "User"}
+            Welcome, {displayName}
           </span>
           <UserButton />
         </div>
@@ -70,7 +88,7 @@ export default async function DashboardPage() {
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
           <p className="text-gray-500 text-sm mt-1">
-            Welcome back, {user?.firstName ?? "User"}
+            Welcome back, {displayName}
           </p>
         </div>
 
