@@ -34,6 +34,18 @@ export async function POST(request: Request) {
       username: string;
       primaryEmail: string;
       profilePhoto?: string;
+      alternateEmail?: string;
+      phoneNumber?: string;
+      workPhone?: string;
+      alternatePhone?: string;
+      country?: string;
+      stateRegion?: string;
+      cityTown?: string;
+      streetAddress?: string;
+      postalCode?: string;
+      emergencyName?: string;
+      emergencyPhone?: string;
+      emergencyRelation?: string;
     };
 
     // Check username availability
@@ -55,6 +67,18 @@ export async function POST(request: Request) {
         username: body.username,
         primaryEmail: body.primaryEmail,
         profilePhoto: body.profilePhoto,
+        alternateEmail: body.alternateEmail,
+        phoneNumber: body.phoneNumber,
+        workPhone: body.workPhone,
+        alternatePhone: body.alternatePhone,
+        country: body.country,
+        stateRegion: body.stateRegion,
+        cityTown: body.cityTown,
+        streetAddress: body.streetAddress,
+        postalCode: body.postalCode,
+        emergencyName: body.emergencyName,
+        emergencyPhone: body.emergencyPhone,
+        emergencyRelation: body.emergencyRelation,
       },
       create: {
         clerkId: userId,
@@ -66,6 +90,18 @@ export async function POST(request: Request) {
         username: body.username,
         primaryEmail: body.primaryEmail,
         profilePhoto: body.profilePhoto,
+        alternateEmail: body.alternateEmail,
+        phoneNumber: body.phoneNumber,
+        workPhone: body.workPhone,
+        alternatePhone: body.alternatePhone,
+        country: body.country,
+        stateRegion: body.stateRegion,
+        cityTown: body.cityTown,
+        streetAddress: body.streetAddress,
+        postalCode: body.postalCode,
+        emergencyName: body.emergencyName,
+        emergencyPhone: body.emergencyPhone,
+        emergencyRelation: body.emergencyRelation,
       },
     });
 
