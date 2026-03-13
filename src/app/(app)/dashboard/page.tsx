@@ -65,7 +65,7 @@ export default async function DashboardPage() {
 
       {/* My Workspaces */}
       <section className="mb-10">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center justify-between gap-4 mb-4">
           <h2 className="text-lg font-semibold text-gray-900">My Workspaces</h2>
           {workspaces.length > 0 && (
             <Link
@@ -78,7 +78,7 @@ export default async function DashboardPage() {
         </div>
 
         {workspaces.length === 0 ? (
-          <div className="mt-4 rounded-xl border border-gray-100 bg-white p-8 text-center">
+          <div className="rounded-xl border border-gray-100 bg-white p-8 text-center">
             <p className="text-sm text-gray-500">
               You have no workspaces yet. Create one to get started.
             </p>
@@ -90,7 +90,7 @@ export default async function DashboardPage() {
             </Link>
           </div>
         ) : (
-          <div className="mt-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {workspaces.map((ws) => {
               const meta = workspaceMeta[ws.type] ?? { label: ws.type, icon: "📁" };
               return (
@@ -124,7 +124,7 @@ export default async function DashboardPage() {
       </section>
 
       {/* Stats Row */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3 mb-10">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
         <div className="rounded-xl border border-gray-100 bg-white p-6">
           <div className="text-sm text-gray-500 mb-1">Total Workspaces</div>
           <div className="text-3xl font-bold text-indigo-600">{workspaces.length}</div>
@@ -138,14 +138,6 @@ export default async function DashboardPage() {
           <div className="text-3xl font-bold text-indigo-600">0</div>
         </div>
       </div>
-
-      {/* Recent Activity */}
-      <section className="rounded-xl border border-gray-100 bg-white p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h2>
-        <div className="py-10 text-center text-sm text-gray-400">
-          No activity yet. Start by creating a workspace!
-        </div>
-      </section>
 
     </div>
   );
