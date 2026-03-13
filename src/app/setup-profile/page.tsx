@@ -13,12 +13,22 @@ function generateUserId() {
   return result;
 }
 
+// Store User ID in sessionStorage so it never regenerates during the session
+function getOrCreateUserId() {
+  const stored = sessionStorage.getItem("munix_setup_user_id");
+  if (stored) return stored;
+  const newId = generateUserId();
+  sessionStorage.setItem("munix_setup_user_id", newId);
+  return newId;
+}
+
 export default function SetupProfilePage() {
   const { user, isLoaded } = useUser();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [userId] = useState(() => generateUserId());
+  // Form state — all in one place, never reset by photo upload
+  const [userId, setUserId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [otherNames, setOtherNames] = useState("");
@@ -27,28 +37,38 @@ export default function SetupProfilePage() {
   const [profilePhoto, setProfilePhoto] = useState<string | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [displayNameManuallyEdited, setDisplayNameManuallyEdited] = useState(false);
 
   const [usernameStatus, setUsernameStatus] = useState<"idle" | "checking" | "available" | "taken">("idle");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [attempted, setAttempted] = useState(false);
 
+  // Generate User ID once — stored in sessionStorage so page refresh keeps same ID
+  useEffect(() => {
+    setUserId(getOrCreateUserId());
+  }, []);
+
+  // Pre-fill from Clerk — only runs once when user loads
   useEffect(() => {
     if (isLoaded && user) {
       const fn = user.firstName ?? "";
       const ln = user.lastName ?? "";
-      setFirstName(fn);
-      setLastName(ln);
-      setDisplayName(fn);
-      const suggested = `${fn.toLowerCase()}.${ln.toLowerCase()}`.replace(/\s+/g, "").replace(/[^a-z0-9._]/g, "");
-      setUsername(suggested);
+      setFirstName((prev) => prev || fn);
+      setLastName((prev) => prev || ln);
+      setDisplayName((prev) => prev || fn);
+      setUsername((prev) => prev || `${fn.toLowerCase()}.${ln.toLowerCase()}`.replace(/\s+/g, "").replace(/[^a-z0-9._]/g, ""));
     }
   }, [isLoaded, user]);
 
+  // Auto update display name from first name ONLY if user hasn't manually edited it
   useEffect(() => {
-    if (firstName) setDisplayName(firstName);
-  }, [firstName]);
+    if (!displayNameManuallyEdited && firstName) {
+      setDisplayName(firstName);
+    }
+  }, [firstName, displayNameManuallyEdited]);
 
+  // Username availability check with debounce
   const checkUsername = useCallback(async (value: string) => {
     if (!value.trim() || value.length < 3) {
       setUsernameStatus("idle");
@@ -71,16 +91,19 @@ export default function SetupProfilePage() {
     return () => clearTimeout(timeout);
   }, [username, checkUsername]);
 
+  // Photo upload — completely isolated, does NOT touch any other state
   async function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Show preview immediately
+    // Show local preview immediately
     const reader = new FileReader();
-    reader.onload = (ev) => setPhotoPreview(ev.target?.result as string);
+    reader.onload = (ev) => {
+      setPhotoPreview(ev.target?.result as string);
+    };
     reader.readAsDataURL(file);
 
-    // Upload to Cloudinary
+    // Upload in background without affecting other fields
     setIsUploading(true);
     try {
       const formData = new FormData();
@@ -94,7 +117,7 @@ export default function SetupProfilePage() {
         setProfilePhoto(data.url);
       }
     } catch {
-      console.error("Upload failed");
+      console.error("Photo upload failed");
     } finally {
       setIsUploading(false);
     }
@@ -107,7 +130,10 @@ export default function SetupProfilePage() {
     displayName: !displayName.trim(),
   };
 
-  const canSubmit = !Object.values(errors).some(Boolean) && usernameStatus !== "checking" && !isUploading;
+  const canSubmit =
+    !Object.values(errors).some(Boolean) &&
+    usernameStatus !== "checking" &&
+    !isUploading;
 
   async function handleSubmit() {
     setAttempted(true);
@@ -136,6 +162,9 @@ export default function SetupProfilePage() {
         const data = await res.json() as { error?: string };
         throw new Error(data.error ?? "Failed to save profile");
       }
+
+      // Clear the session storage ID after successful save
+      sessionStorage.removeItem("munix_setup_user_id");
 
       router.push("/dashboard");
     } catch (err) {
@@ -169,13 +198,15 @@ export default function SetupProfilePage() {
 
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
 
-          {/* User ID */}
+          {/* User ID — shown but never editable */}
           <div className="mb-6 rounded-lg bg-indigo-50 border border-indigo-100 px-4 py-3 flex items-center justify-between">
             <span className="text-xs text-indigo-500 font-medium">Your MUNIX User ID</span>
-            <span className="text-sm font-bold text-indigo-700 tracking-widest">{userId}</span>
+            <span className="text-sm font-bold text-indigo-700 tracking-widest">
+              {userId || "Generating..."}
+            </span>
           </div>
 
-          {/* Profile Photo */}
+          {/* Profile Photo — isolated upload section */}
           <div className="flex flex-col items-center mb-8">
             <div
               className="h-24 w-24 rounded-full bg-indigo-100 flex items-center justify-center text-2xl font-bold text-indigo-600 mb-3 overflow-hidden cursor-pointer border-2 border-indigo-200 hover:border-indigo-400 transition"
@@ -199,9 +230,13 @@ export default function SetupProfilePage() {
               onClick={() => fileInputRef.current?.click()}
               className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition"
             >
-              {isUploading ? "Uploading..." : photoPreview ? "Change photo" : "Upload profile photo"}
+              {isUploading
+                ? "Uploading..."
+                : photoPreview
+                  ? "Change photo"
+                  : "Upload profile photo"}
             </button>
-            <p className="text-xs text-gray-400 mt-1">Optional. JPG, PNG up to 10MB.</p>
+            <p className="text-xs text-gray-400 mt-1">Optional · JPG or PNG · Max 10MB</p>
           </div>
 
           <div className="space-y-5">
@@ -262,7 +297,10 @@ export default function SetupProfilePage() {
               </div>
               <input
                 value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
+                onChange={(e) => {
+                  setDisplayName(e.target.value);
+                  setDisplayNameManuallyEdited(true);
+                }}
                 className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
                 placeholder="Name shown in the app"
               />
@@ -284,7 +322,11 @@ export default function SetupProfilePage() {
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-gray-400">@</span>
                 <input
                   value={username}
-                  onChange={(e) => setUsername(e.target.value.toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9._]/g, ""))}
+                  onChange={(e) =>
+                    setUsername(
+                      e.target.value.toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9._]/g, "")
+                    )
+                  }
                   className={[
                     "w-full rounded-lg border px-3 py-2 pl-7 text-sm outline-none focus:ring-2",
                     usernameStatus === "taken"
@@ -296,17 +338,23 @@ export default function SetupProfilePage() {
                   placeholder="your.username"
                 />
                 {usernameStatus === "checking" && (
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">Checking...</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400">
+                    Checking...
+                  </span>
                 )}
                 {usernameStatus === "available" && (
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-green-600 font-medium">✓ Available</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-green-600 font-medium">
+                    ✓ Available
+                  </span>
                 )}
                 {usernameStatus === "taken" && (
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-rose-600 font-medium">✕ Taken</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-rose-600 font-medium">
+                    ✕ Taken
+                  </span>
                 )}
               </div>
               <p className="mt-1 text-xs text-gray-400">
-                Your unique identifier on MUNIX. Lowercase letters, numbers, dots and underscores only.
+                Lowercase letters, numbers, dots and underscores only.
               </p>
               {attempted && !username.trim() && (
                 <p className="mt-1 text-xs text-rose-600">This field is required</p>
@@ -327,7 +375,9 @@ export default function SetupProfilePage() {
             disabled={isSubmitting || isUploading}
             className={[
               "mt-8 w-full rounded-lg px-5 py-3 text-sm font-semibold text-white transition",
-              isSubmitting || isUploading ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700",
+              isSubmitting || isUploading
+                ? "bg-indigo-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700",
             ].join(" ")}
           >
             {isSubmitting ? "Saving..." : "Complete Setup →"}

@@ -13,12 +13,18 @@ type Props = {
   children: React.ReactNode;
 };
 
-const navItems = [
+const mainNavItems = [
   { href: "/dashboard", icon: "🏠", label: "Dashboard" },
   { href: "/workspaces", icon: "📁", label: "My Workspaces" },
-  { href: "/projects", icon: "📋", label: "Projects" },
-  { href: "/tasks", icon: "✅", label: "Tasks" },
-  { href: "/reports", icon: "📊", label: "Reports" },
+  { href: "/calendar", icon: "📅", label: "Calendar" },
+  { href: "/inbox", icon: "📨", label: "Inbox" },
+  { href: "/activity", icon: "🕐", label: "Recent Activity" },
+  { href: "/notifications", icon: "🔔", label: "Notifications" },
+];
+
+const bottomNavItems = [
+  { href: "/settings", icon: "⚙️", label: "Settings" },
+  { href: "/help", icon: "❓", label: "Help" },
 ];
 
 export default function AppShell({
@@ -31,7 +37,6 @@ export default function AppShell({
   const pathname = usePathname();
   const { signOut } = useClerk();
   const [profileOpen, setProfileOpen] = useState(false);
-  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const initials = displayName
@@ -40,6 +45,27 @@ export default function AppShell({
     .join("")
     .toUpperCase()
     .slice(0, 2);
+
+  const allNavItems = [...mainNavItems, ...bottomNavItems];
+  const currentPage = allNavItems.find((n) => n.href === pathname)?.label ?? "MUNIX";
+
+  function NavLink({ href, icon, label }: { href: string; icon: string; label: string }) {
+    const isActive = pathname === href;
+    return (
+      <Link
+        href={href}
+        className={[
+          "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition",
+          isActive
+            ? "bg-indigo-50 text-indigo-700"
+            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+        ].join(" ")}
+      >
+        <span className="text-lg flex-shrink-0">{icon}</span>
+        {sidebarOpen && <span>{label}</span>}
+      </Link>
+    );
+  }
 
   return (
     <div className="flex min-h-screen bg-gray-50">
@@ -65,46 +91,39 @@ export default function AppShell({
           </button>
         </div>
 
-        {/* Nav Items */}
-        <nav className="flex-1 px-2 py-4 space-y-1">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={[
-                  "flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition",
-                  isActive
-                    ? "bg-indigo-50 text-indigo-700"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                ].join(" ")}
-              >
-                <span className="text-lg">{item.icon}</span>
-                {sidebarOpen && <span>{item.label}</span>}
-              </Link>
-            );
-          })}
+        {/* Main Nav */}
+        <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
+          {mainNavItems.map((item) => (
+            <NavLink key={item.href} {...item} />
+          ))}
         </nav>
 
-        {/* Bottom Profile */}
-        {sidebarOpen && (
-          <div className="px-4 py-4 border-t border-gray-100">
-            <div className="flex items-center gap-3">
-              <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600 overflow-hidden flex-shrink-0">
-                {profilePhoto ? (
-                  <img src={profilePhoto} alt={displayName} className="h-full w-full object-cover" />
-                ) : (
-                  initials
-                )}
-              </div>
-              <div className="min-w-0">
-                <div className="text-xs font-semibold text-gray-900 truncate">{displayName}</div>
-                <div className="text-xs text-gray-400 truncate">@{username}</div>
-              </div>
-            </div>
+        {/* Bottom Nav — Settings & Help */}
+        <div className="px-2 py-2 border-t border-gray-100 space-y-1">
+          {bottomNavItems.map((item) => (
+            <NavLink key={item.href} {...item} />
+          ))}
+        </div>
+
+        {/* User Profile Strip */}
+        <div className={[
+          "border-t border-gray-100 px-3 py-3 flex items-center gap-3",
+          !sidebarOpen && "justify-center",
+        ].join(" ")}>
+          <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600 overflow-hidden flex-shrink-0">
+            {profilePhoto ? (
+              <img src={profilePhoto} alt={displayName} className="h-full w-full object-cover" />
+            ) : (
+              initials
+            )}
           </div>
-        )}
+          {sidebarOpen && (
+            <div className="min-w-0">
+              <div className="text-xs font-semibold text-gray-900 truncate">{displayName}</div>
+              <div className="text-xs text-gray-400 truncate">@{username}</div>
+            </div>
+          )}
+        </div>
       </aside>
 
       {/* Main Content */}
@@ -113,47 +132,16 @@ export default function AppShell({
         sidebarOpen ? "ml-56" : "ml-16",
       ].join(" ")}>
 
-        {/* Top Navigation */}
+        {/* Top Bar */}
         <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
-          <div className="text-sm text-gray-500">
-            {navItems.find((n) => n.href === pathname)?.label ?? "MUNIX"}
-          </div>
+          <div className="text-sm font-medium text-gray-700">{currentPage}</div>
 
           <div className="flex items-center gap-3">
 
-            {/* Notifications Bell */}
+            {/* Profile Avatar + Dropdown */}
             <div className="relative">
               <button
-                onClick={() => {
-                  setNotificationsOpen(!notificationsOpen);
-                  setProfileOpen(false);
-                }}
-                className="relative p-2 rounded-lg hover:bg-gray-100 transition text-gray-500"
-              >
-                🔔
-                <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-indigo-500" />
-              </button>
-
-              {/* Notifications Panel */}
-              {notificationsOpen && (
-                <div className="absolute right-0 top-12 w-80 bg-white rounded-xl border border-gray-200 shadow-lg z-50">
-                  <div className="px-4 py-3 border-b border-gray-100">
-                    <h3 className="text-sm font-semibold text-gray-900">Notifications</h3>
-                  </div>
-                  <div className="p-4 text-center text-sm text-gray-400 py-8">
-                    You are all caught up!
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Profile Avatar */}
-            <div className="relative">
-              <button
-                onClick={() => {
-                  setProfileOpen(!profileOpen);
-                  setNotificationsOpen(false);
-                }}
+                onClick={() => setProfileOpen(!profileOpen)}
                 className="h-9 w-9 rounded-full bg-indigo-100 flex items-center justify-center text-sm font-bold text-indigo-600 overflow-hidden hover:ring-2 hover:ring-indigo-400 transition"
               >
                 {profilePhoto ? (
@@ -166,10 +154,11 @@ export default function AppShell({
               {/* Profile Dropdown */}
               {profileOpen && (
                 <div className="absolute right-0 top-12 w-64 bg-white rounded-xl border border-gray-200 shadow-lg z-50">
+
                   {/* User Info */}
                   <div className="px-4 py-4 border-b border-gray-100">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-sm font-bold text-indigo-600 overflow-hidden">
+                      <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-sm font-bold text-indigo-600 overflow-hidden flex-shrink-0">
                         {profilePhoto ? (
                           <img src={profilePhoto} alt={displayName} className="h-full w-full object-cover" />
                         ) : (
@@ -193,18 +182,11 @@ export default function AppShell({
                       <span>👤</span> View Profile
                     </Link>
                     <Link
-                      href="/settings"
+                      href="/account-settings"
                       onClick={() => setProfileOpen(false)}
                       className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition"
                     >
-                      <span>⚙️</span> Account Settings
-                    </Link>
-                    <Link
-                      href="/settings/notifications"
-                      onClick={() => setProfileOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition"
-                    >
-                      <span>🔔</span> Notification Preferences
+                      <span>🔐</span> Account Settings
                     </Link>
                   </div>
 
@@ -228,14 +210,11 @@ export default function AppShell({
         </main>
       </div>
 
-      {/* Overlay to close dropdowns */}
-      {(profileOpen || notificationsOpen) && (
+      {/* Overlay to close dropdown */}
+      {profileOpen && (
         <div
           className="fixed inset-0 z-10"
-          onClick={() => {
-            setProfileOpen(false);
-            setNotificationsOpen(false);
-          }}
+          onClick={() => setProfileOpen(false)}
         />
       )}
     </div>
