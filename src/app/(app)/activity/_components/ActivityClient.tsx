@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 type Activity = {
   id: string;
@@ -77,10 +78,7 @@ export default function ActivityClient({ activities: initial, displayName }: Pro
   const [activities] = useState(initial);
   const [activeFilter, setActiveFilter] = useState<Filter>("all");
 
-  const filtered = activities.filter(() => {
-    return true;
-  });
-
+  const filtered = activities.filter(() => true);
   const grouped = groupByDate(filtered);
 
   return (
@@ -107,7 +105,11 @@ export default function ActivityClient({ activities: initial, displayName }: Pro
                 : "text-gray-500 hover:text-gray-700",
             ].join(" ")}
           >
-            {filter === "all" ? "All Activity" : filter === "mine" ? "My Actions" : "Workspace"}
+            {filter === "all"
+              ? "All Activity"
+              : filter === "mine"
+              ? "My Actions"
+              : "Workspace"}
           </button>
         ))}
       </div>
@@ -161,12 +163,12 @@ export default function ActivityClient({ activities: initial, displayName }: Pro
                         </p>
                       )}
                       {activity.actionUrl && (
-                        
+                        <Link
                           href={activity.actionUrl}
                           className="text-xs font-medium text-indigo-600 hover:text-indigo-700 mt-2 inline-block transition"
                         >
-                          View →
-                        </a>
+                          View
+                        </Link>
                       )}
                     </div>
                   </div>
