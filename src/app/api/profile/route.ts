@@ -57,6 +57,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Username already taken" }, { status: 400 });
     }
 
+    // Check if this is a brand new profile (first time setup)
+    const existingProfile = await prisma.userProfile.findUnique({
+      where: { clerkId: userId },
+    });
+    const isNewProfile = !existingProfile;
+
     const profile = await prisma.userProfile.upsert({
       where: { clerkId: userId },
       update: {
@@ -104,6 +110,32 @@ export async function POST(request: Request) {
         emergencyRelation: body.emergencyRelation,
       },
     });
+
+    // Send welcome notification only for brand new profiles
+    if (isNewProfile) {
+      await prisma.notification.create({
+        data: {
+          userId: profile.userId,
+          type: "welcome",
+          title: `Welcome to MUNIX, ${body.displayName}! 🎉`,
+          description:
+            "Your account is set up and ready. Start by creating your first workspace or completing your profile.",
+          pinned: true,
+          actionUrl: "/create-workspace",
+          actionLabel: "Create Workspace",
+        },
+      });
+
+      // Also log it as first activity
+      await prisma.activity.create({
+        data: {
+          userId: profile.userId,
+          type: "profile_updated",
+          title: "Account created",
+          description: `${body.displayName} joined MUNIX`,
+        },
+      });
+    }
 
     return NextResponse.json({ profile }, { status: 201 });
   } catch (error) {

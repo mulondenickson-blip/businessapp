@@ -35,8 +35,61 @@ model UserProfile {
     createdAt         DateTime @default(now())
     updatedAt         DateTime @updatedAt
 
+    notifications     Notification[]
+    activities        Activity[]
+
     @@index([clerkId])
     @@index([username])
+}
+
+model Notification {
+    id          String   @id @default(cuid())
+    userId      String
+    type        String
+    // Types: welcome, workspace_invite, task_assigned,
+    //        task_updated, member_joined, member_left,
+    //        project_created, mention, system
+    title       String
+    description String
+    read        Boolean  @default(false)
+    pinned      Boolean  @default(false)
+    // pinned = true means cannot be deleted (e.g. welcome)
+    actionUrl   String?
+    // URL to navigate to when notification is clicked
+    actionLabel String?
+    // Label for the action button e.g. "View Task"
+    createdAt   DateTime @default(now())
+
+    user        UserProfile @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+    @@index([userId])
+    @@index([read])
+}
+
+model Activity {
+    id            String   @id @default(cuid())
+    userId        String
+    // Who performed the action
+    workspaceId   String?
+    // Which workspace this activity belongs to (if any)
+    type          String
+    // Types: profile_updated, workspace_created,
+    //        workspace_updated, member_joined, member_left,
+    //        project_created, project_updated,
+    //        task_created, task_completed, task_updated,
+    //        invite_sent, invite_accepted
+    title         String
+    description   String?
+    metadata      String?
+    // JSON string for extra data e.g. task name, project name
+    actionUrl     String?
+    createdAt     DateTime @default(now())
+
+    user          UserProfile @relation(fields: [userId], references: [userId], onDelete: Cascade)
+
+    @@index([userId])
+    @@index([workspaceId])
+    @@index([createdAt])
 }
 
 model Workspace {
@@ -89,4 +142,33 @@ model WorkspaceInvite {
 
     @@index([email])
     @@index([token])
+}
+
+model Message {
+    id             String   @id @default(cuid())
+    conversationId String
+    senderId       String
+    content        String
+    read           Boolean  @default(false)
+    createdAt      DateTime @default(now())
+
+    conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+    @@index([conversationId])
+    @@index([senderId])
+}
+
+model Conversation {
+    id             String   @id @default(cuid())
+    participantOne String
+    participantTwo String
+    lastMessage    String?
+    lastMessageAt  DateTime?
+    createdAt      DateTime @default(now())
+
+    messages       Message[]
+
+    @@unique([participantOne, participantTwo])
+    @@index([participantOne])
+    @@index([participantTwo])
 }

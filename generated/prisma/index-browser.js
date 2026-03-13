@@ -149,6 +149,31 @@ exports.Prisma.UserProfileScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  title: 'title',
+  description: 'description',
+  read: 'read',
+  pinned: 'pinned',
+  actionUrl: 'actionUrl',
+  actionLabel: 'actionLabel',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ActivityScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  workspaceId: 'workspaceId',
+  type: 'type',
+  title: 'title',
+  description: 'description',
+  metadata: 'metadata',
+  actionUrl: 'actionUrl',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -186,6 +211,24 @@ exports.Prisma.WorkspaceInviteScalarFieldEnum = {
   expiresAt: 'expiresAt'
 };
 
+exports.Prisma.MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  content: 'content',
+  read: 'read',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ConversationScalarFieldEnum = {
+  id: 'id',
+  participantOne: 'participantOne',
+  participantTwo: 'participantTwo',
+  lastMessage: 'lastMessage',
+  lastMessageAt: 'lastMessageAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -204,9 +247,13 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   UserProfile: 'UserProfile',
+  Notification: 'Notification',
+  Activity: 'Activity',
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember',
-  WorkspaceInvite: 'WorkspaceInvite'
+  WorkspaceInvite: 'WorkspaceInvite',
+  Message: 'Message',
+  Conversation: 'Conversation'
 };
 
 /**
