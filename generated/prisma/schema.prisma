@@ -46,18 +46,12 @@ model Notification {
   id          String   @id @default(cuid())
   userId      String
   type        String
-  // Types: welcome, workspace_invite, task_assigned,
-  //        task_updated, member_joined, member_left,
-  //        project_created, mention, system
   title       String
   description String
   read        Boolean  @default(false)
   pinned      Boolean  @default(false)
-  // pinned = true means cannot be deleted (e.g. welcome)
   actionUrl   String?
-  // URL to navigate to when notification is clicked
   actionLabel String?
-  // Label for the action button e.g. "View Task"
   createdAt   DateTime @default(now())
 
   user UserProfile @relation(fields: [userId], references: [userId], onDelete: Cascade)
@@ -69,19 +63,11 @@ model Notification {
 model Activity {
   id          String   @id @default(cuid())
   userId      String
-  // Who performed the action
   workspaceId String?
-  // Which workspace this activity belongs to (if any)
   type        String
-  // Types: profile_updated, workspace_created,
-  //        workspace_updated, member_joined, member_left,
-  //        project_created, project_updated,
-  //        task_created, task_completed, task_updated,
-  //        invite_sent, invite_accepted
   title       String
   description String?
   metadata    String?
-  // JSON string for extra data e.g. task name, project name
   actionUrl   String?
   createdAt   DateTime @default(now())
 
@@ -109,8 +95,11 @@ model Workspace {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  members WorkspaceMember[]
-  invites WorkspaceInvite[]
+  members         WorkspaceMember[]
+  invites         WorkspaceInvite[]
+  businessDetails BusinessDetails?
+  editRequests    EditRequest[]
+  pendingChanges  PendingChange[]
 
   @@index([ownerId])
 }
@@ -120,6 +109,7 @@ model WorkspaceMember {
   workspaceId String
   userId      String
   role        String
+  // Roles: owner, co-owner, admin, member, viewer
   createdAt   DateTime @default(now())
 
   workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
@@ -142,6 +132,85 @@ model WorkspaceInvite {
 
   @@index([email])
   @@index([token])
+}
+
+model BusinessDetails {
+  id          String @id @default(cuid())
+  workspaceId String @unique
+
+  // Identity
+  logo               String?
+  registrationNumber String?
+  legalStructure     String?
+  // e.g. Sole Proprietor, LLC, Corporation, Partnership
+  yearFounded        String?
+
+  // Contact & Location
+  businessEmail   String?
+  businessPhone   String?
+  websiteUrl      String?
+  physicalAddress String?
+
+  // About
+  mission    String?
+  vision     String?
+  coreValues String?
+
+  // Operations
+  operatingHours String?
+
+  // Social Media
+  linkedin    String?
+  twitter     String?
+  facebook    String?
+  instagram   String?
+  otherSocial String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+model EditRequest {
+  id          String   @id @default(cuid())
+  workspaceId String
+  requesterId String
+  // userId of person requesting edit access
+  reason      String
+  status      String   @default("pending")
+  // Status: pending, approved, denied
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([requesterId])
+  @@index([status])
+}
+
+model PendingChange {
+  id          String   @id @default(cuid())
+  workspaceId String
+  submittedBy String
+  // userId of person who made the changes
+  fieldName   String
+  // Which field was changed e.g. "mission"
+  oldValue    String?
+  // Previous value
+  newValue    String
+  // Proposed new value
+  status      String   @default("pending")
+  // Status: pending, approved, rejected
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([submittedBy])
+  @@index([status])
 }
 
 model Message {

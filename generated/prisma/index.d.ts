@@ -44,6 +44,21 @@ export type WorkspaceMember = $Result.DefaultSelection<Prisma.$WorkspaceMemberPa
  */
 export type WorkspaceInvite = $Result.DefaultSelection<Prisma.$WorkspaceInvitePayload>
 /**
+ * Model BusinessDetails
+ * 
+ */
+export type BusinessDetails = $Result.DefaultSelection<Prisma.$BusinessDetailsPayload>
+/**
+ * Model EditRequest
+ * 
+ */
+export type EditRequest = $Result.DefaultSelection<Prisma.$EditRequestPayload>
+/**
+ * Model PendingChange
+ * 
+ */
+export type PendingChange = $Result.DefaultSelection<Prisma.$PendingChangePayload>
+/**
  * Model Message
  * 
  */
@@ -231,6 +246,36 @@ export class PrismaClient<
     * ```
     */
   get workspaceInvite(): Prisma.WorkspaceInviteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.businessDetails`: Exposes CRUD operations for the **BusinessDetails** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BusinessDetails
+    * const businessDetails = await prisma.businessDetails.findMany()
+    * ```
+    */
+  get businessDetails(): Prisma.BusinessDetailsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.editRequest`: Exposes CRUD operations for the **EditRequest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EditRequests
+    * const editRequests = await prisma.editRequest.findMany()
+    * ```
+    */
+  get editRequest(): Prisma.EditRequestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.pendingChange`: Exposes CRUD operations for the **PendingChange** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PendingChanges
+    * const pendingChanges = await prisma.pendingChange.findMany()
+    * ```
+    */
+  get pendingChange(): Prisma.PendingChangeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.message`: Exposes CRUD operations for the **Message** model.
@@ -698,6 +743,9 @@ export namespace Prisma {
     Workspace: 'Workspace',
     WorkspaceMember: 'WorkspaceMember',
     WorkspaceInvite: 'WorkspaceInvite',
+    BusinessDetails: 'BusinessDetails',
+    EditRequest: 'EditRequest',
+    PendingChange: 'PendingChange',
     Message: 'Message',
     Conversation: 'Conversation'
   };
@@ -718,7 +766,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "userProfile" | "notification" | "activity" | "workspace" | "workspaceMember" | "workspaceInvite" | "message" | "conversation"
+      modelProps: "userProfile" | "notification" | "activity" | "workspace" | "workspaceMember" | "workspaceInvite" | "businessDetails" | "editRequest" | "pendingChange" | "message" | "conversation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1166,6 +1214,228 @@ export namespace Prisma {
           }
         }
       }
+      BusinessDetails: {
+        payload: Prisma.$BusinessDetailsPayload<ExtArgs>
+        fields: Prisma.BusinessDetailsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BusinessDetailsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BusinessDetailsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>
+          }
+          findFirst: {
+            args: Prisma.BusinessDetailsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BusinessDetailsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>
+          }
+          findMany: {
+            args: Prisma.BusinessDetailsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>[]
+          }
+          create: {
+            args: Prisma.BusinessDetailsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>
+          }
+          createMany: {
+            args: Prisma.BusinessDetailsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BusinessDetailsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>[]
+          }
+          delete: {
+            args: Prisma.BusinessDetailsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>
+          }
+          update: {
+            args: Prisma.BusinessDetailsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>
+          }
+          deleteMany: {
+            args: Prisma.BusinessDetailsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BusinessDetailsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BusinessDetailsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>[]
+          }
+          upsert: {
+            args: Prisma.BusinessDetailsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BusinessDetailsPayload>
+          }
+          aggregate: {
+            args: Prisma.BusinessDetailsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBusinessDetails>
+          }
+          groupBy: {
+            args: Prisma.BusinessDetailsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BusinessDetailsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BusinessDetailsCountArgs<ExtArgs>
+            result: $Utils.Optional<BusinessDetailsCountAggregateOutputType> | number
+          }
+        }
+      }
+      EditRequest: {
+        payload: Prisma.$EditRequestPayload<ExtArgs>
+        fields: Prisma.EditRequestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EditRequestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EditRequestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>
+          }
+          findFirst: {
+            args: Prisma.EditRequestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EditRequestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>
+          }
+          findMany: {
+            args: Prisma.EditRequestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>[]
+          }
+          create: {
+            args: Prisma.EditRequestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>
+          }
+          createMany: {
+            args: Prisma.EditRequestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EditRequestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>[]
+          }
+          delete: {
+            args: Prisma.EditRequestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>
+          }
+          update: {
+            args: Prisma.EditRequestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>
+          }
+          deleteMany: {
+            args: Prisma.EditRequestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EditRequestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EditRequestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>[]
+          }
+          upsert: {
+            args: Prisma.EditRequestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EditRequestPayload>
+          }
+          aggregate: {
+            args: Prisma.EditRequestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEditRequest>
+          }
+          groupBy: {
+            args: Prisma.EditRequestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EditRequestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EditRequestCountArgs<ExtArgs>
+            result: $Utils.Optional<EditRequestCountAggregateOutputType> | number
+          }
+        }
+      }
+      PendingChange: {
+        payload: Prisma.$PendingChangePayload<ExtArgs>
+        fields: Prisma.PendingChangeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PendingChangeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PendingChangeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>
+          }
+          findFirst: {
+            args: Prisma.PendingChangeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PendingChangeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>
+          }
+          findMany: {
+            args: Prisma.PendingChangeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>[]
+          }
+          create: {
+            args: Prisma.PendingChangeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>
+          }
+          createMany: {
+            args: Prisma.PendingChangeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PendingChangeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>[]
+          }
+          delete: {
+            args: Prisma.PendingChangeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>
+          }
+          update: {
+            args: Prisma.PendingChangeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>
+          }
+          deleteMany: {
+            args: Prisma.PendingChangeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PendingChangeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PendingChangeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>[]
+          }
+          upsert: {
+            args: Prisma.PendingChangeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PendingChangePayload>
+          }
+          aggregate: {
+            args: Prisma.PendingChangeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePendingChange>
+          }
+          groupBy: {
+            args: Prisma.PendingChangeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PendingChangeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PendingChangeCountArgs<ExtArgs>
+            result: $Utils.Optional<PendingChangeCountAggregateOutputType> | number
+          }
+        }
+      }
       Message: {
         payload: Prisma.$MessagePayload<ExtArgs>
         fields: Prisma.MessageFieldRefs
@@ -1416,6 +1686,9 @@ export namespace Prisma {
     workspace?: WorkspaceOmit
     workspaceMember?: WorkspaceMemberOmit
     workspaceInvite?: WorkspaceInviteOmit
+    businessDetails?: BusinessDetailsOmit
+    editRequest?: EditRequestOmit
+    pendingChange?: PendingChangeOmit
     message?: MessageOmit
     conversation?: ConversationOmit
   }
@@ -1540,11 +1813,15 @@ export namespace Prisma {
   export type WorkspaceCountOutputType = {
     members: number
     invites: number
+    editRequests: number
+    pendingChanges: number
   }
 
   export type WorkspaceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | WorkspaceCountOutputTypeCountMembersArgs
     invites?: boolean | WorkspaceCountOutputTypeCountInvitesArgs
+    editRequests?: boolean | WorkspaceCountOutputTypeCountEditRequestsArgs
+    pendingChanges?: boolean | WorkspaceCountOutputTypeCountPendingChangesArgs
   }
 
   // Custom InputTypes
@@ -1570,6 +1847,20 @@ export namespace Prisma {
    */
   export type WorkspaceCountOutputTypeCountInvitesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WorkspaceInviteWhereInput
+  }
+
+  /**
+   * WorkspaceCountOutputType without action
+   */
+  export type WorkspaceCountOutputTypeCountEditRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EditRequestWhereInput
+  }
+
+  /**
+   * WorkspaceCountOutputType without action
+   */
+  export type WorkspaceCountOutputTypeCountPendingChangesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PendingChangeWhereInput
   }
 
 
@@ -5479,6 +5770,9 @@ export namespace Prisma {
     updatedAt?: boolean
     members?: boolean | Workspace$membersArgs<ExtArgs>
     invites?: boolean | Workspace$invitesArgs<ExtArgs>
+    businessDetails?: boolean | Workspace$businessDetailsArgs<ExtArgs>
+    editRequests?: boolean | Workspace$editRequestsArgs<ExtArgs>
+    pendingChanges?: boolean | Workspace$pendingChangesArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workspace"]>
 
@@ -5540,6 +5834,9 @@ export namespace Prisma {
   export type WorkspaceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | Workspace$membersArgs<ExtArgs>
     invites?: boolean | Workspace$invitesArgs<ExtArgs>
+    businessDetails?: boolean | Workspace$businessDetailsArgs<ExtArgs>
+    editRequests?: boolean | Workspace$editRequestsArgs<ExtArgs>
+    pendingChanges?: boolean | Workspace$pendingChangesArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5550,6 +5847,9 @@ export namespace Prisma {
     objects: {
       members: Prisma.$WorkspaceMemberPayload<ExtArgs>[]
       invites: Prisma.$WorkspaceInvitePayload<ExtArgs>[]
+      businessDetails: Prisma.$BusinessDetailsPayload<ExtArgs> | null
+      editRequests: Prisma.$EditRequestPayload<ExtArgs>[]
+      pendingChanges: Prisma.$PendingChangePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5963,6 +6263,9 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     members<T extends Workspace$membersArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkspaceMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     invites<T extends Workspace$invitesArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$invitesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkspaceInvitePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    businessDetails<T extends Workspace$businessDetailsArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$businessDetailsArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    editRequests<T extends Workspace$editRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$editRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pendingChanges<T extends Workspace$pendingChangesArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$pendingChangesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6440,6 +6743,73 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: WorkspaceInviteScalarFieldEnum | WorkspaceInviteScalarFieldEnum[]
+  }
+
+  /**
+   * Workspace.businessDetails
+   */
+  export type Workspace$businessDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    where?: BusinessDetailsWhereInput
+  }
+
+  /**
+   * Workspace.editRequests
+   */
+  export type Workspace$editRequestsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    where?: EditRequestWhereInput
+    orderBy?: EditRequestOrderByWithRelationInput | EditRequestOrderByWithRelationInput[]
+    cursor?: EditRequestWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EditRequestScalarFieldEnum | EditRequestScalarFieldEnum[]
+  }
+
+  /**
+   * Workspace.pendingChanges
+   */
+  export type Workspace$pendingChangesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    where?: PendingChangeWhereInput
+    orderBy?: PendingChangeOrderByWithRelationInput | PendingChangeOrderByWithRelationInput[]
+    cursor?: PendingChangeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PendingChangeScalarFieldEnum | PendingChangeScalarFieldEnum[]
   }
 
   /**
@@ -8613,6 +8983,3466 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: WorkspaceInviteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BusinessDetails
+   */
+
+  export type AggregateBusinessDetails = {
+    _count: BusinessDetailsCountAggregateOutputType | null
+    _min: BusinessDetailsMinAggregateOutputType | null
+    _max: BusinessDetailsMaxAggregateOutputType | null
+  }
+
+  export type BusinessDetailsMinAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    logo: string | null
+    registrationNumber: string | null
+    legalStructure: string | null
+    yearFounded: string | null
+    businessEmail: string | null
+    businessPhone: string | null
+    websiteUrl: string | null
+    physicalAddress: string | null
+    mission: string | null
+    vision: string | null
+    coreValues: string | null
+    operatingHours: string | null
+    linkedin: string | null
+    twitter: string | null
+    facebook: string | null
+    instagram: string | null
+    otherSocial: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BusinessDetailsMaxAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    logo: string | null
+    registrationNumber: string | null
+    legalStructure: string | null
+    yearFounded: string | null
+    businessEmail: string | null
+    businessPhone: string | null
+    websiteUrl: string | null
+    physicalAddress: string | null
+    mission: string | null
+    vision: string | null
+    coreValues: string | null
+    operatingHours: string | null
+    linkedin: string | null
+    twitter: string | null
+    facebook: string | null
+    instagram: string | null
+    otherSocial: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type BusinessDetailsCountAggregateOutputType = {
+    id: number
+    workspaceId: number
+    logo: number
+    registrationNumber: number
+    legalStructure: number
+    yearFounded: number
+    businessEmail: number
+    businessPhone: number
+    websiteUrl: number
+    physicalAddress: number
+    mission: number
+    vision: number
+    coreValues: number
+    operatingHours: number
+    linkedin: number
+    twitter: number
+    facebook: number
+    instagram: number
+    otherSocial: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type BusinessDetailsMinAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    logo?: true
+    registrationNumber?: true
+    legalStructure?: true
+    yearFounded?: true
+    businessEmail?: true
+    businessPhone?: true
+    websiteUrl?: true
+    physicalAddress?: true
+    mission?: true
+    vision?: true
+    coreValues?: true
+    operatingHours?: true
+    linkedin?: true
+    twitter?: true
+    facebook?: true
+    instagram?: true
+    otherSocial?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BusinessDetailsMaxAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    logo?: true
+    registrationNumber?: true
+    legalStructure?: true
+    yearFounded?: true
+    businessEmail?: true
+    businessPhone?: true
+    websiteUrl?: true
+    physicalAddress?: true
+    mission?: true
+    vision?: true
+    coreValues?: true
+    operatingHours?: true
+    linkedin?: true
+    twitter?: true
+    facebook?: true
+    instagram?: true
+    otherSocial?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type BusinessDetailsCountAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    logo?: true
+    registrationNumber?: true
+    legalStructure?: true
+    yearFounded?: true
+    businessEmail?: true
+    businessPhone?: true
+    websiteUrl?: true
+    physicalAddress?: true
+    mission?: true
+    vision?: true
+    coreValues?: true
+    operatingHours?: true
+    linkedin?: true
+    twitter?: true
+    facebook?: true
+    instagram?: true
+    otherSocial?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type BusinessDetailsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BusinessDetails to aggregate.
+     */
+    where?: BusinessDetailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BusinessDetails to fetch.
+     */
+    orderBy?: BusinessDetailsOrderByWithRelationInput | BusinessDetailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BusinessDetailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BusinessDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BusinessDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BusinessDetails
+    **/
+    _count?: true | BusinessDetailsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BusinessDetailsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BusinessDetailsMaxAggregateInputType
+  }
+
+  export type GetBusinessDetailsAggregateType<T extends BusinessDetailsAggregateArgs> = {
+        [P in keyof T & keyof AggregateBusinessDetails]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBusinessDetails[P]>
+      : GetScalarType<T[P], AggregateBusinessDetails[P]>
+  }
+
+
+
+
+  export type BusinessDetailsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BusinessDetailsWhereInput
+    orderBy?: BusinessDetailsOrderByWithAggregationInput | BusinessDetailsOrderByWithAggregationInput[]
+    by: BusinessDetailsScalarFieldEnum[] | BusinessDetailsScalarFieldEnum
+    having?: BusinessDetailsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BusinessDetailsCountAggregateInputType | true
+    _min?: BusinessDetailsMinAggregateInputType
+    _max?: BusinessDetailsMaxAggregateInputType
+  }
+
+  export type BusinessDetailsGroupByOutputType = {
+    id: string
+    workspaceId: string
+    logo: string | null
+    registrationNumber: string | null
+    legalStructure: string | null
+    yearFounded: string | null
+    businessEmail: string | null
+    businessPhone: string | null
+    websiteUrl: string | null
+    physicalAddress: string | null
+    mission: string | null
+    vision: string | null
+    coreValues: string | null
+    operatingHours: string | null
+    linkedin: string | null
+    twitter: string | null
+    facebook: string | null
+    instagram: string | null
+    otherSocial: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: BusinessDetailsCountAggregateOutputType | null
+    _min: BusinessDetailsMinAggregateOutputType | null
+    _max: BusinessDetailsMaxAggregateOutputType | null
+  }
+
+  type GetBusinessDetailsGroupByPayload<T extends BusinessDetailsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BusinessDetailsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BusinessDetailsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BusinessDetailsGroupByOutputType[P]>
+            : GetScalarType<T[P], BusinessDetailsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BusinessDetailsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    logo?: boolean
+    registrationNumber?: boolean
+    legalStructure?: boolean
+    yearFounded?: boolean
+    businessEmail?: boolean
+    businessPhone?: boolean
+    websiteUrl?: boolean
+    physicalAddress?: boolean
+    mission?: boolean
+    vision?: boolean
+    coreValues?: boolean
+    operatingHours?: boolean
+    linkedin?: boolean
+    twitter?: boolean
+    facebook?: boolean
+    instagram?: boolean
+    otherSocial?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["businessDetails"]>
+
+  export type BusinessDetailsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    logo?: boolean
+    registrationNumber?: boolean
+    legalStructure?: boolean
+    yearFounded?: boolean
+    businessEmail?: boolean
+    businessPhone?: boolean
+    websiteUrl?: boolean
+    physicalAddress?: boolean
+    mission?: boolean
+    vision?: boolean
+    coreValues?: boolean
+    operatingHours?: boolean
+    linkedin?: boolean
+    twitter?: boolean
+    facebook?: boolean
+    instagram?: boolean
+    otherSocial?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["businessDetails"]>
+
+  export type BusinessDetailsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    logo?: boolean
+    registrationNumber?: boolean
+    legalStructure?: boolean
+    yearFounded?: boolean
+    businessEmail?: boolean
+    businessPhone?: boolean
+    websiteUrl?: boolean
+    physicalAddress?: boolean
+    mission?: boolean
+    vision?: boolean
+    coreValues?: boolean
+    operatingHours?: boolean
+    linkedin?: boolean
+    twitter?: boolean
+    facebook?: boolean
+    instagram?: boolean
+    otherSocial?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["businessDetails"]>
+
+  export type BusinessDetailsSelectScalar = {
+    id?: boolean
+    workspaceId?: boolean
+    logo?: boolean
+    registrationNumber?: boolean
+    legalStructure?: boolean
+    yearFounded?: boolean
+    businessEmail?: boolean
+    businessPhone?: boolean
+    websiteUrl?: boolean
+    physicalAddress?: boolean
+    mission?: boolean
+    vision?: boolean
+    coreValues?: boolean
+    operatingHours?: boolean
+    linkedin?: boolean
+    twitter?: boolean
+    facebook?: boolean
+    instagram?: boolean
+    otherSocial?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type BusinessDetailsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "logo" | "registrationNumber" | "legalStructure" | "yearFounded" | "businessEmail" | "businessPhone" | "websiteUrl" | "physicalAddress" | "mission" | "vision" | "coreValues" | "operatingHours" | "linkedin" | "twitter" | "facebook" | "instagram" | "otherSocial" | "createdAt" | "updatedAt", ExtArgs["result"]["businessDetails"]>
+  export type BusinessDetailsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+  export type BusinessDetailsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+  export type BusinessDetailsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+
+  export type $BusinessDetailsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BusinessDetails"
+    objects: {
+      workspace: Prisma.$WorkspacePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      workspaceId: string
+      logo: string | null
+      registrationNumber: string | null
+      legalStructure: string | null
+      yearFounded: string | null
+      businessEmail: string | null
+      businessPhone: string | null
+      websiteUrl: string | null
+      physicalAddress: string | null
+      mission: string | null
+      vision: string | null
+      coreValues: string | null
+      operatingHours: string | null
+      linkedin: string | null
+      twitter: string | null
+      facebook: string | null
+      instagram: string | null
+      otherSocial: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["businessDetails"]>
+    composites: {}
+  }
+
+  type BusinessDetailsGetPayload<S extends boolean | null | undefined | BusinessDetailsDefaultArgs> = $Result.GetResult<Prisma.$BusinessDetailsPayload, S>
+
+  type BusinessDetailsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BusinessDetailsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BusinessDetailsCountAggregateInputType | true
+    }
+
+  export interface BusinessDetailsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BusinessDetails'], meta: { name: 'BusinessDetails' } }
+    /**
+     * Find zero or one BusinessDetails that matches the filter.
+     * @param {BusinessDetailsFindUniqueArgs} args - Arguments to find a BusinessDetails
+     * @example
+     * // Get one BusinessDetails
+     * const businessDetails = await prisma.businessDetails.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BusinessDetailsFindUniqueArgs>(args: SelectSubset<T, BusinessDetailsFindUniqueArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BusinessDetails that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BusinessDetailsFindUniqueOrThrowArgs} args - Arguments to find a BusinessDetails
+     * @example
+     * // Get one BusinessDetails
+     * const businessDetails = await prisma.businessDetails.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BusinessDetailsFindUniqueOrThrowArgs>(args: SelectSubset<T, BusinessDetailsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BusinessDetails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessDetailsFindFirstArgs} args - Arguments to find a BusinessDetails
+     * @example
+     * // Get one BusinessDetails
+     * const businessDetails = await prisma.businessDetails.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BusinessDetailsFindFirstArgs>(args?: SelectSubset<T, BusinessDetailsFindFirstArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BusinessDetails that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessDetailsFindFirstOrThrowArgs} args - Arguments to find a BusinessDetails
+     * @example
+     * // Get one BusinessDetails
+     * const businessDetails = await prisma.businessDetails.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BusinessDetailsFindFirstOrThrowArgs>(args?: SelectSubset<T, BusinessDetailsFindFirstOrThrowArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BusinessDetails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessDetailsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BusinessDetails
+     * const businessDetails = await prisma.businessDetails.findMany()
+     * 
+     * // Get first 10 BusinessDetails
+     * const businessDetails = await prisma.businessDetails.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const businessDetailsWithIdOnly = await prisma.businessDetails.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BusinessDetailsFindManyArgs>(args?: SelectSubset<T, BusinessDetailsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BusinessDetails.
+     * @param {BusinessDetailsCreateArgs} args - Arguments to create a BusinessDetails.
+     * @example
+     * // Create one BusinessDetails
+     * const BusinessDetails = await prisma.businessDetails.create({
+     *   data: {
+     *     // ... data to create a BusinessDetails
+     *   }
+     * })
+     * 
+     */
+    create<T extends BusinessDetailsCreateArgs>(args: SelectSubset<T, BusinessDetailsCreateArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BusinessDetails.
+     * @param {BusinessDetailsCreateManyArgs} args - Arguments to create many BusinessDetails.
+     * @example
+     * // Create many BusinessDetails
+     * const businessDetails = await prisma.businessDetails.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BusinessDetailsCreateManyArgs>(args?: SelectSubset<T, BusinessDetailsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many BusinessDetails and returns the data saved in the database.
+     * @param {BusinessDetailsCreateManyAndReturnArgs} args - Arguments to create many BusinessDetails.
+     * @example
+     * // Create many BusinessDetails
+     * const businessDetails = await prisma.businessDetails.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many BusinessDetails and only return the `id`
+     * const businessDetailsWithIdOnly = await prisma.businessDetails.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BusinessDetailsCreateManyAndReturnArgs>(args?: SelectSubset<T, BusinessDetailsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a BusinessDetails.
+     * @param {BusinessDetailsDeleteArgs} args - Arguments to delete one BusinessDetails.
+     * @example
+     * // Delete one BusinessDetails
+     * const BusinessDetails = await prisma.businessDetails.delete({
+     *   where: {
+     *     // ... filter to delete one BusinessDetails
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BusinessDetailsDeleteArgs>(args: SelectSubset<T, BusinessDetailsDeleteArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BusinessDetails.
+     * @param {BusinessDetailsUpdateArgs} args - Arguments to update one BusinessDetails.
+     * @example
+     * // Update one BusinessDetails
+     * const businessDetails = await prisma.businessDetails.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BusinessDetailsUpdateArgs>(args: SelectSubset<T, BusinessDetailsUpdateArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BusinessDetails.
+     * @param {BusinessDetailsDeleteManyArgs} args - Arguments to filter BusinessDetails to delete.
+     * @example
+     * // Delete a few BusinessDetails
+     * const { count } = await prisma.businessDetails.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BusinessDetailsDeleteManyArgs>(args?: SelectSubset<T, BusinessDetailsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BusinessDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessDetailsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BusinessDetails
+     * const businessDetails = await prisma.businessDetails.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BusinessDetailsUpdateManyArgs>(args: SelectSubset<T, BusinessDetailsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BusinessDetails and returns the data updated in the database.
+     * @param {BusinessDetailsUpdateManyAndReturnArgs} args - Arguments to update many BusinessDetails.
+     * @example
+     * // Update many BusinessDetails
+     * const businessDetails = await prisma.businessDetails.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more BusinessDetails and only return the `id`
+     * const businessDetailsWithIdOnly = await prisma.businessDetails.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BusinessDetailsUpdateManyAndReturnArgs>(args: SelectSubset<T, BusinessDetailsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one BusinessDetails.
+     * @param {BusinessDetailsUpsertArgs} args - Arguments to update or create a BusinessDetails.
+     * @example
+     * // Update or create a BusinessDetails
+     * const businessDetails = await prisma.businessDetails.upsert({
+     *   create: {
+     *     // ... data to create a BusinessDetails
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BusinessDetails we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BusinessDetailsUpsertArgs>(args: SelectSubset<T, BusinessDetailsUpsertArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BusinessDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessDetailsCountArgs} args - Arguments to filter BusinessDetails to count.
+     * @example
+     * // Count the number of BusinessDetails
+     * const count = await prisma.businessDetails.count({
+     *   where: {
+     *     // ... the filter for the BusinessDetails we want to count
+     *   }
+     * })
+    **/
+    count<T extends BusinessDetailsCountArgs>(
+      args?: Subset<T, BusinessDetailsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BusinessDetailsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BusinessDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessDetailsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BusinessDetailsAggregateArgs>(args: Subset<T, BusinessDetailsAggregateArgs>): Prisma.PrismaPromise<GetBusinessDetailsAggregateType<T>>
+
+    /**
+     * Group by BusinessDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BusinessDetailsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BusinessDetailsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BusinessDetailsGroupByArgs['orderBy'] }
+        : { orderBy?: BusinessDetailsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BusinessDetailsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBusinessDetailsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BusinessDetails model
+   */
+  readonly fields: BusinessDetailsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BusinessDetails.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BusinessDetailsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    workspace<T extends WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkspaceDefaultArgs<ExtArgs>>): Prisma__WorkspaceClient<$Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BusinessDetails model
+   */
+  interface BusinessDetailsFieldRefs {
+    readonly id: FieldRef<"BusinessDetails", 'String'>
+    readonly workspaceId: FieldRef<"BusinessDetails", 'String'>
+    readonly logo: FieldRef<"BusinessDetails", 'String'>
+    readonly registrationNumber: FieldRef<"BusinessDetails", 'String'>
+    readonly legalStructure: FieldRef<"BusinessDetails", 'String'>
+    readonly yearFounded: FieldRef<"BusinessDetails", 'String'>
+    readonly businessEmail: FieldRef<"BusinessDetails", 'String'>
+    readonly businessPhone: FieldRef<"BusinessDetails", 'String'>
+    readonly websiteUrl: FieldRef<"BusinessDetails", 'String'>
+    readonly physicalAddress: FieldRef<"BusinessDetails", 'String'>
+    readonly mission: FieldRef<"BusinessDetails", 'String'>
+    readonly vision: FieldRef<"BusinessDetails", 'String'>
+    readonly coreValues: FieldRef<"BusinessDetails", 'String'>
+    readonly operatingHours: FieldRef<"BusinessDetails", 'String'>
+    readonly linkedin: FieldRef<"BusinessDetails", 'String'>
+    readonly twitter: FieldRef<"BusinessDetails", 'String'>
+    readonly facebook: FieldRef<"BusinessDetails", 'String'>
+    readonly instagram: FieldRef<"BusinessDetails", 'String'>
+    readonly otherSocial: FieldRef<"BusinessDetails", 'String'>
+    readonly createdAt: FieldRef<"BusinessDetails", 'DateTime'>
+    readonly updatedAt: FieldRef<"BusinessDetails", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BusinessDetails findUnique
+   */
+  export type BusinessDetailsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessDetails to fetch.
+     */
+    where: BusinessDetailsWhereUniqueInput
+  }
+
+  /**
+   * BusinessDetails findUniqueOrThrow
+   */
+  export type BusinessDetailsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessDetails to fetch.
+     */
+    where: BusinessDetailsWhereUniqueInput
+  }
+
+  /**
+   * BusinessDetails findFirst
+   */
+  export type BusinessDetailsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessDetails to fetch.
+     */
+    where?: BusinessDetailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BusinessDetails to fetch.
+     */
+    orderBy?: BusinessDetailsOrderByWithRelationInput | BusinessDetailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BusinessDetails.
+     */
+    cursor?: BusinessDetailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BusinessDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BusinessDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BusinessDetails.
+     */
+    distinct?: BusinessDetailsScalarFieldEnum | BusinessDetailsScalarFieldEnum[]
+  }
+
+  /**
+   * BusinessDetails findFirstOrThrow
+   */
+  export type BusinessDetailsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessDetails to fetch.
+     */
+    where?: BusinessDetailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BusinessDetails to fetch.
+     */
+    orderBy?: BusinessDetailsOrderByWithRelationInput | BusinessDetailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BusinessDetails.
+     */
+    cursor?: BusinessDetailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BusinessDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BusinessDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BusinessDetails.
+     */
+    distinct?: BusinessDetailsScalarFieldEnum | BusinessDetailsScalarFieldEnum[]
+  }
+
+  /**
+   * BusinessDetails findMany
+   */
+  export type BusinessDetailsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * Filter, which BusinessDetails to fetch.
+     */
+    where?: BusinessDetailsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BusinessDetails to fetch.
+     */
+    orderBy?: BusinessDetailsOrderByWithRelationInput | BusinessDetailsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BusinessDetails.
+     */
+    cursor?: BusinessDetailsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BusinessDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BusinessDetails.
+     */
+    skip?: number
+    distinct?: BusinessDetailsScalarFieldEnum | BusinessDetailsScalarFieldEnum[]
+  }
+
+  /**
+   * BusinessDetails create
+   */
+  export type BusinessDetailsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BusinessDetails.
+     */
+    data: XOR<BusinessDetailsCreateInput, BusinessDetailsUncheckedCreateInput>
+  }
+
+  /**
+   * BusinessDetails createMany
+   */
+  export type BusinessDetailsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BusinessDetails.
+     */
+    data: BusinessDetailsCreateManyInput | BusinessDetailsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BusinessDetails createManyAndReturn
+   */
+  export type BusinessDetailsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * The data used to create many BusinessDetails.
+     */
+    data: BusinessDetailsCreateManyInput | BusinessDetailsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BusinessDetails update
+   */
+  export type BusinessDetailsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BusinessDetails.
+     */
+    data: XOR<BusinessDetailsUpdateInput, BusinessDetailsUncheckedUpdateInput>
+    /**
+     * Choose, which BusinessDetails to update.
+     */
+    where: BusinessDetailsWhereUniqueInput
+  }
+
+  /**
+   * BusinessDetails updateMany
+   */
+  export type BusinessDetailsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BusinessDetails.
+     */
+    data: XOR<BusinessDetailsUpdateManyMutationInput, BusinessDetailsUncheckedUpdateManyInput>
+    /**
+     * Filter which BusinessDetails to update
+     */
+    where?: BusinessDetailsWhereInput
+    /**
+     * Limit how many BusinessDetails to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BusinessDetails updateManyAndReturn
+   */
+  export type BusinessDetailsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * The data used to update BusinessDetails.
+     */
+    data: XOR<BusinessDetailsUpdateManyMutationInput, BusinessDetailsUncheckedUpdateManyInput>
+    /**
+     * Filter which BusinessDetails to update
+     */
+    where?: BusinessDetailsWhereInput
+    /**
+     * Limit how many BusinessDetails to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * BusinessDetails upsert
+   */
+  export type BusinessDetailsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BusinessDetails to update in case it exists.
+     */
+    where: BusinessDetailsWhereUniqueInput
+    /**
+     * In case the BusinessDetails found by the `where` argument doesn't exist, create a new BusinessDetails with this data.
+     */
+    create: XOR<BusinessDetailsCreateInput, BusinessDetailsUncheckedCreateInput>
+    /**
+     * In case the BusinessDetails was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BusinessDetailsUpdateInput, BusinessDetailsUncheckedUpdateInput>
+  }
+
+  /**
+   * BusinessDetails delete
+   */
+  export type BusinessDetailsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+    /**
+     * Filter which BusinessDetails to delete.
+     */
+    where: BusinessDetailsWhereUniqueInput
+  }
+
+  /**
+   * BusinessDetails deleteMany
+   */
+  export type BusinessDetailsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BusinessDetails to delete
+     */
+    where?: BusinessDetailsWhereInput
+    /**
+     * Limit how many BusinessDetails to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BusinessDetails without action
+   */
+  export type BusinessDetailsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BusinessDetails
+     */
+    select?: BusinessDetailsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BusinessDetails
+     */
+    omit?: BusinessDetailsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BusinessDetailsInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EditRequest
+   */
+
+  export type AggregateEditRequest = {
+    _count: EditRequestCountAggregateOutputType | null
+    _min: EditRequestMinAggregateOutputType | null
+    _max: EditRequestMaxAggregateOutputType | null
+  }
+
+  export type EditRequestMinAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    requesterId: string | null
+    reason: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EditRequestMaxAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    requesterId: string | null
+    reason: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EditRequestCountAggregateOutputType = {
+    id: number
+    workspaceId: number
+    requesterId: number
+    reason: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EditRequestMinAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    requesterId?: true
+    reason?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EditRequestMaxAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    requesterId?: true
+    reason?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EditRequestCountAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    requesterId?: true
+    reason?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EditRequestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EditRequest to aggregate.
+     */
+    where?: EditRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EditRequests to fetch.
+     */
+    orderBy?: EditRequestOrderByWithRelationInput | EditRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EditRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EditRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EditRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EditRequests
+    **/
+    _count?: true | EditRequestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EditRequestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EditRequestMaxAggregateInputType
+  }
+
+  export type GetEditRequestAggregateType<T extends EditRequestAggregateArgs> = {
+        [P in keyof T & keyof AggregateEditRequest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEditRequest[P]>
+      : GetScalarType<T[P], AggregateEditRequest[P]>
+  }
+
+
+
+
+  export type EditRequestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EditRequestWhereInput
+    orderBy?: EditRequestOrderByWithAggregationInput | EditRequestOrderByWithAggregationInput[]
+    by: EditRequestScalarFieldEnum[] | EditRequestScalarFieldEnum
+    having?: EditRequestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EditRequestCountAggregateInputType | true
+    _min?: EditRequestMinAggregateInputType
+    _max?: EditRequestMaxAggregateInputType
+  }
+
+  export type EditRequestGroupByOutputType = {
+    id: string
+    workspaceId: string
+    requesterId: string
+    reason: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: EditRequestCountAggregateOutputType | null
+    _min: EditRequestMinAggregateOutputType | null
+    _max: EditRequestMaxAggregateOutputType | null
+  }
+
+  type GetEditRequestGroupByPayload<T extends EditRequestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EditRequestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EditRequestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EditRequestGroupByOutputType[P]>
+            : GetScalarType<T[P], EditRequestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EditRequestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    requesterId?: boolean
+    reason?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["editRequest"]>
+
+  export type EditRequestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    requesterId?: boolean
+    reason?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["editRequest"]>
+
+  export type EditRequestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    requesterId?: boolean
+    reason?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["editRequest"]>
+
+  export type EditRequestSelectScalar = {
+    id?: boolean
+    workspaceId?: boolean
+    requesterId?: boolean
+    reason?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EditRequestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "requesterId" | "reason" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["editRequest"]>
+  export type EditRequestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+  export type EditRequestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+  export type EditRequestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+
+  export type $EditRequestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EditRequest"
+    objects: {
+      workspace: Prisma.$WorkspacePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      workspaceId: string
+      requesterId: string
+      reason: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["editRequest"]>
+    composites: {}
+  }
+
+  type EditRequestGetPayload<S extends boolean | null | undefined | EditRequestDefaultArgs> = $Result.GetResult<Prisma.$EditRequestPayload, S>
+
+  type EditRequestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EditRequestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EditRequestCountAggregateInputType | true
+    }
+
+  export interface EditRequestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EditRequest'], meta: { name: 'EditRequest' } }
+    /**
+     * Find zero or one EditRequest that matches the filter.
+     * @param {EditRequestFindUniqueArgs} args - Arguments to find a EditRequest
+     * @example
+     * // Get one EditRequest
+     * const editRequest = await prisma.editRequest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EditRequestFindUniqueArgs>(args: SelectSubset<T, EditRequestFindUniqueArgs<ExtArgs>>): Prisma__EditRequestClient<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EditRequest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EditRequestFindUniqueOrThrowArgs} args - Arguments to find a EditRequest
+     * @example
+     * // Get one EditRequest
+     * const editRequest = await prisma.editRequest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EditRequestFindUniqueOrThrowArgs>(args: SelectSubset<T, EditRequestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EditRequestClient<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EditRequest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EditRequestFindFirstArgs} args - Arguments to find a EditRequest
+     * @example
+     * // Get one EditRequest
+     * const editRequest = await prisma.editRequest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EditRequestFindFirstArgs>(args?: SelectSubset<T, EditRequestFindFirstArgs<ExtArgs>>): Prisma__EditRequestClient<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EditRequest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EditRequestFindFirstOrThrowArgs} args - Arguments to find a EditRequest
+     * @example
+     * // Get one EditRequest
+     * const editRequest = await prisma.editRequest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EditRequestFindFirstOrThrowArgs>(args?: SelectSubset<T, EditRequestFindFirstOrThrowArgs<ExtArgs>>): Prisma__EditRequestClient<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EditRequests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EditRequestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EditRequests
+     * const editRequests = await prisma.editRequest.findMany()
+     * 
+     * // Get first 10 EditRequests
+     * const editRequests = await prisma.editRequest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const editRequestWithIdOnly = await prisma.editRequest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EditRequestFindManyArgs>(args?: SelectSubset<T, EditRequestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EditRequest.
+     * @param {EditRequestCreateArgs} args - Arguments to create a EditRequest.
+     * @example
+     * // Create one EditRequest
+     * const EditRequest = await prisma.editRequest.create({
+     *   data: {
+     *     // ... data to create a EditRequest
+     *   }
+     * })
+     * 
+     */
+    create<T extends EditRequestCreateArgs>(args: SelectSubset<T, EditRequestCreateArgs<ExtArgs>>): Prisma__EditRequestClient<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EditRequests.
+     * @param {EditRequestCreateManyArgs} args - Arguments to create many EditRequests.
+     * @example
+     * // Create many EditRequests
+     * const editRequest = await prisma.editRequest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EditRequestCreateManyArgs>(args?: SelectSubset<T, EditRequestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EditRequests and returns the data saved in the database.
+     * @param {EditRequestCreateManyAndReturnArgs} args - Arguments to create many EditRequests.
+     * @example
+     * // Create many EditRequests
+     * const editRequest = await prisma.editRequest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EditRequests and only return the `id`
+     * const editRequestWithIdOnly = await prisma.editRequest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EditRequestCreateManyAndReturnArgs>(args?: SelectSubset<T, EditRequestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EditRequest.
+     * @param {EditRequestDeleteArgs} args - Arguments to delete one EditRequest.
+     * @example
+     * // Delete one EditRequest
+     * const EditRequest = await prisma.editRequest.delete({
+     *   where: {
+     *     // ... filter to delete one EditRequest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EditRequestDeleteArgs>(args: SelectSubset<T, EditRequestDeleteArgs<ExtArgs>>): Prisma__EditRequestClient<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EditRequest.
+     * @param {EditRequestUpdateArgs} args - Arguments to update one EditRequest.
+     * @example
+     * // Update one EditRequest
+     * const editRequest = await prisma.editRequest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EditRequestUpdateArgs>(args: SelectSubset<T, EditRequestUpdateArgs<ExtArgs>>): Prisma__EditRequestClient<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EditRequests.
+     * @param {EditRequestDeleteManyArgs} args - Arguments to filter EditRequests to delete.
+     * @example
+     * // Delete a few EditRequests
+     * const { count } = await prisma.editRequest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EditRequestDeleteManyArgs>(args?: SelectSubset<T, EditRequestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EditRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EditRequestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EditRequests
+     * const editRequest = await prisma.editRequest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EditRequestUpdateManyArgs>(args: SelectSubset<T, EditRequestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EditRequests and returns the data updated in the database.
+     * @param {EditRequestUpdateManyAndReturnArgs} args - Arguments to update many EditRequests.
+     * @example
+     * // Update many EditRequests
+     * const editRequest = await prisma.editRequest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EditRequests and only return the `id`
+     * const editRequestWithIdOnly = await prisma.editRequest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EditRequestUpdateManyAndReturnArgs>(args: SelectSubset<T, EditRequestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EditRequest.
+     * @param {EditRequestUpsertArgs} args - Arguments to update or create a EditRequest.
+     * @example
+     * // Update or create a EditRequest
+     * const editRequest = await prisma.editRequest.upsert({
+     *   create: {
+     *     // ... data to create a EditRequest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EditRequest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EditRequestUpsertArgs>(args: SelectSubset<T, EditRequestUpsertArgs<ExtArgs>>): Prisma__EditRequestClient<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EditRequests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EditRequestCountArgs} args - Arguments to filter EditRequests to count.
+     * @example
+     * // Count the number of EditRequests
+     * const count = await prisma.editRequest.count({
+     *   where: {
+     *     // ... the filter for the EditRequests we want to count
+     *   }
+     * })
+    **/
+    count<T extends EditRequestCountArgs>(
+      args?: Subset<T, EditRequestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EditRequestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EditRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EditRequestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EditRequestAggregateArgs>(args: Subset<T, EditRequestAggregateArgs>): Prisma.PrismaPromise<GetEditRequestAggregateType<T>>
+
+    /**
+     * Group by EditRequest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EditRequestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EditRequestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EditRequestGroupByArgs['orderBy'] }
+        : { orderBy?: EditRequestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EditRequestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEditRequestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EditRequest model
+   */
+  readonly fields: EditRequestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EditRequest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EditRequestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    workspace<T extends WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkspaceDefaultArgs<ExtArgs>>): Prisma__WorkspaceClient<$Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EditRequest model
+   */
+  interface EditRequestFieldRefs {
+    readonly id: FieldRef<"EditRequest", 'String'>
+    readonly workspaceId: FieldRef<"EditRequest", 'String'>
+    readonly requesterId: FieldRef<"EditRequest", 'String'>
+    readonly reason: FieldRef<"EditRequest", 'String'>
+    readonly status: FieldRef<"EditRequest", 'String'>
+    readonly createdAt: FieldRef<"EditRequest", 'DateTime'>
+    readonly updatedAt: FieldRef<"EditRequest", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EditRequest findUnique
+   */
+  export type EditRequestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which EditRequest to fetch.
+     */
+    where: EditRequestWhereUniqueInput
+  }
+
+  /**
+   * EditRequest findUniqueOrThrow
+   */
+  export type EditRequestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which EditRequest to fetch.
+     */
+    where: EditRequestWhereUniqueInput
+  }
+
+  /**
+   * EditRequest findFirst
+   */
+  export type EditRequestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which EditRequest to fetch.
+     */
+    where?: EditRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EditRequests to fetch.
+     */
+    orderBy?: EditRequestOrderByWithRelationInput | EditRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EditRequests.
+     */
+    cursor?: EditRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EditRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EditRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EditRequests.
+     */
+    distinct?: EditRequestScalarFieldEnum | EditRequestScalarFieldEnum[]
+  }
+
+  /**
+   * EditRequest findFirstOrThrow
+   */
+  export type EditRequestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which EditRequest to fetch.
+     */
+    where?: EditRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EditRequests to fetch.
+     */
+    orderBy?: EditRequestOrderByWithRelationInput | EditRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EditRequests.
+     */
+    cursor?: EditRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EditRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EditRequests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EditRequests.
+     */
+    distinct?: EditRequestScalarFieldEnum | EditRequestScalarFieldEnum[]
+  }
+
+  /**
+   * EditRequest findMany
+   */
+  export type EditRequestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * Filter, which EditRequests to fetch.
+     */
+    where?: EditRequestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EditRequests to fetch.
+     */
+    orderBy?: EditRequestOrderByWithRelationInput | EditRequestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EditRequests.
+     */
+    cursor?: EditRequestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EditRequests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EditRequests.
+     */
+    skip?: number
+    distinct?: EditRequestScalarFieldEnum | EditRequestScalarFieldEnum[]
+  }
+
+  /**
+   * EditRequest create
+   */
+  export type EditRequestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EditRequest.
+     */
+    data: XOR<EditRequestCreateInput, EditRequestUncheckedCreateInput>
+  }
+
+  /**
+   * EditRequest createMany
+   */
+  export type EditRequestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EditRequests.
+     */
+    data: EditRequestCreateManyInput | EditRequestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EditRequest createManyAndReturn
+   */
+  export type EditRequestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * The data used to create many EditRequests.
+     */
+    data: EditRequestCreateManyInput | EditRequestCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EditRequest update
+   */
+  export type EditRequestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EditRequest.
+     */
+    data: XOR<EditRequestUpdateInput, EditRequestUncheckedUpdateInput>
+    /**
+     * Choose, which EditRequest to update.
+     */
+    where: EditRequestWhereUniqueInput
+  }
+
+  /**
+   * EditRequest updateMany
+   */
+  export type EditRequestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EditRequests.
+     */
+    data: XOR<EditRequestUpdateManyMutationInput, EditRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which EditRequests to update
+     */
+    where?: EditRequestWhereInput
+    /**
+     * Limit how many EditRequests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EditRequest updateManyAndReturn
+   */
+  export type EditRequestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * The data used to update EditRequests.
+     */
+    data: XOR<EditRequestUpdateManyMutationInput, EditRequestUncheckedUpdateManyInput>
+    /**
+     * Filter which EditRequests to update
+     */
+    where?: EditRequestWhereInput
+    /**
+     * Limit how many EditRequests to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EditRequest upsert
+   */
+  export type EditRequestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EditRequest to update in case it exists.
+     */
+    where: EditRequestWhereUniqueInput
+    /**
+     * In case the EditRequest found by the `where` argument doesn't exist, create a new EditRequest with this data.
+     */
+    create: XOR<EditRequestCreateInput, EditRequestUncheckedCreateInput>
+    /**
+     * In case the EditRequest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EditRequestUpdateInput, EditRequestUncheckedUpdateInput>
+  }
+
+  /**
+   * EditRequest delete
+   */
+  export type EditRequestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+    /**
+     * Filter which EditRequest to delete.
+     */
+    where: EditRequestWhereUniqueInput
+  }
+
+  /**
+   * EditRequest deleteMany
+   */
+  export type EditRequestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EditRequests to delete
+     */
+    where?: EditRequestWhereInput
+    /**
+     * Limit how many EditRequests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EditRequest without action
+   */
+  export type EditRequestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EditRequest
+     */
+    select?: EditRequestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EditRequest
+     */
+    omit?: EditRequestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EditRequestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PendingChange
+   */
+
+  export type AggregatePendingChange = {
+    _count: PendingChangeCountAggregateOutputType | null
+    _min: PendingChangeMinAggregateOutputType | null
+    _max: PendingChangeMaxAggregateOutputType | null
+  }
+
+  export type PendingChangeMinAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    submittedBy: string | null
+    fieldName: string | null
+    oldValue: string | null
+    newValue: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PendingChangeMaxAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    submittedBy: string | null
+    fieldName: string | null
+    oldValue: string | null
+    newValue: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PendingChangeCountAggregateOutputType = {
+    id: number
+    workspaceId: number
+    submittedBy: number
+    fieldName: number
+    oldValue: number
+    newValue: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PendingChangeMinAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    submittedBy?: true
+    fieldName?: true
+    oldValue?: true
+    newValue?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PendingChangeMaxAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    submittedBy?: true
+    fieldName?: true
+    oldValue?: true
+    newValue?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PendingChangeCountAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    submittedBy?: true
+    fieldName?: true
+    oldValue?: true
+    newValue?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PendingChangeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PendingChange to aggregate.
+     */
+    where?: PendingChangeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PendingChanges to fetch.
+     */
+    orderBy?: PendingChangeOrderByWithRelationInput | PendingChangeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PendingChangeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PendingChanges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PendingChanges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PendingChanges
+    **/
+    _count?: true | PendingChangeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PendingChangeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PendingChangeMaxAggregateInputType
+  }
+
+  export type GetPendingChangeAggregateType<T extends PendingChangeAggregateArgs> = {
+        [P in keyof T & keyof AggregatePendingChange]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePendingChange[P]>
+      : GetScalarType<T[P], AggregatePendingChange[P]>
+  }
+
+
+
+
+  export type PendingChangeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PendingChangeWhereInput
+    orderBy?: PendingChangeOrderByWithAggregationInput | PendingChangeOrderByWithAggregationInput[]
+    by: PendingChangeScalarFieldEnum[] | PendingChangeScalarFieldEnum
+    having?: PendingChangeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PendingChangeCountAggregateInputType | true
+    _min?: PendingChangeMinAggregateInputType
+    _max?: PendingChangeMaxAggregateInputType
+  }
+
+  export type PendingChangeGroupByOutputType = {
+    id: string
+    workspaceId: string
+    submittedBy: string
+    fieldName: string
+    oldValue: string | null
+    newValue: string
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PendingChangeCountAggregateOutputType | null
+    _min: PendingChangeMinAggregateOutputType | null
+    _max: PendingChangeMaxAggregateOutputType | null
+  }
+
+  type GetPendingChangeGroupByPayload<T extends PendingChangeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PendingChangeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PendingChangeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PendingChangeGroupByOutputType[P]>
+            : GetScalarType<T[P], PendingChangeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PendingChangeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    submittedBy?: boolean
+    fieldName?: boolean
+    oldValue?: boolean
+    newValue?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pendingChange"]>
+
+  export type PendingChangeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    submittedBy?: boolean
+    fieldName?: boolean
+    oldValue?: boolean
+    newValue?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pendingChange"]>
+
+  export type PendingChangeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    submittedBy?: boolean
+    fieldName?: boolean
+    oldValue?: boolean
+    newValue?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pendingChange"]>
+
+  export type PendingChangeSelectScalar = {
+    id?: boolean
+    workspaceId?: boolean
+    submittedBy?: boolean
+    fieldName?: boolean
+    oldValue?: boolean
+    newValue?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PendingChangeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "submittedBy" | "fieldName" | "oldValue" | "newValue" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["pendingChange"]>
+  export type PendingChangeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+  export type PendingChangeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+  export type PendingChangeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+
+  export type $PendingChangePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PendingChange"
+    objects: {
+      workspace: Prisma.$WorkspacePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      workspaceId: string
+      submittedBy: string
+      fieldName: string
+      oldValue: string | null
+      newValue: string
+      status: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["pendingChange"]>
+    composites: {}
+  }
+
+  type PendingChangeGetPayload<S extends boolean | null | undefined | PendingChangeDefaultArgs> = $Result.GetResult<Prisma.$PendingChangePayload, S>
+
+  type PendingChangeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PendingChangeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PendingChangeCountAggregateInputType | true
+    }
+
+  export interface PendingChangeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PendingChange'], meta: { name: 'PendingChange' } }
+    /**
+     * Find zero or one PendingChange that matches the filter.
+     * @param {PendingChangeFindUniqueArgs} args - Arguments to find a PendingChange
+     * @example
+     * // Get one PendingChange
+     * const pendingChange = await prisma.pendingChange.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PendingChangeFindUniqueArgs>(args: SelectSubset<T, PendingChangeFindUniqueArgs<ExtArgs>>): Prisma__PendingChangeClient<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PendingChange that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PendingChangeFindUniqueOrThrowArgs} args - Arguments to find a PendingChange
+     * @example
+     * // Get one PendingChange
+     * const pendingChange = await prisma.pendingChange.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PendingChangeFindUniqueOrThrowArgs>(args: SelectSubset<T, PendingChangeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PendingChangeClient<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PendingChange that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingChangeFindFirstArgs} args - Arguments to find a PendingChange
+     * @example
+     * // Get one PendingChange
+     * const pendingChange = await prisma.pendingChange.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PendingChangeFindFirstArgs>(args?: SelectSubset<T, PendingChangeFindFirstArgs<ExtArgs>>): Prisma__PendingChangeClient<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PendingChange that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingChangeFindFirstOrThrowArgs} args - Arguments to find a PendingChange
+     * @example
+     * // Get one PendingChange
+     * const pendingChange = await prisma.pendingChange.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PendingChangeFindFirstOrThrowArgs>(args?: SelectSubset<T, PendingChangeFindFirstOrThrowArgs<ExtArgs>>): Prisma__PendingChangeClient<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PendingChanges that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingChangeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PendingChanges
+     * const pendingChanges = await prisma.pendingChange.findMany()
+     * 
+     * // Get first 10 PendingChanges
+     * const pendingChanges = await prisma.pendingChange.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pendingChangeWithIdOnly = await prisma.pendingChange.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PendingChangeFindManyArgs>(args?: SelectSubset<T, PendingChangeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PendingChange.
+     * @param {PendingChangeCreateArgs} args - Arguments to create a PendingChange.
+     * @example
+     * // Create one PendingChange
+     * const PendingChange = await prisma.pendingChange.create({
+     *   data: {
+     *     // ... data to create a PendingChange
+     *   }
+     * })
+     * 
+     */
+    create<T extends PendingChangeCreateArgs>(args: SelectSubset<T, PendingChangeCreateArgs<ExtArgs>>): Prisma__PendingChangeClient<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PendingChanges.
+     * @param {PendingChangeCreateManyArgs} args - Arguments to create many PendingChanges.
+     * @example
+     * // Create many PendingChanges
+     * const pendingChange = await prisma.pendingChange.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PendingChangeCreateManyArgs>(args?: SelectSubset<T, PendingChangeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PendingChanges and returns the data saved in the database.
+     * @param {PendingChangeCreateManyAndReturnArgs} args - Arguments to create many PendingChanges.
+     * @example
+     * // Create many PendingChanges
+     * const pendingChange = await prisma.pendingChange.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PendingChanges and only return the `id`
+     * const pendingChangeWithIdOnly = await prisma.pendingChange.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PendingChangeCreateManyAndReturnArgs>(args?: SelectSubset<T, PendingChangeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PendingChange.
+     * @param {PendingChangeDeleteArgs} args - Arguments to delete one PendingChange.
+     * @example
+     * // Delete one PendingChange
+     * const PendingChange = await prisma.pendingChange.delete({
+     *   where: {
+     *     // ... filter to delete one PendingChange
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PendingChangeDeleteArgs>(args: SelectSubset<T, PendingChangeDeleteArgs<ExtArgs>>): Prisma__PendingChangeClient<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PendingChange.
+     * @param {PendingChangeUpdateArgs} args - Arguments to update one PendingChange.
+     * @example
+     * // Update one PendingChange
+     * const pendingChange = await prisma.pendingChange.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PendingChangeUpdateArgs>(args: SelectSubset<T, PendingChangeUpdateArgs<ExtArgs>>): Prisma__PendingChangeClient<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PendingChanges.
+     * @param {PendingChangeDeleteManyArgs} args - Arguments to filter PendingChanges to delete.
+     * @example
+     * // Delete a few PendingChanges
+     * const { count } = await prisma.pendingChange.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PendingChangeDeleteManyArgs>(args?: SelectSubset<T, PendingChangeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PendingChanges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingChangeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PendingChanges
+     * const pendingChange = await prisma.pendingChange.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PendingChangeUpdateManyArgs>(args: SelectSubset<T, PendingChangeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PendingChanges and returns the data updated in the database.
+     * @param {PendingChangeUpdateManyAndReturnArgs} args - Arguments to update many PendingChanges.
+     * @example
+     * // Update many PendingChanges
+     * const pendingChange = await prisma.pendingChange.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PendingChanges and only return the `id`
+     * const pendingChangeWithIdOnly = await prisma.pendingChange.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PendingChangeUpdateManyAndReturnArgs>(args: SelectSubset<T, PendingChangeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PendingChange.
+     * @param {PendingChangeUpsertArgs} args - Arguments to update or create a PendingChange.
+     * @example
+     * // Update or create a PendingChange
+     * const pendingChange = await prisma.pendingChange.upsert({
+     *   create: {
+     *     // ... data to create a PendingChange
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PendingChange we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PendingChangeUpsertArgs>(args: SelectSubset<T, PendingChangeUpsertArgs<ExtArgs>>): Prisma__PendingChangeClient<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PendingChanges.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingChangeCountArgs} args - Arguments to filter PendingChanges to count.
+     * @example
+     * // Count the number of PendingChanges
+     * const count = await prisma.pendingChange.count({
+     *   where: {
+     *     // ... the filter for the PendingChanges we want to count
+     *   }
+     * })
+    **/
+    count<T extends PendingChangeCountArgs>(
+      args?: Subset<T, PendingChangeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PendingChangeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PendingChange.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingChangeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PendingChangeAggregateArgs>(args: Subset<T, PendingChangeAggregateArgs>): Prisma.PrismaPromise<GetPendingChangeAggregateType<T>>
+
+    /**
+     * Group by PendingChange.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PendingChangeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PendingChangeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PendingChangeGroupByArgs['orderBy'] }
+        : { orderBy?: PendingChangeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PendingChangeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPendingChangeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PendingChange model
+   */
+  readonly fields: PendingChangeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PendingChange.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PendingChangeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    workspace<T extends WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkspaceDefaultArgs<ExtArgs>>): Prisma__WorkspaceClient<$Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PendingChange model
+   */
+  interface PendingChangeFieldRefs {
+    readonly id: FieldRef<"PendingChange", 'String'>
+    readonly workspaceId: FieldRef<"PendingChange", 'String'>
+    readonly submittedBy: FieldRef<"PendingChange", 'String'>
+    readonly fieldName: FieldRef<"PendingChange", 'String'>
+    readonly oldValue: FieldRef<"PendingChange", 'String'>
+    readonly newValue: FieldRef<"PendingChange", 'String'>
+    readonly status: FieldRef<"PendingChange", 'String'>
+    readonly createdAt: FieldRef<"PendingChange", 'DateTime'>
+    readonly updatedAt: FieldRef<"PendingChange", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PendingChange findUnique
+   */
+  export type PendingChangeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingChange to fetch.
+     */
+    where: PendingChangeWhereUniqueInput
+  }
+
+  /**
+   * PendingChange findUniqueOrThrow
+   */
+  export type PendingChangeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingChange to fetch.
+     */
+    where: PendingChangeWhereUniqueInput
+  }
+
+  /**
+   * PendingChange findFirst
+   */
+  export type PendingChangeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingChange to fetch.
+     */
+    where?: PendingChangeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PendingChanges to fetch.
+     */
+    orderBy?: PendingChangeOrderByWithRelationInput | PendingChangeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PendingChanges.
+     */
+    cursor?: PendingChangeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PendingChanges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PendingChanges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PendingChanges.
+     */
+    distinct?: PendingChangeScalarFieldEnum | PendingChangeScalarFieldEnum[]
+  }
+
+  /**
+   * PendingChange findFirstOrThrow
+   */
+  export type PendingChangeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingChange to fetch.
+     */
+    where?: PendingChangeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PendingChanges to fetch.
+     */
+    orderBy?: PendingChangeOrderByWithRelationInput | PendingChangeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PendingChanges.
+     */
+    cursor?: PendingChangeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PendingChanges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PendingChanges.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PendingChanges.
+     */
+    distinct?: PendingChangeScalarFieldEnum | PendingChangeScalarFieldEnum[]
+  }
+
+  /**
+   * PendingChange findMany
+   */
+  export type PendingChangeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * Filter, which PendingChanges to fetch.
+     */
+    where?: PendingChangeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PendingChanges to fetch.
+     */
+    orderBy?: PendingChangeOrderByWithRelationInput | PendingChangeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PendingChanges.
+     */
+    cursor?: PendingChangeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PendingChanges from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PendingChanges.
+     */
+    skip?: number
+    distinct?: PendingChangeScalarFieldEnum | PendingChangeScalarFieldEnum[]
+  }
+
+  /**
+   * PendingChange create
+   */
+  export type PendingChangeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PendingChange.
+     */
+    data: XOR<PendingChangeCreateInput, PendingChangeUncheckedCreateInput>
+  }
+
+  /**
+   * PendingChange createMany
+   */
+  export type PendingChangeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PendingChanges.
+     */
+    data: PendingChangeCreateManyInput | PendingChangeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PendingChange createManyAndReturn
+   */
+  export type PendingChangeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * The data used to create many PendingChanges.
+     */
+    data: PendingChangeCreateManyInput | PendingChangeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PendingChange update
+   */
+  export type PendingChangeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PendingChange.
+     */
+    data: XOR<PendingChangeUpdateInput, PendingChangeUncheckedUpdateInput>
+    /**
+     * Choose, which PendingChange to update.
+     */
+    where: PendingChangeWhereUniqueInput
+  }
+
+  /**
+   * PendingChange updateMany
+   */
+  export type PendingChangeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PendingChanges.
+     */
+    data: XOR<PendingChangeUpdateManyMutationInput, PendingChangeUncheckedUpdateManyInput>
+    /**
+     * Filter which PendingChanges to update
+     */
+    where?: PendingChangeWhereInput
+    /**
+     * Limit how many PendingChanges to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PendingChange updateManyAndReturn
+   */
+  export type PendingChangeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * The data used to update PendingChanges.
+     */
+    data: XOR<PendingChangeUpdateManyMutationInput, PendingChangeUncheckedUpdateManyInput>
+    /**
+     * Filter which PendingChanges to update
+     */
+    where?: PendingChangeWhereInput
+    /**
+     * Limit how many PendingChanges to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PendingChange upsert
+   */
+  export type PendingChangeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PendingChange to update in case it exists.
+     */
+    where: PendingChangeWhereUniqueInput
+    /**
+     * In case the PendingChange found by the `where` argument doesn't exist, create a new PendingChange with this data.
+     */
+    create: XOR<PendingChangeCreateInput, PendingChangeUncheckedCreateInput>
+    /**
+     * In case the PendingChange was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PendingChangeUpdateInput, PendingChangeUncheckedUpdateInput>
+  }
+
+  /**
+   * PendingChange delete
+   */
+  export type PendingChangeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
+    /**
+     * Filter which PendingChange to delete.
+     */
+    where: PendingChangeWhereUniqueInput
+  }
+
+  /**
+   * PendingChange deleteMany
+   */
+  export type PendingChangeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PendingChanges to delete
+     */
+    where?: PendingChangeWhereInput
+    /**
+     * Limit how many PendingChanges to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PendingChange without action
+   */
+  export type PendingChangeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PendingChange
+     */
+    select?: PendingChangeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PendingChange
+     */
+    omit?: PendingChangeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PendingChangeInclude<ExtArgs> | null
   }
 
 
@@ -10892,6 +14722,61 @@ export namespace Prisma {
   export type WorkspaceInviteScalarFieldEnum = (typeof WorkspaceInviteScalarFieldEnum)[keyof typeof WorkspaceInviteScalarFieldEnum]
 
 
+  export const BusinessDetailsScalarFieldEnum: {
+    id: 'id',
+    workspaceId: 'workspaceId',
+    logo: 'logo',
+    registrationNumber: 'registrationNumber',
+    legalStructure: 'legalStructure',
+    yearFounded: 'yearFounded',
+    businessEmail: 'businessEmail',
+    businessPhone: 'businessPhone',
+    websiteUrl: 'websiteUrl',
+    physicalAddress: 'physicalAddress',
+    mission: 'mission',
+    vision: 'vision',
+    coreValues: 'coreValues',
+    operatingHours: 'operatingHours',
+    linkedin: 'linkedin',
+    twitter: 'twitter',
+    facebook: 'facebook',
+    instagram: 'instagram',
+    otherSocial: 'otherSocial',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type BusinessDetailsScalarFieldEnum = (typeof BusinessDetailsScalarFieldEnum)[keyof typeof BusinessDetailsScalarFieldEnum]
+
+
+  export const EditRequestScalarFieldEnum: {
+    id: 'id',
+    workspaceId: 'workspaceId',
+    requesterId: 'requesterId',
+    reason: 'reason',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EditRequestScalarFieldEnum = (typeof EditRequestScalarFieldEnum)[keyof typeof EditRequestScalarFieldEnum]
+
+
+  export const PendingChangeScalarFieldEnum: {
+    id: 'id',
+    workspaceId: 'workspaceId',
+    submittedBy: 'submittedBy',
+    fieldName: 'fieldName',
+    oldValue: 'oldValue',
+    newValue: 'newValue',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PendingChangeScalarFieldEnum = (typeof PendingChangeScalarFieldEnum)[keyof typeof PendingChangeScalarFieldEnum]
+
+
   export const MessageScalarFieldEnum: {
     id: 'id',
     conversationId: 'conversationId',
@@ -11347,6 +15232,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Workspace"> | Date | string
     members?: WorkspaceMemberListRelationFilter
     invites?: WorkspaceInviteListRelationFilter
+    businessDetails?: XOR<BusinessDetailsNullableScalarRelationFilter, BusinessDetailsWhereInput> | null
+    editRequests?: EditRequestListRelationFilter
+    pendingChanges?: PendingChangeListRelationFilter
   }
 
   export type WorkspaceOrderByWithRelationInput = {
@@ -11367,6 +15255,9 @@ export namespace Prisma {
     updatedAt?: SortOrder
     members?: WorkspaceMemberOrderByRelationAggregateInput
     invites?: WorkspaceInviteOrderByRelationAggregateInput
+    businessDetails?: BusinessDetailsOrderByWithRelationInput
+    editRequests?: EditRequestOrderByRelationAggregateInput
+    pendingChanges?: PendingChangeOrderByRelationAggregateInput
   }
 
   export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
@@ -11390,6 +15281,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Workspace"> | Date | string
     members?: WorkspaceMemberListRelationFilter
     invites?: WorkspaceInviteListRelationFilter
+    businessDetails?: XOR<BusinessDetailsNullableScalarRelationFilter, BusinessDetailsWhereInput> | null
+    editRequests?: EditRequestListRelationFilter
+    pendingChanges?: PendingChangeListRelationFilter
   }, "id" | "slug">
 
   export type WorkspaceOrderByWithAggregationInput = {
@@ -11558,6 +15452,281 @@ export namespace Prisma {
     accepted?: BoolWithAggregatesFilter<"WorkspaceInvite"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"WorkspaceInvite"> | Date | string
     expiresAt?: DateTimeWithAggregatesFilter<"WorkspaceInvite"> | Date | string
+  }
+
+  export type BusinessDetailsWhereInput = {
+    AND?: BusinessDetailsWhereInput | BusinessDetailsWhereInput[]
+    OR?: BusinessDetailsWhereInput[]
+    NOT?: BusinessDetailsWhereInput | BusinessDetailsWhereInput[]
+    id?: StringFilter<"BusinessDetails"> | string
+    workspaceId?: StringFilter<"BusinessDetails"> | string
+    logo?: StringNullableFilter<"BusinessDetails"> | string | null
+    registrationNumber?: StringNullableFilter<"BusinessDetails"> | string | null
+    legalStructure?: StringNullableFilter<"BusinessDetails"> | string | null
+    yearFounded?: StringNullableFilter<"BusinessDetails"> | string | null
+    businessEmail?: StringNullableFilter<"BusinessDetails"> | string | null
+    businessPhone?: StringNullableFilter<"BusinessDetails"> | string | null
+    websiteUrl?: StringNullableFilter<"BusinessDetails"> | string | null
+    physicalAddress?: StringNullableFilter<"BusinessDetails"> | string | null
+    mission?: StringNullableFilter<"BusinessDetails"> | string | null
+    vision?: StringNullableFilter<"BusinessDetails"> | string | null
+    coreValues?: StringNullableFilter<"BusinessDetails"> | string | null
+    operatingHours?: StringNullableFilter<"BusinessDetails"> | string | null
+    linkedin?: StringNullableFilter<"BusinessDetails"> | string | null
+    twitter?: StringNullableFilter<"BusinessDetails"> | string | null
+    facebook?: StringNullableFilter<"BusinessDetails"> | string | null
+    instagram?: StringNullableFilter<"BusinessDetails"> | string | null
+    otherSocial?: StringNullableFilter<"BusinessDetails"> | string | null
+    createdAt?: DateTimeFilter<"BusinessDetails"> | Date | string
+    updatedAt?: DateTimeFilter<"BusinessDetails"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+  }
+
+  export type BusinessDetailsOrderByWithRelationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    logo?: SortOrderInput | SortOrder
+    registrationNumber?: SortOrderInput | SortOrder
+    legalStructure?: SortOrderInput | SortOrder
+    yearFounded?: SortOrderInput | SortOrder
+    businessEmail?: SortOrderInput | SortOrder
+    businessPhone?: SortOrderInput | SortOrder
+    websiteUrl?: SortOrderInput | SortOrder
+    physicalAddress?: SortOrderInput | SortOrder
+    mission?: SortOrderInput | SortOrder
+    vision?: SortOrderInput | SortOrder
+    coreValues?: SortOrderInput | SortOrder
+    operatingHours?: SortOrderInput | SortOrder
+    linkedin?: SortOrderInput | SortOrder
+    twitter?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
+    otherSocial?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    workspace?: WorkspaceOrderByWithRelationInput
+  }
+
+  export type BusinessDetailsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    workspaceId?: string
+    AND?: BusinessDetailsWhereInput | BusinessDetailsWhereInput[]
+    OR?: BusinessDetailsWhereInput[]
+    NOT?: BusinessDetailsWhereInput | BusinessDetailsWhereInput[]
+    logo?: StringNullableFilter<"BusinessDetails"> | string | null
+    registrationNumber?: StringNullableFilter<"BusinessDetails"> | string | null
+    legalStructure?: StringNullableFilter<"BusinessDetails"> | string | null
+    yearFounded?: StringNullableFilter<"BusinessDetails"> | string | null
+    businessEmail?: StringNullableFilter<"BusinessDetails"> | string | null
+    businessPhone?: StringNullableFilter<"BusinessDetails"> | string | null
+    websiteUrl?: StringNullableFilter<"BusinessDetails"> | string | null
+    physicalAddress?: StringNullableFilter<"BusinessDetails"> | string | null
+    mission?: StringNullableFilter<"BusinessDetails"> | string | null
+    vision?: StringNullableFilter<"BusinessDetails"> | string | null
+    coreValues?: StringNullableFilter<"BusinessDetails"> | string | null
+    operatingHours?: StringNullableFilter<"BusinessDetails"> | string | null
+    linkedin?: StringNullableFilter<"BusinessDetails"> | string | null
+    twitter?: StringNullableFilter<"BusinessDetails"> | string | null
+    facebook?: StringNullableFilter<"BusinessDetails"> | string | null
+    instagram?: StringNullableFilter<"BusinessDetails"> | string | null
+    otherSocial?: StringNullableFilter<"BusinessDetails"> | string | null
+    createdAt?: DateTimeFilter<"BusinessDetails"> | Date | string
+    updatedAt?: DateTimeFilter<"BusinessDetails"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+  }, "id" | "workspaceId">
+
+  export type BusinessDetailsOrderByWithAggregationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    logo?: SortOrderInput | SortOrder
+    registrationNumber?: SortOrderInput | SortOrder
+    legalStructure?: SortOrderInput | SortOrder
+    yearFounded?: SortOrderInput | SortOrder
+    businessEmail?: SortOrderInput | SortOrder
+    businessPhone?: SortOrderInput | SortOrder
+    websiteUrl?: SortOrderInput | SortOrder
+    physicalAddress?: SortOrderInput | SortOrder
+    mission?: SortOrderInput | SortOrder
+    vision?: SortOrderInput | SortOrder
+    coreValues?: SortOrderInput | SortOrder
+    operatingHours?: SortOrderInput | SortOrder
+    linkedin?: SortOrderInput | SortOrder
+    twitter?: SortOrderInput | SortOrder
+    facebook?: SortOrderInput | SortOrder
+    instagram?: SortOrderInput | SortOrder
+    otherSocial?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: BusinessDetailsCountOrderByAggregateInput
+    _max?: BusinessDetailsMaxOrderByAggregateInput
+    _min?: BusinessDetailsMinOrderByAggregateInput
+  }
+
+  export type BusinessDetailsScalarWhereWithAggregatesInput = {
+    AND?: BusinessDetailsScalarWhereWithAggregatesInput | BusinessDetailsScalarWhereWithAggregatesInput[]
+    OR?: BusinessDetailsScalarWhereWithAggregatesInput[]
+    NOT?: BusinessDetailsScalarWhereWithAggregatesInput | BusinessDetailsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BusinessDetails"> | string
+    workspaceId?: StringWithAggregatesFilter<"BusinessDetails"> | string
+    logo?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    registrationNumber?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    legalStructure?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    yearFounded?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    businessEmail?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    businessPhone?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    websiteUrl?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    physicalAddress?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    mission?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    vision?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    coreValues?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    operatingHours?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    linkedin?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    twitter?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    facebook?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    instagram?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    otherSocial?: StringNullableWithAggregatesFilter<"BusinessDetails"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"BusinessDetails"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"BusinessDetails"> | Date | string
+  }
+
+  export type EditRequestWhereInput = {
+    AND?: EditRequestWhereInput | EditRequestWhereInput[]
+    OR?: EditRequestWhereInput[]
+    NOT?: EditRequestWhereInput | EditRequestWhereInput[]
+    id?: StringFilter<"EditRequest"> | string
+    workspaceId?: StringFilter<"EditRequest"> | string
+    requesterId?: StringFilter<"EditRequest"> | string
+    reason?: StringFilter<"EditRequest"> | string
+    status?: StringFilter<"EditRequest"> | string
+    createdAt?: DateTimeFilter<"EditRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"EditRequest"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+  }
+
+  export type EditRequestOrderByWithRelationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    requesterId?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    workspace?: WorkspaceOrderByWithRelationInput
+  }
+
+  export type EditRequestWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EditRequestWhereInput | EditRequestWhereInput[]
+    OR?: EditRequestWhereInput[]
+    NOT?: EditRequestWhereInput | EditRequestWhereInput[]
+    workspaceId?: StringFilter<"EditRequest"> | string
+    requesterId?: StringFilter<"EditRequest"> | string
+    reason?: StringFilter<"EditRequest"> | string
+    status?: StringFilter<"EditRequest"> | string
+    createdAt?: DateTimeFilter<"EditRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"EditRequest"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+  }, "id">
+
+  export type EditRequestOrderByWithAggregationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    requesterId?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EditRequestCountOrderByAggregateInput
+    _max?: EditRequestMaxOrderByAggregateInput
+    _min?: EditRequestMinOrderByAggregateInput
+  }
+
+  export type EditRequestScalarWhereWithAggregatesInput = {
+    AND?: EditRequestScalarWhereWithAggregatesInput | EditRequestScalarWhereWithAggregatesInput[]
+    OR?: EditRequestScalarWhereWithAggregatesInput[]
+    NOT?: EditRequestScalarWhereWithAggregatesInput | EditRequestScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EditRequest"> | string
+    workspaceId?: StringWithAggregatesFilter<"EditRequest"> | string
+    requesterId?: StringWithAggregatesFilter<"EditRequest"> | string
+    reason?: StringWithAggregatesFilter<"EditRequest"> | string
+    status?: StringWithAggregatesFilter<"EditRequest"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EditRequest"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EditRequest"> | Date | string
+  }
+
+  export type PendingChangeWhereInput = {
+    AND?: PendingChangeWhereInput | PendingChangeWhereInput[]
+    OR?: PendingChangeWhereInput[]
+    NOT?: PendingChangeWhereInput | PendingChangeWhereInput[]
+    id?: StringFilter<"PendingChange"> | string
+    workspaceId?: StringFilter<"PendingChange"> | string
+    submittedBy?: StringFilter<"PendingChange"> | string
+    fieldName?: StringFilter<"PendingChange"> | string
+    oldValue?: StringNullableFilter<"PendingChange"> | string | null
+    newValue?: StringFilter<"PendingChange"> | string
+    status?: StringFilter<"PendingChange"> | string
+    createdAt?: DateTimeFilter<"PendingChange"> | Date | string
+    updatedAt?: DateTimeFilter<"PendingChange"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+  }
+
+  export type PendingChangeOrderByWithRelationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    submittedBy?: SortOrder
+    fieldName?: SortOrder
+    oldValue?: SortOrderInput | SortOrder
+    newValue?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    workspace?: WorkspaceOrderByWithRelationInput
+  }
+
+  export type PendingChangeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PendingChangeWhereInput | PendingChangeWhereInput[]
+    OR?: PendingChangeWhereInput[]
+    NOT?: PendingChangeWhereInput | PendingChangeWhereInput[]
+    workspaceId?: StringFilter<"PendingChange"> | string
+    submittedBy?: StringFilter<"PendingChange"> | string
+    fieldName?: StringFilter<"PendingChange"> | string
+    oldValue?: StringNullableFilter<"PendingChange"> | string | null
+    newValue?: StringFilter<"PendingChange"> | string
+    status?: StringFilter<"PendingChange"> | string
+    createdAt?: DateTimeFilter<"PendingChange"> | Date | string
+    updatedAt?: DateTimeFilter<"PendingChange"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+  }, "id">
+
+  export type PendingChangeOrderByWithAggregationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    submittedBy?: SortOrder
+    fieldName?: SortOrder
+    oldValue?: SortOrderInput | SortOrder
+    newValue?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PendingChangeCountOrderByAggregateInput
+    _max?: PendingChangeMaxOrderByAggregateInput
+    _min?: PendingChangeMinOrderByAggregateInput
+  }
+
+  export type PendingChangeScalarWhereWithAggregatesInput = {
+    AND?: PendingChangeScalarWhereWithAggregatesInput | PendingChangeScalarWhereWithAggregatesInput[]
+    OR?: PendingChangeScalarWhereWithAggregatesInput[]
+    NOT?: PendingChangeScalarWhereWithAggregatesInput | PendingChangeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PendingChange"> | string
+    workspaceId?: StringWithAggregatesFilter<"PendingChange"> | string
+    submittedBy?: StringWithAggregatesFilter<"PendingChange"> | string
+    fieldName?: StringWithAggregatesFilter<"PendingChange"> | string
+    oldValue?: StringNullableWithAggregatesFilter<"PendingChange"> | string | null
+    newValue?: StringWithAggregatesFilter<"PendingChange"> | string
+    status?: StringWithAggregatesFilter<"PendingChange"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"PendingChange"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"PendingChange"> | Date | string
   }
 
   export type MessageWhereInput = {
@@ -12076,6 +16245,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     members?: WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
     invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateInput = {
@@ -12096,6 +16268,9 @@ export namespace Prisma {
     updatedAt?: Date | string
     members?: WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
     invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUpdateInput = {
@@ -12116,6 +16291,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
     invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateInput = {
@@ -12136,6 +16314,9 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
     invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceCreateManyInput = {
@@ -12321,6 +16502,325 @@ export namespace Prisma {
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BusinessDetailsCreateInput = {
+    id?: string
+    logo?: string | null
+    registrationNumber?: string | null
+    legalStructure?: string | null
+    yearFounded?: string | null
+    businessEmail?: string | null
+    businessPhone?: string | null
+    websiteUrl?: string | null
+    physicalAddress?: string | null
+    mission?: string | null
+    vision?: string | null
+    coreValues?: string | null
+    operatingHours?: string | null
+    linkedin?: string | null
+    twitter?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    otherSocial?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutBusinessDetailsInput
+  }
+
+  export type BusinessDetailsUncheckedCreateInput = {
+    id?: string
+    workspaceId: string
+    logo?: string | null
+    registrationNumber?: string | null
+    legalStructure?: string | null
+    yearFounded?: string | null
+    businessEmail?: string | null
+    businessPhone?: string | null
+    websiteUrl?: string | null
+    physicalAddress?: string | null
+    mission?: string | null
+    vision?: string | null
+    coreValues?: string | null
+    operatingHours?: string | null
+    linkedin?: string | null
+    twitter?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    otherSocial?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BusinessDetailsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    legalStructure?: NullableStringFieldUpdateOperationsInput | string | null
+    yearFounded?: NullableStringFieldUpdateOperationsInput | string | null
+    businessEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    businessPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    physicalAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mission?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    coreValues?: NullableStringFieldUpdateOperationsInput | string | null
+    operatingHours?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    otherSocial?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutBusinessDetailsNestedInput
+  }
+
+  export type BusinessDetailsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    legalStructure?: NullableStringFieldUpdateOperationsInput | string | null
+    yearFounded?: NullableStringFieldUpdateOperationsInput | string | null
+    businessEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    businessPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    physicalAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mission?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    coreValues?: NullableStringFieldUpdateOperationsInput | string | null
+    operatingHours?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    otherSocial?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BusinessDetailsCreateManyInput = {
+    id?: string
+    workspaceId: string
+    logo?: string | null
+    registrationNumber?: string | null
+    legalStructure?: string | null
+    yearFounded?: string | null
+    businessEmail?: string | null
+    businessPhone?: string | null
+    websiteUrl?: string | null
+    physicalAddress?: string | null
+    mission?: string | null
+    vision?: string | null
+    coreValues?: string | null
+    operatingHours?: string | null
+    linkedin?: string | null
+    twitter?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    otherSocial?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BusinessDetailsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    legalStructure?: NullableStringFieldUpdateOperationsInput | string | null
+    yearFounded?: NullableStringFieldUpdateOperationsInput | string | null
+    businessEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    businessPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    physicalAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mission?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    coreValues?: NullableStringFieldUpdateOperationsInput | string | null
+    operatingHours?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    otherSocial?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BusinessDetailsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    legalStructure?: NullableStringFieldUpdateOperationsInput | string | null
+    yearFounded?: NullableStringFieldUpdateOperationsInput | string | null
+    businessEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    businessPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    physicalAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mission?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    coreValues?: NullableStringFieldUpdateOperationsInput | string | null
+    operatingHours?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    otherSocial?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EditRequestCreateInput = {
+    id?: string
+    requesterId: string
+    reason: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutEditRequestsInput
+  }
+
+  export type EditRequestUncheckedCreateInput = {
+    id?: string
+    workspaceId: string
+    requesterId: string
+    reason: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EditRequestUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requesterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutEditRequestsNestedInput
+  }
+
+  export type EditRequestUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    requesterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EditRequestCreateManyInput = {
+    id?: string
+    workspaceId: string
+    requesterId: string
+    reason: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EditRequestUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requesterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EditRequestUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    requesterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingChangeCreateInput = {
+    id?: string
+    submittedBy: string
+    fieldName: string
+    oldValue?: string | null
+    newValue: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutPendingChangesInput
+  }
+
+  export type PendingChangeUncheckedCreateInput = {
+    id?: string
+    workspaceId: string
+    submittedBy: string
+    fieldName: string
+    oldValue?: string | null
+    newValue: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PendingChangeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submittedBy?: StringFieldUpdateOperationsInput | string
+    fieldName?: StringFieldUpdateOperationsInput | string
+    oldValue?: NullableStringFieldUpdateOperationsInput | string | null
+    newValue?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutPendingChangesNestedInput
+  }
+
+  export type PendingChangeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: StringFieldUpdateOperationsInput | string
+    fieldName?: StringFieldUpdateOperationsInput | string
+    oldValue?: NullableStringFieldUpdateOperationsInput | string | null
+    newValue?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingChangeCreateManyInput = {
+    id?: string
+    workspaceId: string
+    submittedBy: string
+    fieldName: string
+    oldValue?: string | null
+    newValue: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PendingChangeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submittedBy?: StringFieldUpdateOperationsInput | string
+    fieldName?: StringFieldUpdateOperationsInput | string
+    oldValue?: NullableStringFieldUpdateOperationsInput | string | null
+    newValue?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingChangeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    submittedBy?: StringFieldUpdateOperationsInput | string
+    fieldName?: StringFieldUpdateOperationsInput | string
+    oldValue?: NullableStringFieldUpdateOperationsInput | string | null
+    newValue?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MessageCreateInput = {
@@ -12803,11 +17303,36 @@ export namespace Prisma {
     none?: WorkspaceInviteWhereInput
   }
 
+  export type BusinessDetailsNullableScalarRelationFilter = {
+    is?: BusinessDetailsWhereInput | null
+    isNot?: BusinessDetailsWhereInput | null
+  }
+
+  export type EditRequestListRelationFilter = {
+    every?: EditRequestWhereInput
+    some?: EditRequestWhereInput
+    none?: EditRequestWhereInput
+  }
+
+  export type PendingChangeListRelationFilter = {
+    every?: PendingChangeWhereInput
+    some?: PendingChangeWhereInput
+    none?: PendingChangeWhereInput
+  }
+
   export type WorkspaceMemberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type WorkspaceInviteOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EditRequestOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PendingChangeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -12944,6 +17469,144 @@ export namespace Prisma {
     accepted?: SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrder
+  }
+
+  export type BusinessDetailsCountOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    logo?: SortOrder
+    registrationNumber?: SortOrder
+    legalStructure?: SortOrder
+    yearFounded?: SortOrder
+    businessEmail?: SortOrder
+    businessPhone?: SortOrder
+    websiteUrl?: SortOrder
+    physicalAddress?: SortOrder
+    mission?: SortOrder
+    vision?: SortOrder
+    coreValues?: SortOrder
+    operatingHours?: SortOrder
+    linkedin?: SortOrder
+    twitter?: SortOrder
+    facebook?: SortOrder
+    instagram?: SortOrder
+    otherSocial?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BusinessDetailsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    logo?: SortOrder
+    registrationNumber?: SortOrder
+    legalStructure?: SortOrder
+    yearFounded?: SortOrder
+    businessEmail?: SortOrder
+    businessPhone?: SortOrder
+    websiteUrl?: SortOrder
+    physicalAddress?: SortOrder
+    mission?: SortOrder
+    vision?: SortOrder
+    coreValues?: SortOrder
+    operatingHours?: SortOrder
+    linkedin?: SortOrder
+    twitter?: SortOrder
+    facebook?: SortOrder
+    instagram?: SortOrder
+    otherSocial?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type BusinessDetailsMinOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    logo?: SortOrder
+    registrationNumber?: SortOrder
+    legalStructure?: SortOrder
+    yearFounded?: SortOrder
+    businessEmail?: SortOrder
+    businessPhone?: SortOrder
+    websiteUrl?: SortOrder
+    physicalAddress?: SortOrder
+    mission?: SortOrder
+    vision?: SortOrder
+    coreValues?: SortOrder
+    operatingHours?: SortOrder
+    linkedin?: SortOrder
+    twitter?: SortOrder
+    facebook?: SortOrder
+    instagram?: SortOrder
+    otherSocial?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EditRequestCountOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    requesterId?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EditRequestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    requesterId?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EditRequestMinOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    requesterId?: SortOrder
+    reason?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PendingChangeCountOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    submittedBy?: SortOrder
+    fieldName?: SortOrder
+    oldValue?: SortOrder
+    newValue?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PendingChangeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    submittedBy?: SortOrder
+    fieldName?: SortOrder
+    oldValue?: SortOrder
+    newValue?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PendingChangeMinOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    submittedBy?: SortOrder
+    fieldName?: SortOrder
+    oldValue?: SortOrder
+    newValue?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ConversationScalarRelationFilter = {
@@ -13170,6 +17833,26 @@ export namespace Prisma {
     connect?: WorkspaceInviteWhereUniqueInput | WorkspaceInviteWhereUniqueInput[]
   }
 
+  export type BusinessDetailsCreateNestedOneWithoutWorkspaceInput = {
+    create?: XOR<BusinessDetailsCreateWithoutWorkspaceInput, BusinessDetailsUncheckedCreateWithoutWorkspaceInput>
+    connectOrCreate?: BusinessDetailsCreateOrConnectWithoutWorkspaceInput
+    connect?: BusinessDetailsWhereUniqueInput
+  }
+
+  export type EditRequestCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<EditRequestCreateWithoutWorkspaceInput, EditRequestUncheckedCreateWithoutWorkspaceInput> | EditRequestCreateWithoutWorkspaceInput[] | EditRequestUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: EditRequestCreateOrConnectWithoutWorkspaceInput | EditRequestCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: EditRequestCreateManyWorkspaceInputEnvelope
+    connect?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+  }
+
+  export type PendingChangeCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<PendingChangeCreateWithoutWorkspaceInput, PendingChangeUncheckedCreateWithoutWorkspaceInput> | PendingChangeCreateWithoutWorkspaceInput[] | PendingChangeUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: PendingChangeCreateOrConnectWithoutWorkspaceInput | PendingChangeCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: PendingChangeCreateManyWorkspaceInputEnvelope
+    connect?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+  }
+
   export type WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput = {
     create?: XOR<WorkspaceMemberCreateWithoutWorkspaceInput, WorkspaceMemberUncheckedCreateWithoutWorkspaceInput> | WorkspaceMemberCreateWithoutWorkspaceInput[] | WorkspaceMemberUncheckedCreateWithoutWorkspaceInput[]
     connectOrCreate?: WorkspaceMemberCreateOrConnectWithoutWorkspaceInput | WorkspaceMemberCreateOrConnectWithoutWorkspaceInput[]
@@ -13182,6 +17865,26 @@ export namespace Prisma {
     connectOrCreate?: WorkspaceInviteCreateOrConnectWithoutWorkspaceInput | WorkspaceInviteCreateOrConnectWithoutWorkspaceInput[]
     createMany?: WorkspaceInviteCreateManyWorkspaceInputEnvelope
     connect?: WorkspaceInviteWhereUniqueInput | WorkspaceInviteWhereUniqueInput[]
+  }
+
+  export type BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput = {
+    create?: XOR<BusinessDetailsCreateWithoutWorkspaceInput, BusinessDetailsUncheckedCreateWithoutWorkspaceInput>
+    connectOrCreate?: BusinessDetailsCreateOrConnectWithoutWorkspaceInput
+    connect?: BusinessDetailsWhereUniqueInput
+  }
+
+  export type EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<EditRequestCreateWithoutWorkspaceInput, EditRequestUncheckedCreateWithoutWorkspaceInput> | EditRequestCreateWithoutWorkspaceInput[] | EditRequestUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: EditRequestCreateOrConnectWithoutWorkspaceInput | EditRequestCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: EditRequestCreateManyWorkspaceInputEnvelope
+    connect?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+  }
+
+  export type PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<PendingChangeCreateWithoutWorkspaceInput, PendingChangeUncheckedCreateWithoutWorkspaceInput> | PendingChangeCreateWithoutWorkspaceInput[] | PendingChangeUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: PendingChangeCreateOrConnectWithoutWorkspaceInput | PendingChangeCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: PendingChangeCreateManyWorkspaceInputEnvelope
+    connect?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -13216,6 +17919,44 @@ export namespace Prisma {
     deleteMany?: WorkspaceInviteScalarWhereInput | WorkspaceInviteScalarWhereInput[]
   }
 
+  export type BusinessDetailsUpdateOneWithoutWorkspaceNestedInput = {
+    create?: XOR<BusinessDetailsCreateWithoutWorkspaceInput, BusinessDetailsUncheckedCreateWithoutWorkspaceInput>
+    connectOrCreate?: BusinessDetailsCreateOrConnectWithoutWorkspaceInput
+    upsert?: BusinessDetailsUpsertWithoutWorkspaceInput
+    disconnect?: BusinessDetailsWhereInput | boolean
+    delete?: BusinessDetailsWhereInput | boolean
+    connect?: BusinessDetailsWhereUniqueInput
+    update?: XOR<XOR<BusinessDetailsUpdateToOneWithWhereWithoutWorkspaceInput, BusinessDetailsUpdateWithoutWorkspaceInput>, BusinessDetailsUncheckedUpdateWithoutWorkspaceInput>
+  }
+
+  export type EditRequestUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<EditRequestCreateWithoutWorkspaceInput, EditRequestUncheckedCreateWithoutWorkspaceInput> | EditRequestCreateWithoutWorkspaceInput[] | EditRequestUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: EditRequestCreateOrConnectWithoutWorkspaceInput | EditRequestCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: EditRequestUpsertWithWhereUniqueWithoutWorkspaceInput | EditRequestUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: EditRequestCreateManyWorkspaceInputEnvelope
+    set?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+    disconnect?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+    delete?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+    connect?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+    update?: EditRequestUpdateWithWhereUniqueWithoutWorkspaceInput | EditRequestUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: EditRequestUpdateManyWithWhereWithoutWorkspaceInput | EditRequestUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: EditRequestScalarWhereInput | EditRequestScalarWhereInput[]
+  }
+
+  export type PendingChangeUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<PendingChangeCreateWithoutWorkspaceInput, PendingChangeUncheckedCreateWithoutWorkspaceInput> | PendingChangeCreateWithoutWorkspaceInput[] | PendingChangeUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: PendingChangeCreateOrConnectWithoutWorkspaceInput | PendingChangeCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: PendingChangeUpsertWithWhereUniqueWithoutWorkspaceInput | PendingChangeUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: PendingChangeCreateManyWorkspaceInputEnvelope
+    set?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+    disconnect?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+    delete?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+    connect?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+    update?: PendingChangeUpdateWithWhereUniqueWithoutWorkspaceInput | PendingChangeUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: PendingChangeUpdateManyWithWhereWithoutWorkspaceInput | PendingChangeUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: PendingChangeScalarWhereInput | PendingChangeScalarWhereInput[]
+  }
+
   export type WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput = {
     create?: XOR<WorkspaceMemberCreateWithoutWorkspaceInput, WorkspaceMemberUncheckedCreateWithoutWorkspaceInput> | WorkspaceMemberCreateWithoutWorkspaceInput[] | WorkspaceMemberUncheckedCreateWithoutWorkspaceInput[]
     connectOrCreate?: WorkspaceMemberCreateOrConnectWithoutWorkspaceInput | WorkspaceMemberCreateOrConnectWithoutWorkspaceInput[]
@@ -13244,6 +17985,44 @@ export namespace Prisma {
     deleteMany?: WorkspaceInviteScalarWhereInput | WorkspaceInviteScalarWhereInput[]
   }
 
+  export type BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput = {
+    create?: XOR<BusinessDetailsCreateWithoutWorkspaceInput, BusinessDetailsUncheckedCreateWithoutWorkspaceInput>
+    connectOrCreate?: BusinessDetailsCreateOrConnectWithoutWorkspaceInput
+    upsert?: BusinessDetailsUpsertWithoutWorkspaceInput
+    disconnect?: BusinessDetailsWhereInput | boolean
+    delete?: BusinessDetailsWhereInput | boolean
+    connect?: BusinessDetailsWhereUniqueInput
+    update?: XOR<XOR<BusinessDetailsUpdateToOneWithWhereWithoutWorkspaceInput, BusinessDetailsUpdateWithoutWorkspaceInput>, BusinessDetailsUncheckedUpdateWithoutWorkspaceInput>
+  }
+
+  export type EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<EditRequestCreateWithoutWorkspaceInput, EditRequestUncheckedCreateWithoutWorkspaceInput> | EditRequestCreateWithoutWorkspaceInput[] | EditRequestUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: EditRequestCreateOrConnectWithoutWorkspaceInput | EditRequestCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: EditRequestUpsertWithWhereUniqueWithoutWorkspaceInput | EditRequestUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: EditRequestCreateManyWorkspaceInputEnvelope
+    set?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+    disconnect?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+    delete?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+    connect?: EditRequestWhereUniqueInput | EditRequestWhereUniqueInput[]
+    update?: EditRequestUpdateWithWhereUniqueWithoutWorkspaceInput | EditRequestUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: EditRequestUpdateManyWithWhereWithoutWorkspaceInput | EditRequestUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: EditRequestScalarWhereInput | EditRequestScalarWhereInput[]
+  }
+
+  export type PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<PendingChangeCreateWithoutWorkspaceInput, PendingChangeUncheckedCreateWithoutWorkspaceInput> | PendingChangeCreateWithoutWorkspaceInput[] | PendingChangeUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: PendingChangeCreateOrConnectWithoutWorkspaceInput | PendingChangeCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: PendingChangeUpsertWithWhereUniqueWithoutWorkspaceInput | PendingChangeUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: PendingChangeCreateManyWorkspaceInputEnvelope
+    set?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+    disconnect?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+    delete?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+    connect?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+    update?: PendingChangeUpdateWithWhereUniqueWithoutWorkspaceInput | PendingChangeUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: PendingChangeUpdateManyWithWhereWithoutWorkspaceInput | PendingChangeUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: PendingChangeScalarWhereInput | PendingChangeScalarWhereInput[]
+  }
+
   export type WorkspaceCreateNestedOneWithoutMembersInput = {
     create?: XOR<WorkspaceCreateWithoutMembersInput, WorkspaceUncheckedCreateWithoutMembersInput>
     connectOrCreate?: WorkspaceCreateOrConnectWithoutMembersInput
@@ -13270,6 +18049,48 @@ export namespace Prisma {
     upsert?: WorkspaceUpsertWithoutInvitesInput
     connect?: WorkspaceWhereUniqueInput
     update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutInvitesInput, WorkspaceUpdateWithoutInvitesInput>, WorkspaceUncheckedUpdateWithoutInvitesInput>
+  }
+
+  export type WorkspaceCreateNestedOneWithoutBusinessDetailsInput = {
+    create?: XOR<WorkspaceCreateWithoutBusinessDetailsInput, WorkspaceUncheckedCreateWithoutBusinessDetailsInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutBusinessDetailsInput
+    connect?: WorkspaceWhereUniqueInput
+  }
+
+  export type WorkspaceUpdateOneRequiredWithoutBusinessDetailsNestedInput = {
+    create?: XOR<WorkspaceCreateWithoutBusinessDetailsInput, WorkspaceUncheckedCreateWithoutBusinessDetailsInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutBusinessDetailsInput
+    upsert?: WorkspaceUpsertWithoutBusinessDetailsInput
+    connect?: WorkspaceWhereUniqueInput
+    update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutBusinessDetailsInput, WorkspaceUpdateWithoutBusinessDetailsInput>, WorkspaceUncheckedUpdateWithoutBusinessDetailsInput>
+  }
+
+  export type WorkspaceCreateNestedOneWithoutEditRequestsInput = {
+    create?: XOR<WorkspaceCreateWithoutEditRequestsInput, WorkspaceUncheckedCreateWithoutEditRequestsInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutEditRequestsInput
+    connect?: WorkspaceWhereUniqueInput
+  }
+
+  export type WorkspaceUpdateOneRequiredWithoutEditRequestsNestedInput = {
+    create?: XOR<WorkspaceCreateWithoutEditRequestsInput, WorkspaceUncheckedCreateWithoutEditRequestsInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutEditRequestsInput
+    upsert?: WorkspaceUpsertWithoutEditRequestsInput
+    connect?: WorkspaceWhereUniqueInput
+    update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutEditRequestsInput, WorkspaceUpdateWithoutEditRequestsInput>, WorkspaceUncheckedUpdateWithoutEditRequestsInput>
+  }
+
+  export type WorkspaceCreateNestedOneWithoutPendingChangesInput = {
+    create?: XOR<WorkspaceCreateWithoutPendingChangesInput, WorkspaceUncheckedCreateWithoutPendingChangesInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutPendingChangesInput
+    connect?: WorkspaceWhereUniqueInput
+  }
+
+  export type WorkspaceUpdateOneRequiredWithoutPendingChangesNestedInput = {
+    create?: XOR<WorkspaceCreateWithoutPendingChangesInput, WorkspaceUncheckedCreateWithoutPendingChangesInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutPendingChangesInput
+    upsert?: WorkspaceUpsertWithoutPendingChangesInput
+    connect?: WorkspaceWhereUniqueInput
+    update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutPendingChangesInput, WorkspaceUpdateWithoutPendingChangesInput>, WorkspaceUncheckedUpdateWithoutPendingChangesInput>
   }
 
   export type ConversationCreateNestedOneWithoutMessagesInput = {
@@ -13949,6 +18770,117 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type BusinessDetailsCreateWithoutWorkspaceInput = {
+    id?: string
+    logo?: string | null
+    registrationNumber?: string | null
+    legalStructure?: string | null
+    yearFounded?: string | null
+    businessEmail?: string | null
+    businessPhone?: string | null
+    websiteUrl?: string | null
+    physicalAddress?: string | null
+    mission?: string | null
+    vision?: string | null
+    coreValues?: string | null
+    operatingHours?: string | null
+    linkedin?: string | null
+    twitter?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    otherSocial?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BusinessDetailsUncheckedCreateWithoutWorkspaceInput = {
+    id?: string
+    logo?: string | null
+    registrationNumber?: string | null
+    legalStructure?: string | null
+    yearFounded?: string | null
+    businessEmail?: string | null
+    businessPhone?: string | null
+    websiteUrl?: string | null
+    physicalAddress?: string | null
+    mission?: string | null
+    vision?: string | null
+    coreValues?: string | null
+    operatingHours?: string | null
+    linkedin?: string | null
+    twitter?: string | null
+    facebook?: string | null
+    instagram?: string | null
+    otherSocial?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BusinessDetailsCreateOrConnectWithoutWorkspaceInput = {
+    where: BusinessDetailsWhereUniqueInput
+    create: XOR<BusinessDetailsCreateWithoutWorkspaceInput, BusinessDetailsUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type EditRequestCreateWithoutWorkspaceInput = {
+    id?: string
+    requesterId: string
+    reason: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EditRequestUncheckedCreateWithoutWorkspaceInput = {
+    id?: string
+    requesterId: string
+    reason: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EditRequestCreateOrConnectWithoutWorkspaceInput = {
+    where: EditRequestWhereUniqueInput
+    create: XOR<EditRequestCreateWithoutWorkspaceInput, EditRequestUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type EditRequestCreateManyWorkspaceInputEnvelope = {
+    data: EditRequestCreateManyWorkspaceInput | EditRequestCreateManyWorkspaceInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PendingChangeCreateWithoutWorkspaceInput = {
+    id?: string
+    submittedBy: string
+    fieldName: string
+    oldValue?: string | null
+    newValue: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PendingChangeUncheckedCreateWithoutWorkspaceInput = {
+    id?: string
+    submittedBy: string
+    fieldName: string
+    oldValue?: string | null
+    newValue: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PendingChangeCreateOrConnectWithoutWorkspaceInput = {
+    where: PendingChangeWhereUniqueInput
+    create: XOR<PendingChangeCreateWithoutWorkspaceInput, PendingChangeUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type PendingChangeCreateManyWorkspaceInputEnvelope = {
+    data: PendingChangeCreateManyWorkspaceInput | PendingChangeCreateManyWorkspaceInput[]
+    skipDuplicates?: boolean
+  }
+
   export type WorkspaceMemberUpsertWithWhereUniqueWithoutWorkspaceInput = {
     where: WorkspaceMemberWhereUniqueInput
     update: XOR<WorkspaceMemberUpdateWithoutWorkspaceInput, WorkspaceMemberUncheckedUpdateWithoutWorkspaceInput>
@@ -14006,6 +18938,123 @@ export namespace Prisma {
     expiresAt?: DateTimeFilter<"WorkspaceInvite"> | Date | string
   }
 
+  export type BusinessDetailsUpsertWithoutWorkspaceInput = {
+    update: XOR<BusinessDetailsUpdateWithoutWorkspaceInput, BusinessDetailsUncheckedUpdateWithoutWorkspaceInput>
+    create: XOR<BusinessDetailsCreateWithoutWorkspaceInput, BusinessDetailsUncheckedCreateWithoutWorkspaceInput>
+    where?: BusinessDetailsWhereInput
+  }
+
+  export type BusinessDetailsUpdateToOneWithWhereWithoutWorkspaceInput = {
+    where?: BusinessDetailsWhereInput
+    data: XOR<BusinessDetailsUpdateWithoutWorkspaceInput, BusinessDetailsUncheckedUpdateWithoutWorkspaceInput>
+  }
+
+  export type BusinessDetailsUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    legalStructure?: NullableStringFieldUpdateOperationsInput | string | null
+    yearFounded?: NullableStringFieldUpdateOperationsInput | string | null
+    businessEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    businessPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    physicalAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mission?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    coreValues?: NullableStringFieldUpdateOperationsInput | string | null
+    operatingHours?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    otherSocial?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BusinessDetailsUncheckedUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    logo?: NullableStringFieldUpdateOperationsInput | string | null
+    registrationNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    legalStructure?: NullableStringFieldUpdateOperationsInput | string | null
+    yearFounded?: NullableStringFieldUpdateOperationsInput | string | null
+    businessEmail?: NullableStringFieldUpdateOperationsInput | string | null
+    businessPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    websiteUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    physicalAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    mission?: NullableStringFieldUpdateOperationsInput | string | null
+    vision?: NullableStringFieldUpdateOperationsInput | string | null
+    coreValues?: NullableStringFieldUpdateOperationsInput | string | null
+    operatingHours?: NullableStringFieldUpdateOperationsInput | string | null
+    linkedin?: NullableStringFieldUpdateOperationsInput | string | null
+    twitter?: NullableStringFieldUpdateOperationsInput | string | null
+    facebook?: NullableStringFieldUpdateOperationsInput | string | null
+    instagram?: NullableStringFieldUpdateOperationsInput | string | null
+    otherSocial?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EditRequestUpsertWithWhereUniqueWithoutWorkspaceInput = {
+    where: EditRequestWhereUniqueInput
+    update: XOR<EditRequestUpdateWithoutWorkspaceInput, EditRequestUncheckedUpdateWithoutWorkspaceInput>
+    create: XOR<EditRequestCreateWithoutWorkspaceInput, EditRequestUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type EditRequestUpdateWithWhereUniqueWithoutWorkspaceInput = {
+    where: EditRequestWhereUniqueInput
+    data: XOR<EditRequestUpdateWithoutWorkspaceInput, EditRequestUncheckedUpdateWithoutWorkspaceInput>
+  }
+
+  export type EditRequestUpdateManyWithWhereWithoutWorkspaceInput = {
+    where: EditRequestScalarWhereInput
+    data: XOR<EditRequestUpdateManyMutationInput, EditRequestUncheckedUpdateManyWithoutWorkspaceInput>
+  }
+
+  export type EditRequestScalarWhereInput = {
+    AND?: EditRequestScalarWhereInput | EditRequestScalarWhereInput[]
+    OR?: EditRequestScalarWhereInput[]
+    NOT?: EditRequestScalarWhereInput | EditRequestScalarWhereInput[]
+    id?: StringFilter<"EditRequest"> | string
+    workspaceId?: StringFilter<"EditRequest"> | string
+    requesterId?: StringFilter<"EditRequest"> | string
+    reason?: StringFilter<"EditRequest"> | string
+    status?: StringFilter<"EditRequest"> | string
+    createdAt?: DateTimeFilter<"EditRequest"> | Date | string
+    updatedAt?: DateTimeFilter<"EditRequest"> | Date | string
+  }
+
+  export type PendingChangeUpsertWithWhereUniqueWithoutWorkspaceInput = {
+    where: PendingChangeWhereUniqueInput
+    update: XOR<PendingChangeUpdateWithoutWorkspaceInput, PendingChangeUncheckedUpdateWithoutWorkspaceInput>
+    create: XOR<PendingChangeCreateWithoutWorkspaceInput, PendingChangeUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type PendingChangeUpdateWithWhereUniqueWithoutWorkspaceInput = {
+    where: PendingChangeWhereUniqueInput
+    data: XOR<PendingChangeUpdateWithoutWorkspaceInput, PendingChangeUncheckedUpdateWithoutWorkspaceInput>
+  }
+
+  export type PendingChangeUpdateManyWithWhereWithoutWorkspaceInput = {
+    where: PendingChangeScalarWhereInput
+    data: XOR<PendingChangeUpdateManyMutationInput, PendingChangeUncheckedUpdateManyWithoutWorkspaceInput>
+  }
+
+  export type PendingChangeScalarWhereInput = {
+    AND?: PendingChangeScalarWhereInput | PendingChangeScalarWhereInput[]
+    OR?: PendingChangeScalarWhereInput[]
+    NOT?: PendingChangeScalarWhereInput | PendingChangeScalarWhereInput[]
+    id?: StringFilter<"PendingChange"> | string
+    workspaceId?: StringFilter<"PendingChange"> | string
+    submittedBy?: StringFilter<"PendingChange"> | string
+    fieldName?: StringFilter<"PendingChange"> | string
+    oldValue?: StringNullableFilter<"PendingChange"> | string | null
+    newValue?: StringFilter<"PendingChange"> | string
+    status?: StringFilter<"PendingChange"> | string
+    createdAt?: DateTimeFilter<"PendingChange"> | Date | string
+    updatedAt?: DateTimeFilter<"PendingChange"> | Date | string
+  }
+
   export type WorkspaceCreateWithoutMembersInput = {
     id?: string
     name: string
@@ -14023,6 +19072,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutMembersInput = {
@@ -14042,6 +19094,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutMembersInput = {
@@ -14077,6 +19132,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutMembersInput = {
@@ -14096,6 +19154,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceCreateWithoutInvitesInput = {
@@ -14115,6 +19176,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutInvitesInput = {
@@ -14134,6 +19198,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     members?: WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutInvitesInput = {
@@ -14169,6 +19236,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutInvitesInput = {
@@ -14188,6 +19258,321 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     members?: WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceCreateWithoutBusinessDetailsInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
+    editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceUncheckedCreateWithoutBusinessDetailsInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
+    editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceCreateOrConnectWithoutBusinessDetailsInput = {
+    where: WorkspaceWhereUniqueInput
+    create: XOR<WorkspaceCreateWithoutBusinessDetailsInput, WorkspaceUncheckedCreateWithoutBusinessDetailsInput>
+  }
+
+  export type WorkspaceUpsertWithoutBusinessDetailsInput = {
+    update: XOR<WorkspaceUpdateWithoutBusinessDetailsInput, WorkspaceUncheckedUpdateWithoutBusinessDetailsInput>
+    create: XOR<WorkspaceCreateWithoutBusinessDetailsInput, WorkspaceUncheckedCreateWithoutBusinessDetailsInput>
+    where?: WorkspaceWhereInput
+  }
+
+  export type WorkspaceUpdateToOneWithWhereWithoutBusinessDetailsInput = {
+    where?: WorkspaceWhereInput
+    data: XOR<WorkspaceUpdateWithoutBusinessDetailsInput, WorkspaceUncheckedUpdateWithoutBusinessDetailsInput>
+  }
+
+  export type WorkspaceUpdateWithoutBusinessDetailsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceUncheckedUpdateWithoutBusinessDetailsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceCreateWithoutEditRequestsInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
+    pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceUncheckedCreateWithoutEditRequestsInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
+    pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceCreateOrConnectWithoutEditRequestsInput = {
+    where: WorkspaceWhereUniqueInput
+    create: XOR<WorkspaceCreateWithoutEditRequestsInput, WorkspaceUncheckedCreateWithoutEditRequestsInput>
+  }
+
+  export type WorkspaceUpsertWithoutEditRequestsInput = {
+    update: XOR<WorkspaceUpdateWithoutEditRequestsInput, WorkspaceUncheckedUpdateWithoutEditRequestsInput>
+    create: XOR<WorkspaceCreateWithoutEditRequestsInput, WorkspaceUncheckedCreateWithoutEditRequestsInput>
+    where?: WorkspaceWhereInput
+  }
+
+  export type WorkspaceUpdateToOneWithWhereWithoutEditRequestsInput = {
+    where?: WorkspaceWhereInput
+    data: XOR<WorkspaceUpdateWithoutEditRequestsInput, WorkspaceUncheckedUpdateWithoutEditRequestsInput>
+  }
+
+  export type WorkspaceUpdateWithoutEditRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceUncheckedUpdateWithoutEditRequestsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceCreateWithoutPendingChangesInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceUncheckedCreateWithoutPendingChangesInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceCreateOrConnectWithoutPendingChangesInput = {
+    where: WorkspaceWhereUniqueInput
+    create: XOR<WorkspaceCreateWithoutPendingChangesInput, WorkspaceUncheckedCreateWithoutPendingChangesInput>
+  }
+
+  export type WorkspaceUpsertWithoutPendingChangesInput = {
+    update: XOR<WorkspaceUpdateWithoutPendingChangesInput, WorkspaceUncheckedUpdateWithoutPendingChangesInput>
+    create: XOR<WorkspaceCreateWithoutPendingChangesInput, WorkspaceUncheckedCreateWithoutPendingChangesInput>
+    where?: WorkspaceWhereInput
+  }
+
+  export type WorkspaceUpdateToOneWithWhereWithoutPendingChangesInput = {
+    where?: WorkspaceWhereInput
+    data: XOR<WorkspaceUpdateWithoutPendingChangesInput, WorkspaceUncheckedUpdateWithoutPendingChangesInput>
+  }
+
+  export type WorkspaceUpdateWithoutPendingChangesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceUncheckedUpdateWithoutPendingChangesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type ConversationCreateWithoutMessagesInput = {
@@ -14405,6 +19790,26 @@ export namespace Prisma {
     expiresAt: Date | string
   }
 
+  export type EditRequestCreateManyWorkspaceInput = {
+    id?: string
+    requesterId: string
+    reason: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PendingChangeCreateManyWorkspaceInput = {
+    id?: string
+    submittedBy: string
+    fieldName: string
+    oldValue?: string | null
+    newValue: string
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type WorkspaceMemberUpdateWithoutWorkspaceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -14454,6 +19859,66 @@ export namespace Prisma {
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EditRequestUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requesterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EditRequestUncheckedUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requesterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EditRequestUncheckedUpdateManyWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    requesterId?: StringFieldUpdateOperationsInput | string
+    reason?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingChangeUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submittedBy?: StringFieldUpdateOperationsInput | string
+    fieldName?: StringFieldUpdateOperationsInput | string
+    oldValue?: NullableStringFieldUpdateOperationsInput | string | null
+    newValue?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingChangeUncheckedUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submittedBy?: StringFieldUpdateOperationsInput | string
+    fieldName?: StringFieldUpdateOperationsInput | string
+    oldValue?: NullableStringFieldUpdateOperationsInput | string | null
+    newValue?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PendingChangeUncheckedUpdateManyWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    submittedBy?: StringFieldUpdateOperationsInput | string
+    fieldName?: StringFieldUpdateOperationsInput | string
+    oldValue?: NullableStringFieldUpdateOperationsInput | string | null
+    newValue?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type MessageCreateManyConversationInput = {

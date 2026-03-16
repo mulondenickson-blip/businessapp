@@ -211,6 +211,52 @@ exports.Prisma.WorkspaceInviteScalarFieldEnum = {
   expiresAt: 'expiresAt'
 };
 
+exports.Prisma.BusinessDetailsScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  logo: 'logo',
+  registrationNumber: 'registrationNumber',
+  legalStructure: 'legalStructure',
+  yearFounded: 'yearFounded',
+  businessEmail: 'businessEmail',
+  businessPhone: 'businessPhone',
+  websiteUrl: 'websiteUrl',
+  physicalAddress: 'physicalAddress',
+  mission: 'mission',
+  vision: 'vision',
+  coreValues: 'coreValues',
+  operatingHours: 'operatingHours',
+  linkedin: 'linkedin',
+  twitter: 'twitter',
+  facebook: 'facebook',
+  instagram: 'instagram',
+  otherSocial: 'otherSocial',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EditRequestScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  requesterId: 'requesterId',
+  reason: 'reason',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PendingChangeScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  submittedBy: 'submittedBy',
+  fieldName: 'fieldName',
+  oldValue: 'oldValue',
+  newValue: 'newValue',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.MessageScalarFieldEnum = {
   id: 'id',
   conversationId: 'conversationId',
@@ -252,6 +298,9 @@ exports.Prisma.ModelName = {
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember',
   WorkspaceInvite: 'WorkspaceInvite',
+  BusinessDetails: 'BusinessDetails',
+  EditRequest: 'EditRequest',
+  PendingChange: 'PendingChange',
   Message: 'Message',
   Conversation: 'Conversation'
 };
