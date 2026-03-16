@@ -17,7 +17,7 @@ export default async function WorkspacesPage() {
   const workspaces = await prisma.workspace.findMany({
     where: {
       members: {
-        some: { userId: profile.userId },
+        some: { userId },
       },
     },
     orderBy: { createdAt: "desc" },
@@ -64,7 +64,7 @@ export default async function WorkspacesPage() {
         </div>
       ) : (
         <>
-          {/* Workspace Type Filter Summary */}
+          {/* Workspace Type Summary */}
           <div className="grid grid-cols-3 gap-4 mb-8">
             {["business", "organization", "project"].map((type) => {
               const count = workspaces.filter((w) => w.type === type).length;
@@ -90,10 +90,9 @@ export default async function WorkspacesPage() {
               return (
                 <Link
                   key={ws.id}
-                  href={`/workspace/${ws.id}`}
+                  href={`/workspace/${ws.id}/overview`}
                   className="group rounded-2xl border border-gray-100 bg-white p-6 hover:border-indigo-200 hover:shadow-md transition"
                 >
-                  {/* Top Row */}
                   <div className="flex items-start justify-between mb-4">
                     <div className={`h-12 w-12 rounded-xl flex items-center justify-center text-2xl ${meta.color}`}>
                       {meta.icon}
@@ -102,34 +101,20 @@ export default async function WorkspacesPage() {
                       {meta.label}
                     </span>
                   </div>
-
-                  {/* Name */}
                   <div className="mb-1">
                     <h3 className="text-base font-bold text-gray-900 group-hover:text-indigo-700 transition truncate">
                       {ws.name}
                     </h3>
                   </div>
-
-                  {/* Description */}
                   {ws.description && (
                     <p className="text-xs text-gray-500 line-clamp-2 mb-4">
                       {ws.description}
                     </p>
                   )}
-
-                  {/* Meta Info */}
                   <div className="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
                     <div className="flex flex-col gap-1">
-                      {ws.industry && (
-                        <span className="text-xs text-gray-400">
-                          {ws.industry}
-                        </span>
-                      )}
-                      {ws.country && (
-                        <span className="text-xs text-gray-400">
-                          {ws.country}
-                        </span>
-                      )}
+                      {ws.industry && <span className="text-xs text-gray-400">{ws.industry}</span>}
+                      {ws.country && <span className="text-xs text-gray-400">{ws.country}</span>}
                     </div>
                     <div className="text-right">
                       <div className="text-xs text-gray-400">
