@@ -197,6 +197,12 @@ exports.Prisma.WorkspaceMemberScalarFieldEnum = {
   workspaceId: 'workspaceId',
   userId: 'userId',
   role: 'role',
+  departmentId: 'departmentId',
+  invitedBy: 'invitedBy',
+  approvalStatus: 'approvalStatus',
+  approvedBy: 'approvedBy',
+  approvedAt: 'approvedAt',
+  personalMessage: 'personalMessage',
   createdAt: 'createdAt'
 };
 
@@ -205,10 +211,42 @@ exports.Prisma.WorkspaceInviteScalarFieldEnum = {
   workspaceId: 'workspaceId',
   email: 'email',
   role: 'role',
+  departmentId: 'departmentId',
+  invitedBy: 'invitedBy',
+  personalMessage: 'personalMessage',
   token: 'token',
   accepted: 'accepted',
   createdAt: 'createdAt',
   expiresAt: 'expiresAt'
+};
+
+exports.Prisma.DepartmentScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  description: 'description',
+  headUserId: 'headUserId',
+  parentDepartmentId: 'parentDepartmentId',
+  status: 'status',
+  createdBy: 'createdBy',
+  approvedBy: 'approvedBy',
+  approvedAt: 'approvedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WorkspaceDelegateScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  delegateUserId: 'delegateUserId',
+  delegatedBy: 'delegatedBy',
+  canApproveDepartments: 'canApproveDepartments',
+  canApproveMembers: 'canApproveMembers',
+  canApproveChanges: 'canApproveChanges',
+  canInviteMembers: 'canInviteMembers',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.BusinessDetailsScalarFieldEnum = {
@@ -298,6 +336,8 @@ exports.Prisma.ModelName = {
   Workspace: 'Workspace',
   WorkspaceMember: 'WorkspaceMember',
   WorkspaceInvite: 'WorkspaceInvite',
+  Department: 'Department',
+  WorkspaceDelegate: 'WorkspaceDelegate',
   BusinessDetails: 'BusinessDetails',
   EditRequest: 'EditRequest',
   PendingChange: 'PendingChange',

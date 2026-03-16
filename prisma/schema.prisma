@@ -100,72 +100,131 @@ model Workspace {
     businessDetails BusinessDetails?
     editRequests    EditRequest[]
     pendingChanges  PendingChange[]
+    departments     Department[]
+    delegates       WorkspaceDelegate[]
 
     @@index([ownerId])
 }
 
 model WorkspaceMember {
-    id          String    @id @default(cuid())
-    workspaceId String
-    userId      String
-    role        String
+    id               String    @id @default(cuid())
+    workspaceId      String
+    userId           String
+    role             String
     // Roles: owner, co-owner, admin, member, viewer
-    createdAt   DateTime  @default(now())
+    departmentId     String?
+    // Which department this member belongs to
+    invitedBy        String?
+    // userId of who invited this member
+    approvalStatus   String    @default("approved")
+    // Status: pending, approved, rejected
+    // owner is always approved by default
+    approvedBy       String?
+    // userId of who approved this member
+    approvedAt       DateTime?
+    personalMessage  String?
+    // Message sent with the invite
+    createdAt        DateTime  @default(now())
 
-    workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    workspace        Workspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    department       Department? @relation(fields: [departmentId], references: [id])
 
     @@unique([workspaceId, userId])
     @@index([userId])
+    @@index([departmentId])
+    @@index([approvalStatus])
 }
 
 model WorkspaceInvite {
-    id          String    @id @default(cuid())
-    workspaceId String
-    email       String
-    role        String
-    token       String    @unique @default(cuid())
-    accepted    Boolean   @default(false)
-    createdAt   DateTime  @default(now())
-    expiresAt   DateTime
+    id              String    @id @default(cuid())
+    workspaceId     String
+    email           String
+    role            String
+    departmentId    String?
+    invitedBy       String
+    // userId of who sent this invite
+    personalMessage String?
+    token           String    @unique @default(cuid())
+    accepted        Boolean   @default(false)
+    createdAt       DateTime  @default(now())
+    expiresAt       DateTime
 
-    workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
     @@index([email])
     @@index([token])
+    @@index([invitedBy])
+}
+
+model Department {
+    id                 String    @id @default(cuid())
+    workspaceId        String
+    name               String
+    description        String?
+    headUserId         String?
+    // userId of department head
+    parentDepartmentId String?
+    // For sub-departments
+    status             String    @default("pending")
+    // Status: pending, active, archived
+    createdBy          String
+    approvedBy         String?
+    approvedAt         DateTime?
+    createdAt          DateTime  @default(now())
+    updatedAt          DateTime  @updatedAt
+
+    workspace          Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    members            WorkspaceMember[]
+    parentDepartment   Department?      @relation("DepartmentHierarchy", fields: [parentDepartmentId], references: [id])
+    subDepartments     Department[]     @relation("DepartmentHierarchy")
+
+    @@index([workspaceId])
+    @@index([status])
+    @@index([parentDepartmentId])
+}
+
+model WorkspaceDelegate {
+    id            String   @id @default(cuid())
+    workspaceId   String
+    delegateUserId String
+    // userId of the person being delegated to
+    delegatedBy   String
+    // userId of owner who delegated
+    canApproveDepartments Boolean @default(true)
+    canApproveMembers     Boolean @default(true)
+    canApproveChanges     Boolean @default(true)
+    canInviteMembers      Boolean @default(true)
+    isActive      Boolean  @default(true)
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+
+    workspace     Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+    @@unique([workspaceId, delegateUserId])
+    @@index([workspaceId])
+    @@index([delegateUserId])
 }
 
 model BusinessDetails {
     id                  String    @id @default(cuid())
     workspaceId         String    @unique
-
-    // Identity
     logo                String?
     registrationNumber  String?
     legalStructure      String?
-    // e.g. Sole Proprietor, LLC, Corporation, Partnership
     yearFounded         String?
-
-    // Contact & Location
     businessEmail       String?
     businessPhone       String?
     websiteUrl          String?
     physicalAddress     String?
-
-    // About
     mission             String?
     vision              String?
     coreValues          String?
-
-    // Operations
     operatingHours      String?
-
-    // Social Media
     linkedin            String?
     twitter             String?
     facebook            String?
     instagram           String?
     otherSocial         String?
-
     createdAt           DateTime  @default(now())
     updatedAt           DateTime  @updatedAt
 
@@ -176,7 +235,6 @@ model EditRequest {
     id           String   @id @default(cuid())
     workspaceId  String
     requesterId  String
-    // userId of person requesting edit access
     reason       String
     status       String   @default("pending")
     // Status: pending, approved, denied
@@ -194,13 +252,9 @@ model PendingChange {
     id           String   @id @default(cuid())
     workspaceId  String
     submittedBy  String
-    // userId of person who made the changes
     fieldName    String
-    // Which field was changed e.g. "mission"
     oldValue     String?
-    // Previous value
     newValue     String
-    // Proposed new value
     status       String   @default("pending")
     // Status: pending, approved, rejected
     createdAt    DateTime @default(now())

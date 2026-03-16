@@ -44,6 +44,16 @@ export type WorkspaceMember = $Result.DefaultSelection<Prisma.$WorkspaceMemberPa
  */
 export type WorkspaceInvite = $Result.DefaultSelection<Prisma.$WorkspaceInvitePayload>
 /**
+ * Model Department
+ * 
+ */
+export type Department = $Result.DefaultSelection<Prisma.$DepartmentPayload>
+/**
+ * Model WorkspaceDelegate
+ * 
+ */
+export type WorkspaceDelegate = $Result.DefaultSelection<Prisma.$WorkspaceDelegatePayload>
+/**
  * Model BusinessDetails
  * 
  */
@@ -246,6 +256,26 @@ export class PrismaClient<
     * ```
     */
   get workspaceInvite(): Prisma.WorkspaceInviteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.department`: Exposes CRUD operations for the **Department** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Departments
+    * const departments = await prisma.department.findMany()
+    * ```
+    */
+  get department(): Prisma.DepartmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.workspaceDelegate`: Exposes CRUD operations for the **WorkspaceDelegate** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WorkspaceDelegates
+    * const workspaceDelegates = await prisma.workspaceDelegate.findMany()
+    * ```
+    */
+  get workspaceDelegate(): Prisma.WorkspaceDelegateDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.businessDetails`: Exposes CRUD operations for the **BusinessDetails** model.
@@ -743,6 +773,8 @@ export namespace Prisma {
     Workspace: 'Workspace',
     WorkspaceMember: 'WorkspaceMember',
     WorkspaceInvite: 'WorkspaceInvite',
+    Department: 'Department',
+    WorkspaceDelegate: 'WorkspaceDelegate',
     BusinessDetails: 'BusinessDetails',
     EditRequest: 'EditRequest',
     PendingChange: 'PendingChange',
@@ -766,7 +798,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "userProfile" | "notification" | "activity" | "workspace" | "workspaceMember" | "workspaceInvite" | "businessDetails" | "editRequest" | "pendingChange" | "message" | "conversation"
+      modelProps: "userProfile" | "notification" | "activity" | "workspace" | "workspaceMember" | "workspaceInvite" | "department" | "workspaceDelegate" | "businessDetails" | "editRequest" | "pendingChange" | "message" | "conversation"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1211,6 +1243,154 @@ export namespace Prisma {
           count: {
             args: Prisma.WorkspaceInviteCountArgs<ExtArgs>
             result: $Utils.Optional<WorkspaceInviteCountAggregateOutputType> | number
+          }
+        }
+      }
+      Department: {
+        payload: Prisma.$DepartmentPayload<ExtArgs>
+        fields: Prisma.DepartmentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DepartmentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DepartmentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          findFirst: {
+            args: Prisma.DepartmentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DepartmentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          findMany: {
+            args: Prisma.DepartmentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>[]
+          }
+          create: {
+            args: Prisma.DepartmentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          createMany: {
+            args: Prisma.DepartmentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DepartmentCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>[]
+          }
+          delete: {
+            args: Prisma.DepartmentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          update: {
+            args: Prisma.DepartmentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          deleteMany: {
+            args: Prisma.DepartmentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DepartmentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DepartmentUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>[]
+          }
+          upsert: {
+            args: Prisma.DepartmentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DepartmentPayload>
+          }
+          aggregate: {
+            args: Prisma.DepartmentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDepartment>
+          }
+          groupBy: {
+            args: Prisma.DepartmentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DepartmentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DepartmentCountArgs<ExtArgs>
+            result: $Utils.Optional<DepartmentCountAggregateOutputType> | number
+          }
+        }
+      }
+      WorkspaceDelegate: {
+        payload: Prisma.$WorkspaceDelegatePayload<ExtArgs>
+        fields: Prisma.WorkspaceDelegateFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WorkspaceDelegateFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WorkspaceDelegateFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>
+          }
+          findFirst: {
+            args: Prisma.WorkspaceDelegateFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WorkspaceDelegateFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>
+          }
+          findMany: {
+            args: Prisma.WorkspaceDelegateFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>[]
+          }
+          create: {
+            args: Prisma.WorkspaceDelegateCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>
+          }
+          createMany: {
+            args: Prisma.WorkspaceDelegateCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WorkspaceDelegateCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>[]
+          }
+          delete: {
+            args: Prisma.WorkspaceDelegateDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>
+          }
+          update: {
+            args: Prisma.WorkspaceDelegateUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>
+          }
+          deleteMany: {
+            args: Prisma.WorkspaceDelegateDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WorkspaceDelegateUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WorkspaceDelegateUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>[]
+          }
+          upsert: {
+            args: Prisma.WorkspaceDelegateUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WorkspaceDelegatePayload>
+          }
+          aggregate: {
+            args: Prisma.WorkspaceDelegateAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWorkspaceDelegate>
+          }
+          groupBy: {
+            args: Prisma.WorkspaceDelegateGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WorkspaceDelegateGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WorkspaceDelegateCountArgs<ExtArgs>
+            result: $Utils.Optional<WorkspaceDelegateCountAggregateOutputType> | number
           }
         }
       }
@@ -1686,6 +1866,8 @@ export namespace Prisma {
     workspace?: WorkspaceOmit
     workspaceMember?: WorkspaceMemberOmit
     workspaceInvite?: WorkspaceInviteOmit
+    department?: DepartmentOmit
+    workspaceDelegate?: WorkspaceDelegateOmit
     businessDetails?: BusinessDetailsOmit
     editRequest?: EditRequestOmit
     pendingChange?: PendingChangeOmit
@@ -1815,6 +1997,8 @@ export namespace Prisma {
     invites: number
     editRequests: number
     pendingChanges: number
+    departments: number
+    delegates: number
   }
 
   export type WorkspaceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1822,6 +2006,8 @@ export namespace Prisma {
     invites?: boolean | WorkspaceCountOutputTypeCountInvitesArgs
     editRequests?: boolean | WorkspaceCountOutputTypeCountEditRequestsArgs
     pendingChanges?: boolean | WorkspaceCountOutputTypeCountPendingChangesArgs
+    departments?: boolean | WorkspaceCountOutputTypeCountDepartmentsArgs
+    delegates?: boolean | WorkspaceCountOutputTypeCountDelegatesArgs
   }
 
   // Custom InputTypes
@@ -1861,6 +2047,60 @@ export namespace Prisma {
    */
   export type WorkspaceCountOutputTypeCountPendingChangesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PendingChangeWhereInput
+  }
+
+  /**
+   * WorkspaceCountOutputType without action
+   */
+  export type WorkspaceCountOutputTypeCountDepartmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartmentWhereInput
+  }
+
+  /**
+   * WorkspaceCountOutputType without action
+   */
+  export type WorkspaceCountOutputTypeCountDelegatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkspaceDelegateWhereInput
+  }
+
+
+  /**
+   * Count Type DepartmentCountOutputType
+   */
+
+  export type DepartmentCountOutputType = {
+    members: number
+    subDepartments: number
+  }
+
+  export type DepartmentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    members?: boolean | DepartmentCountOutputTypeCountMembersArgs
+    subDepartments?: boolean | DepartmentCountOutputTypeCountSubDepartmentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DepartmentCountOutputType
+     */
+    select?: DepartmentCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkspaceMemberWhereInput
+  }
+
+  /**
+   * DepartmentCountOutputType without action
+   */
+  export type DepartmentCountOutputTypeCountSubDepartmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartmentWhereInput
   }
 
 
@@ -5773,6 +6013,8 @@ export namespace Prisma {
     businessDetails?: boolean | Workspace$businessDetailsArgs<ExtArgs>
     editRequests?: boolean | Workspace$editRequestsArgs<ExtArgs>
     pendingChanges?: boolean | Workspace$pendingChangesArgs<ExtArgs>
+    departments?: boolean | Workspace$departmentsArgs<ExtArgs>
+    delegates?: boolean | Workspace$delegatesArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["workspace"]>
 
@@ -5837,6 +6079,8 @@ export namespace Prisma {
     businessDetails?: boolean | Workspace$businessDetailsArgs<ExtArgs>
     editRequests?: boolean | Workspace$editRequestsArgs<ExtArgs>
     pendingChanges?: boolean | Workspace$pendingChangesArgs<ExtArgs>
+    departments?: boolean | Workspace$departmentsArgs<ExtArgs>
+    delegates?: boolean | Workspace$delegatesArgs<ExtArgs>
     _count?: boolean | WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type WorkspaceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5850,6 +6094,8 @@ export namespace Prisma {
       businessDetails: Prisma.$BusinessDetailsPayload<ExtArgs> | null
       editRequests: Prisma.$EditRequestPayload<ExtArgs>[]
       pendingChanges: Prisma.$PendingChangePayload<ExtArgs>[]
+      departments: Prisma.$DepartmentPayload<ExtArgs>[]
+      delegates: Prisma.$WorkspaceDelegatePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6266,6 +6512,8 @@ export namespace Prisma {
     businessDetails<T extends Workspace$businessDetailsArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$businessDetailsArgs<ExtArgs>>): Prisma__BusinessDetailsClient<$Result.GetResult<Prisma.$BusinessDetailsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     editRequests<T extends Workspace$editRequestsArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$editRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EditRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pendingChanges<T extends Workspace$pendingChangesArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$pendingChangesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PendingChangePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    departments<T extends Workspace$departmentsArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$departmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    delegates<T extends Workspace$delegatesArgs<ExtArgs> = {}>(args?: Subset<T, Workspace$delegatesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6813,6 +7061,54 @@ export namespace Prisma {
   }
 
   /**
+   * Workspace.departments
+   */
+  export type Workspace$departmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    where?: DepartmentWhereInput
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    cursor?: DepartmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
+  }
+
+  /**
+   * Workspace.delegates
+   */
+  export type Workspace$delegatesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    where?: WorkspaceDelegateWhereInput
+    orderBy?: WorkspaceDelegateOrderByWithRelationInput | WorkspaceDelegateOrderByWithRelationInput[]
+    cursor?: WorkspaceDelegateWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WorkspaceDelegateScalarFieldEnum | WorkspaceDelegateScalarFieldEnum[]
+  }
+
+  /**
    * Workspace without action
    */
   export type WorkspaceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6846,6 +7142,12 @@ export namespace Prisma {
     workspaceId: string | null
     userId: string | null
     role: string | null
+    departmentId: string | null
+    invitedBy: string | null
+    approvalStatus: string | null
+    approvedBy: string | null
+    approvedAt: Date | null
+    personalMessage: string | null
     createdAt: Date | null
   }
 
@@ -6854,6 +7156,12 @@ export namespace Prisma {
     workspaceId: string | null
     userId: string | null
     role: string | null
+    departmentId: string | null
+    invitedBy: string | null
+    approvalStatus: string | null
+    approvedBy: string | null
+    approvedAt: Date | null
+    personalMessage: string | null
     createdAt: Date | null
   }
 
@@ -6862,6 +7170,12 @@ export namespace Prisma {
     workspaceId: number
     userId: number
     role: number
+    departmentId: number
+    invitedBy: number
+    approvalStatus: number
+    approvedBy: number
+    approvedAt: number
+    personalMessage: number
     createdAt: number
     _all: number
   }
@@ -6872,6 +7186,12 @@ export namespace Prisma {
     workspaceId?: true
     userId?: true
     role?: true
+    departmentId?: true
+    invitedBy?: true
+    approvalStatus?: true
+    approvedBy?: true
+    approvedAt?: true
+    personalMessage?: true
     createdAt?: true
   }
 
@@ -6880,6 +7200,12 @@ export namespace Prisma {
     workspaceId?: true
     userId?: true
     role?: true
+    departmentId?: true
+    invitedBy?: true
+    approvalStatus?: true
+    approvedBy?: true
+    approvedAt?: true
+    personalMessage?: true
     createdAt?: true
   }
 
@@ -6888,6 +7214,12 @@ export namespace Prisma {
     workspaceId?: true
     userId?: true
     role?: true
+    departmentId?: true
+    invitedBy?: true
+    approvalStatus?: true
+    approvedBy?: true
+    approvedAt?: true
+    personalMessage?: true
     createdAt?: true
     _all?: true
   }
@@ -6969,6 +7301,12 @@ export namespace Prisma {
     workspaceId: string
     userId: string
     role: string
+    departmentId: string | null
+    invitedBy: string | null
+    approvalStatus: string
+    approvedBy: string | null
+    approvedAt: Date | null
+    personalMessage: string | null
     createdAt: Date
     _count: WorkspaceMemberCountAggregateOutputType | null
     _min: WorkspaceMemberMinAggregateOutputType | null
@@ -6994,8 +7332,15 @@ export namespace Prisma {
     workspaceId?: boolean
     userId?: boolean
     role?: boolean
+    departmentId?: boolean
+    invitedBy?: boolean
+    approvalStatus?: boolean
+    approvedBy?: boolean
+    approvedAt?: boolean
+    personalMessage?: boolean
     createdAt?: boolean
     workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    department?: boolean | WorkspaceMember$departmentArgs<ExtArgs>
   }, ExtArgs["result"]["workspaceMember"]>
 
   export type WorkspaceMemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7003,8 +7348,15 @@ export namespace Prisma {
     workspaceId?: boolean
     userId?: boolean
     role?: boolean
+    departmentId?: boolean
+    invitedBy?: boolean
+    approvalStatus?: boolean
+    approvedBy?: boolean
+    approvedAt?: boolean
+    personalMessage?: boolean
     createdAt?: boolean
     workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    department?: boolean | WorkspaceMember$departmentArgs<ExtArgs>
   }, ExtArgs["result"]["workspaceMember"]>
 
   export type WorkspaceMemberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7012,8 +7364,15 @@ export namespace Prisma {
     workspaceId?: boolean
     userId?: boolean
     role?: boolean
+    departmentId?: boolean
+    invitedBy?: boolean
+    approvalStatus?: boolean
+    approvedBy?: boolean
+    approvedAt?: boolean
+    personalMessage?: boolean
     createdAt?: boolean
     workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    department?: boolean | WorkspaceMember$departmentArgs<ExtArgs>
   }, ExtArgs["result"]["workspaceMember"]>
 
   export type WorkspaceMemberSelectScalar = {
@@ -7021,30 +7380,46 @@ export namespace Prisma {
     workspaceId?: boolean
     userId?: boolean
     role?: boolean
+    departmentId?: boolean
+    invitedBy?: boolean
+    approvalStatus?: boolean
+    approvedBy?: boolean
+    approvedAt?: boolean
+    personalMessage?: boolean
     createdAt?: boolean
   }
 
-  export type WorkspaceMemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "userId" | "role" | "createdAt", ExtArgs["result"]["workspaceMember"]>
+  export type WorkspaceMemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "userId" | "role" | "departmentId" | "invitedBy" | "approvalStatus" | "approvedBy" | "approvedAt" | "personalMessage" | "createdAt", ExtArgs["result"]["workspaceMember"]>
   export type WorkspaceMemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    department?: boolean | WorkspaceMember$departmentArgs<ExtArgs>
   }
   export type WorkspaceMemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    department?: boolean | WorkspaceMember$departmentArgs<ExtArgs>
   }
   export type WorkspaceMemberIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    department?: boolean | WorkspaceMember$departmentArgs<ExtArgs>
   }
 
   export type $WorkspaceMemberPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "WorkspaceMember"
     objects: {
       workspace: Prisma.$WorkspacePayload<ExtArgs>
+      department: Prisma.$DepartmentPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       workspaceId: string
       userId: string
       role: string
+      departmentId: string | null
+      invitedBy: string | null
+      approvalStatus: string
+      approvedBy: string | null
+      approvedAt: Date | null
+      personalMessage: string | null
       createdAt: Date
     }, ExtArgs["result"]["workspaceMember"]>
     composites: {}
@@ -7441,6 +7816,7 @@ export namespace Prisma {
   export interface Prisma__WorkspaceMemberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     workspace<T extends WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkspaceDefaultArgs<ExtArgs>>): Prisma__WorkspaceClient<$Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    department<T extends WorkspaceMember$departmentArgs<ExtArgs> = {}>(args?: Subset<T, WorkspaceMember$departmentArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7474,6 +7850,12 @@ export namespace Prisma {
     readonly workspaceId: FieldRef<"WorkspaceMember", 'String'>
     readonly userId: FieldRef<"WorkspaceMember", 'String'>
     readonly role: FieldRef<"WorkspaceMember", 'String'>
+    readonly departmentId: FieldRef<"WorkspaceMember", 'String'>
+    readonly invitedBy: FieldRef<"WorkspaceMember", 'String'>
+    readonly approvalStatus: FieldRef<"WorkspaceMember", 'String'>
+    readonly approvedBy: FieldRef<"WorkspaceMember", 'String'>
+    readonly approvedAt: FieldRef<"WorkspaceMember", 'DateTime'>
+    readonly personalMessage: FieldRef<"WorkspaceMember", 'String'>
     readonly createdAt: FieldRef<"WorkspaceMember", 'DateTime'>
   }
     
@@ -7871,6 +8253,25 @@ export namespace Prisma {
   }
 
   /**
+   * WorkspaceMember.department
+   */
+  export type WorkspaceMember$departmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    where?: DepartmentWhereInput
+  }
+
+  /**
    * WorkspaceMember without action
    */
   export type WorkspaceMemberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7904,6 +8305,9 @@ export namespace Prisma {
     workspaceId: string | null
     email: string | null
     role: string | null
+    departmentId: string | null
+    invitedBy: string | null
+    personalMessage: string | null
     token: string | null
     accepted: boolean | null
     createdAt: Date | null
@@ -7915,6 +8319,9 @@ export namespace Prisma {
     workspaceId: string | null
     email: string | null
     role: string | null
+    departmentId: string | null
+    invitedBy: string | null
+    personalMessage: string | null
     token: string | null
     accepted: boolean | null
     createdAt: Date | null
@@ -7926,6 +8333,9 @@ export namespace Prisma {
     workspaceId: number
     email: number
     role: number
+    departmentId: number
+    invitedBy: number
+    personalMessage: number
     token: number
     accepted: number
     createdAt: number
@@ -7939,6 +8349,9 @@ export namespace Prisma {
     workspaceId?: true
     email?: true
     role?: true
+    departmentId?: true
+    invitedBy?: true
+    personalMessage?: true
     token?: true
     accepted?: true
     createdAt?: true
@@ -7950,6 +8363,9 @@ export namespace Prisma {
     workspaceId?: true
     email?: true
     role?: true
+    departmentId?: true
+    invitedBy?: true
+    personalMessage?: true
     token?: true
     accepted?: true
     createdAt?: true
@@ -7961,6 +8377,9 @@ export namespace Prisma {
     workspaceId?: true
     email?: true
     role?: true
+    departmentId?: true
+    invitedBy?: true
+    personalMessage?: true
     token?: true
     accepted?: true
     createdAt?: true
@@ -8045,6 +8464,9 @@ export namespace Prisma {
     workspaceId: string
     email: string
     role: string
+    departmentId: string | null
+    invitedBy: string
+    personalMessage: string | null
     token: string
     accepted: boolean
     createdAt: Date
@@ -8073,6 +8495,9 @@ export namespace Prisma {
     workspaceId?: boolean
     email?: boolean
     role?: boolean
+    departmentId?: boolean
+    invitedBy?: boolean
+    personalMessage?: boolean
     token?: boolean
     accepted?: boolean
     createdAt?: boolean
@@ -8085,6 +8510,9 @@ export namespace Prisma {
     workspaceId?: boolean
     email?: boolean
     role?: boolean
+    departmentId?: boolean
+    invitedBy?: boolean
+    personalMessage?: boolean
     token?: boolean
     accepted?: boolean
     createdAt?: boolean
@@ -8097,6 +8525,9 @@ export namespace Prisma {
     workspaceId?: boolean
     email?: boolean
     role?: boolean
+    departmentId?: boolean
+    invitedBy?: boolean
+    personalMessage?: boolean
     token?: boolean
     accepted?: boolean
     createdAt?: boolean
@@ -8109,13 +8540,16 @@ export namespace Prisma {
     workspaceId?: boolean
     email?: boolean
     role?: boolean
+    departmentId?: boolean
+    invitedBy?: boolean
+    personalMessage?: boolean
     token?: boolean
     accepted?: boolean
     createdAt?: boolean
     expiresAt?: boolean
   }
 
-  export type WorkspaceInviteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "email" | "role" | "token" | "accepted" | "createdAt" | "expiresAt", ExtArgs["result"]["workspaceInvite"]>
+  export type WorkspaceInviteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "email" | "role" | "departmentId" | "invitedBy" | "personalMessage" | "token" | "accepted" | "createdAt" | "expiresAt", ExtArgs["result"]["workspaceInvite"]>
   export type WorkspaceInviteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
   }
@@ -8136,6 +8570,9 @@ export namespace Prisma {
       workspaceId: string
       email: string
       role: string
+      departmentId: string | null
+      invitedBy: string
+      personalMessage: string | null
       token: string
       accepted: boolean
       createdAt: Date
@@ -8568,6 +9005,9 @@ export namespace Prisma {
     readonly workspaceId: FieldRef<"WorkspaceInvite", 'String'>
     readonly email: FieldRef<"WorkspaceInvite", 'String'>
     readonly role: FieldRef<"WorkspaceInvite", 'String'>
+    readonly departmentId: FieldRef<"WorkspaceInvite", 'String'>
+    readonly invitedBy: FieldRef<"WorkspaceInvite", 'String'>
+    readonly personalMessage: FieldRef<"WorkspaceInvite", 'String'>
     readonly token: FieldRef<"WorkspaceInvite", 'String'>
     readonly accepted: FieldRef<"WorkspaceInvite", 'Boolean'>
     readonly createdAt: FieldRef<"WorkspaceInvite", 'DateTime'>
@@ -8983,6 +9423,2376 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: WorkspaceInviteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Department
+   */
+
+  export type AggregateDepartment = {
+    _count: DepartmentCountAggregateOutputType | null
+    _min: DepartmentMinAggregateOutputType | null
+    _max: DepartmentMaxAggregateOutputType | null
+  }
+
+  export type DepartmentMinAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    name: string | null
+    description: string | null
+    headUserId: string | null
+    parentDepartmentId: string | null
+    status: string | null
+    createdBy: string | null
+    approvedBy: string | null
+    approvedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DepartmentMaxAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    name: string | null
+    description: string | null
+    headUserId: string | null
+    parentDepartmentId: string | null
+    status: string | null
+    createdBy: string | null
+    approvedBy: string | null
+    approvedAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DepartmentCountAggregateOutputType = {
+    id: number
+    workspaceId: number
+    name: number
+    description: number
+    headUserId: number
+    parentDepartmentId: number
+    status: number
+    createdBy: number
+    approvedBy: number
+    approvedAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DepartmentMinAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    name?: true
+    description?: true
+    headUserId?: true
+    parentDepartmentId?: true
+    status?: true
+    createdBy?: true
+    approvedBy?: true
+    approvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DepartmentMaxAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    name?: true
+    description?: true
+    headUserId?: true
+    parentDepartmentId?: true
+    status?: true
+    createdBy?: true
+    approvedBy?: true
+    approvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DepartmentCountAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    name?: true
+    description?: true
+    headUserId?: true
+    parentDepartmentId?: true
+    status?: true
+    createdBy?: true
+    approvedBy?: true
+    approvedAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DepartmentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Department to aggregate.
+     */
+    where?: DepartmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departments to fetch.
+     */
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DepartmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Departments
+    **/
+    _count?: true | DepartmentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DepartmentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DepartmentMaxAggregateInputType
+  }
+
+  export type GetDepartmentAggregateType<T extends DepartmentAggregateArgs> = {
+        [P in keyof T & keyof AggregateDepartment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDepartment[P]>
+      : GetScalarType<T[P], AggregateDepartment[P]>
+  }
+
+
+
+
+  export type DepartmentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DepartmentWhereInput
+    orderBy?: DepartmentOrderByWithAggregationInput | DepartmentOrderByWithAggregationInput[]
+    by: DepartmentScalarFieldEnum[] | DepartmentScalarFieldEnum
+    having?: DepartmentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DepartmentCountAggregateInputType | true
+    _min?: DepartmentMinAggregateInputType
+    _max?: DepartmentMaxAggregateInputType
+  }
+
+  export type DepartmentGroupByOutputType = {
+    id: string
+    workspaceId: string
+    name: string
+    description: string | null
+    headUserId: string | null
+    parentDepartmentId: string | null
+    status: string
+    createdBy: string
+    approvedBy: string | null
+    approvedAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: DepartmentCountAggregateOutputType | null
+    _min: DepartmentMinAggregateOutputType | null
+    _max: DepartmentMaxAggregateOutputType | null
+  }
+
+  type GetDepartmentGroupByPayload<T extends DepartmentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DepartmentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DepartmentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DepartmentGroupByOutputType[P]>
+            : GetScalarType<T[P], DepartmentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DepartmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    name?: boolean
+    description?: boolean
+    headUserId?: boolean
+    parentDepartmentId?: boolean
+    status?: boolean
+    createdBy?: boolean
+    approvedBy?: boolean
+    approvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    members?: boolean | Department$membersArgs<ExtArgs>
+    parentDepartment?: boolean | Department$parentDepartmentArgs<ExtArgs>
+    subDepartments?: boolean | Department$subDepartmentsArgs<ExtArgs>
+    _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["department"]>
+
+  export type DepartmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    name?: boolean
+    description?: boolean
+    headUserId?: boolean
+    parentDepartmentId?: boolean
+    status?: boolean
+    createdBy?: boolean
+    approvedBy?: boolean
+    approvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    parentDepartment?: boolean | Department$parentDepartmentArgs<ExtArgs>
+  }, ExtArgs["result"]["department"]>
+
+  export type DepartmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    name?: boolean
+    description?: boolean
+    headUserId?: boolean
+    parentDepartmentId?: boolean
+    status?: boolean
+    createdBy?: boolean
+    approvedBy?: boolean
+    approvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    parentDepartment?: boolean | Department$parentDepartmentArgs<ExtArgs>
+  }, ExtArgs["result"]["department"]>
+
+  export type DepartmentSelectScalar = {
+    id?: boolean
+    workspaceId?: boolean
+    name?: boolean
+    description?: boolean
+    headUserId?: boolean
+    parentDepartmentId?: boolean
+    status?: boolean
+    createdBy?: boolean
+    approvedBy?: boolean
+    approvedAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DepartmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "name" | "description" | "headUserId" | "parentDepartmentId" | "status" | "createdBy" | "approvedBy" | "approvedAt" | "createdAt" | "updatedAt", ExtArgs["result"]["department"]>
+  export type DepartmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    members?: boolean | Department$membersArgs<ExtArgs>
+    parentDepartment?: boolean | Department$parentDepartmentArgs<ExtArgs>
+    subDepartments?: boolean | Department$subDepartmentsArgs<ExtArgs>
+    _count?: boolean | DepartmentCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type DepartmentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    parentDepartment?: boolean | Department$parentDepartmentArgs<ExtArgs>
+  }
+  export type DepartmentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+    parentDepartment?: boolean | Department$parentDepartmentArgs<ExtArgs>
+  }
+
+  export type $DepartmentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Department"
+    objects: {
+      workspace: Prisma.$WorkspacePayload<ExtArgs>
+      members: Prisma.$WorkspaceMemberPayload<ExtArgs>[]
+      parentDepartment: Prisma.$DepartmentPayload<ExtArgs> | null
+      subDepartments: Prisma.$DepartmentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      workspaceId: string
+      name: string
+      description: string | null
+      headUserId: string | null
+      parentDepartmentId: string | null
+      status: string
+      createdBy: string
+      approvedBy: string | null
+      approvedAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["department"]>
+    composites: {}
+  }
+
+  type DepartmentGetPayload<S extends boolean | null | undefined | DepartmentDefaultArgs> = $Result.GetResult<Prisma.$DepartmentPayload, S>
+
+  type DepartmentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<DepartmentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: DepartmentCountAggregateInputType | true
+    }
+
+  export interface DepartmentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Department'], meta: { name: 'Department' } }
+    /**
+     * Find zero or one Department that matches the filter.
+     * @param {DepartmentFindUniqueArgs} args - Arguments to find a Department
+     * @example
+     * // Get one Department
+     * const department = await prisma.department.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DepartmentFindUniqueArgs>(args: SelectSubset<T, DepartmentFindUniqueArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Department that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {DepartmentFindUniqueOrThrowArgs} args - Arguments to find a Department
+     * @example
+     * // Get one Department
+     * const department = await prisma.department.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DepartmentFindUniqueOrThrowArgs>(args: SelectSubset<T, DepartmentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Department that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentFindFirstArgs} args - Arguments to find a Department
+     * @example
+     * // Get one Department
+     * const department = await prisma.department.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DepartmentFindFirstArgs>(args?: SelectSubset<T, DepartmentFindFirstArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Department that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentFindFirstOrThrowArgs} args - Arguments to find a Department
+     * @example
+     * // Get one Department
+     * const department = await prisma.department.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DepartmentFindFirstOrThrowArgs>(args?: SelectSubset<T, DepartmentFindFirstOrThrowArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Departments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Departments
+     * const departments = await prisma.department.findMany()
+     * 
+     * // Get first 10 Departments
+     * const departments = await prisma.department.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const departmentWithIdOnly = await prisma.department.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DepartmentFindManyArgs>(args?: SelectSubset<T, DepartmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Department.
+     * @param {DepartmentCreateArgs} args - Arguments to create a Department.
+     * @example
+     * // Create one Department
+     * const Department = await prisma.department.create({
+     *   data: {
+     *     // ... data to create a Department
+     *   }
+     * })
+     * 
+     */
+    create<T extends DepartmentCreateArgs>(args: SelectSubset<T, DepartmentCreateArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Departments.
+     * @param {DepartmentCreateManyArgs} args - Arguments to create many Departments.
+     * @example
+     * // Create many Departments
+     * const department = await prisma.department.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DepartmentCreateManyArgs>(args?: SelectSubset<T, DepartmentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Departments and returns the data saved in the database.
+     * @param {DepartmentCreateManyAndReturnArgs} args - Arguments to create many Departments.
+     * @example
+     * // Create many Departments
+     * const department = await prisma.department.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Departments and only return the `id`
+     * const departmentWithIdOnly = await prisma.department.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DepartmentCreateManyAndReturnArgs>(args?: SelectSubset<T, DepartmentCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Department.
+     * @param {DepartmentDeleteArgs} args - Arguments to delete one Department.
+     * @example
+     * // Delete one Department
+     * const Department = await prisma.department.delete({
+     *   where: {
+     *     // ... filter to delete one Department
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DepartmentDeleteArgs>(args: SelectSubset<T, DepartmentDeleteArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Department.
+     * @param {DepartmentUpdateArgs} args - Arguments to update one Department.
+     * @example
+     * // Update one Department
+     * const department = await prisma.department.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DepartmentUpdateArgs>(args: SelectSubset<T, DepartmentUpdateArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Departments.
+     * @param {DepartmentDeleteManyArgs} args - Arguments to filter Departments to delete.
+     * @example
+     * // Delete a few Departments
+     * const { count } = await prisma.department.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DepartmentDeleteManyArgs>(args?: SelectSubset<T, DepartmentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Departments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Departments
+     * const department = await prisma.department.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DepartmentUpdateManyArgs>(args: SelectSubset<T, DepartmentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Departments and returns the data updated in the database.
+     * @param {DepartmentUpdateManyAndReturnArgs} args - Arguments to update many Departments.
+     * @example
+     * // Update many Departments
+     * const department = await prisma.department.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Departments and only return the `id`
+     * const departmentWithIdOnly = await prisma.department.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends DepartmentUpdateManyAndReturnArgs>(args: SelectSubset<T, DepartmentUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Department.
+     * @param {DepartmentUpsertArgs} args - Arguments to update or create a Department.
+     * @example
+     * // Update or create a Department
+     * const department = await prisma.department.upsert({
+     *   create: {
+     *     // ... data to create a Department
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Department we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DepartmentUpsertArgs>(args: SelectSubset<T, DepartmentUpsertArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Departments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentCountArgs} args - Arguments to filter Departments to count.
+     * @example
+     * // Count the number of Departments
+     * const count = await prisma.department.count({
+     *   where: {
+     *     // ... the filter for the Departments we want to count
+     *   }
+     * })
+    **/
+    count<T extends DepartmentCountArgs>(
+      args?: Subset<T, DepartmentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DepartmentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Department.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DepartmentAggregateArgs>(args: Subset<T, DepartmentAggregateArgs>): Prisma.PrismaPromise<GetDepartmentAggregateType<T>>
+
+    /**
+     * Group by Department.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DepartmentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DepartmentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DepartmentGroupByArgs['orderBy'] }
+        : { orderBy?: DepartmentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DepartmentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDepartmentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Department model
+   */
+  readonly fields: DepartmentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Department.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DepartmentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    workspace<T extends WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkspaceDefaultArgs<ExtArgs>>): Prisma__WorkspaceClient<$Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    members<T extends Department$membersArgs<ExtArgs> = {}>(args?: Subset<T, Department$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkspaceMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    parentDepartment<T extends Department$parentDepartmentArgs<ExtArgs> = {}>(args?: Subset<T, Department$parentDepartmentArgs<ExtArgs>>): Prisma__DepartmentClient<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    subDepartments<T extends Department$subDepartmentsArgs<ExtArgs> = {}>(args?: Subset<T, Department$subDepartmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DepartmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Department model
+   */
+  interface DepartmentFieldRefs {
+    readonly id: FieldRef<"Department", 'String'>
+    readonly workspaceId: FieldRef<"Department", 'String'>
+    readonly name: FieldRef<"Department", 'String'>
+    readonly description: FieldRef<"Department", 'String'>
+    readonly headUserId: FieldRef<"Department", 'String'>
+    readonly parentDepartmentId: FieldRef<"Department", 'String'>
+    readonly status: FieldRef<"Department", 'String'>
+    readonly createdBy: FieldRef<"Department", 'String'>
+    readonly approvedBy: FieldRef<"Department", 'String'>
+    readonly approvedAt: FieldRef<"Department", 'DateTime'>
+    readonly createdAt: FieldRef<"Department", 'DateTime'>
+    readonly updatedAt: FieldRef<"Department", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Department findUnique
+   */
+  export type DepartmentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Department to fetch.
+     */
+    where: DepartmentWhereUniqueInput
+  }
+
+  /**
+   * Department findUniqueOrThrow
+   */
+  export type DepartmentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Department to fetch.
+     */
+    where: DepartmentWhereUniqueInput
+  }
+
+  /**
+   * Department findFirst
+   */
+  export type DepartmentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Department to fetch.
+     */
+    where?: DepartmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departments to fetch.
+     */
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departments.
+     */
+    cursor?: DepartmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departments.
+     */
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
+  }
+
+  /**
+   * Department findFirstOrThrow
+   */
+  export type DepartmentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Department to fetch.
+     */
+    where?: DepartmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departments to fetch.
+     */
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Departments.
+     */
+    cursor?: DepartmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Departments.
+     */
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
+  }
+
+  /**
+   * Department findMany
+   */
+  export type DepartmentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter, which Departments to fetch.
+     */
+    where?: DepartmentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Departments to fetch.
+     */
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Departments.
+     */
+    cursor?: DepartmentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Departments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Departments.
+     */
+    skip?: number
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
+  }
+
+  /**
+   * Department create
+   */
+  export type DepartmentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Department.
+     */
+    data: XOR<DepartmentCreateInput, DepartmentUncheckedCreateInput>
+  }
+
+  /**
+   * Department createMany
+   */
+  export type DepartmentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Departments.
+     */
+    data: DepartmentCreateManyInput | DepartmentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Department createManyAndReturn
+   */
+  export type DepartmentCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * The data used to create many Departments.
+     */
+    data: DepartmentCreateManyInput | DepartmentCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Department update
+   */
+  export type DepartmentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Department.
+     */
+    data: XOR<DepartmentUpdateInput, DepartmentUncheckedUpdateInput>
+    /**
+     * Choose, which Department to update.
+     */
+    where: DepartmentWhereUniqueInput
+  }
+
+  /**
+   * Department updateMany
+   */
+  export type DepartmentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Departments.
+     */
+    data: XOR<DepartmentUpdateManyMutationInput, DepartmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Departments to update
+     */
+    where?: DepartmentWhereInput
+    /**
+     * Limit how many Departments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Department updateManyAndReturn
+   */
+  export type DepartmentUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * The data used to update Departments.
+     */
+    data: XOR<DepartmentUpdateManyMutationInput, DepartmentUncheckedUpdateManyInput>
+    /**
+     * Filter which Departments to update
+     */
+    where?: DepartmentWhereInput
+    /**
+     * Limit how many Departments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Department upsert
+   */
+  export type DepartmentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Department to update in case it exists.
+     */
+    where: DepartmentWhereUniqueInput
+    /**
+     * In case the Department found by the `where` argument doesn't exist, create a new Department with this data.
+     */
+    create: XOR<DepartmentCreateInput, DepartmentUncheckedCreateInput>
+    /**
+     * In case the Department was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DepartmentUpdateInput, DepartmentUncheckedUpdateInput>
+  }
+
+  /**
+   * Department delete
+   */
+  export type DepartmentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    /**
+     * Filter which Department to delete.
+     */
+    where: DepartmentWhereUniqueInput
+  }
+
+  /**
+   * Department deleteMany
+   */
+  export type DepartmentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Departments to delete
+     */
+    where?: DepartmentWhereInput
+    /**
+     * Limit how many Departments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Department.members
+   */
+  export type Department$membersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceMember
+     */
+    select?: WorkspaceMemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceMember
+     */
+    omit?: WorkspaceMemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceMemberInclude<ExtArgs> | null
+    where?: WorkspaceMemberWhereInput
+    orderBy?: WorkspaceMemberOrderByWithRelationInput | WorkspaceMemberOrderByWithRelationInput[]
+    cursor?: WorkspaceMemberWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WorkspaceMemberScalarFieldEnum | WorkspaceMemberScalarFieldEnum[]
+  }
+
+  /**
+   * Department.parentDepartment
+   */
+  export type Department$parentDepartmentArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    where?: DepartmentWhereInput
+  }
+
+  /**
+   * Department.subDepartments
+   */
+  export type Department$subDepartmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+    where?: DepartmentWhereInput
+    orderBy?: DepartmentOrderByWithRelationInput | DepartmentOrderByWithRelationInput[]
+    cursor?: DepartmentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DepartmentScalarFieldEnum | DepartmentScalarFieldEnum[]
+  }
+
+  /**
+   * Department without action
+   */
+  export type DepartmentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Department
+     */
+    select?: DepartmentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Department
+     */
+    omit?: DepartmentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DepartmentInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model WorkspaceDelegate
+   */
+
+  export type AggregateWorkspaceDelegate = {
+    _count: WorkspaceDelegateCountAggregateOutputType | null
+    _min: WorkspaceDelegateMinAggregateOutputType | null
+    _max: WorkspaceDelegateMaxAggregateOutputType | null
+  }
+
+  export type WorkspaceDelegateMinAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    delegateUserId: string | null
+    delegatedBy: string | null
+    canApproveDepartments: boolean | null
+    canApproveMembers: boolean | null
+    canApproveChanges: boolean | null
+    canInviteMembers: boolean | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WorkspaceDelegateMaxAggregateOutputType = {
+    id: string | null
+    workspaceId: string | null
+    delegateUserId: string | null
+    delegatedBy: string | null
+    canApproveDepartments: boolean | null
+    canApproveMembers: boolean | null
+    canApproveChanges: boolean | null
+    canInviteMembers: boolean | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WorkspaceDelegateCountAggregateOutputType = {
+    id: number
+    workspaceId: number
+    delegateUserId: number
+    delegatedBy: number
+    canApproveDepartments: number
+    canApproveMembers: number
+    canApproveChanges: number
+    canInviteMembers: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WorkspaceDelegateMinAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    delegateUserId?: true
+    delegatedBy?: true
+    canApproveDepartments?: true
+    canApproveMembers?: true
+    canApproveChanges?: true
+    canInviteMembers?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WorkspaceDelegateMaxAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    delegateUserId?: true
+    delegatedBy?: true
+    canApproveDepartments?: true
+    canApproveMembers?: true
+    canApproveChanges?: true
+    canInviteMembers?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WorkspaceDelegateCountAggregateInputType = {
+    id?: true
+    workspaceId?: true
+    delegateUserId?: true
+    delegatedBy?: true
+    canApproveDepartments?: true
+    canApproveMembers?: true
+    canApproveChanges?: true
+    canInviteMembers?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WorkspaceDelegateAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WorkspaceDelegate to aggregate.
+     */
+    where?: WorkspaceDelegateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkspaceDelegates to fetch.
+     */
+    orderBy?: WorkspaceDelegateOrderByWithRelationInput | WorkspaceDelegateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WorkspaceDelegateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkspaceDelegates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkspaceDelegates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned WorkspaceDelegates
+    **/
+    _count?: true | WorkspaceDelegateCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WorkspaceDelegateMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WorkspaceDelegateMaxAggregateInputType
+  }
+
+  export type GetWorkspaceDelegateAggregateType<T extends WorkspaceDelegateAggregateArgs> = {
+        [P in keyof T & keyof AggregateWorkspaceDelegate]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWorkspaceDelegate[P]>
+      : GetScalarType<T[P], AggregateWorkspaceDelegate[P]>
+  }
+
+
+
+
+  export type WorkspaceDelegateGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WorkspaceDelegateWhereInput
+    orderBy?: WorkspaceDelegateOrderByWithAggregationInput | WorkspaceDelegateOrderByWithAggregationInput[]
+    by: WorkspaceDelegateScalarFieldEnum[] | WorkspaceDelegateScalarFieldEnum
+    having?: WorkspaceDelegateScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WorkspaceDelegateCountAggregateInputType | true
+    _min?: WorkspaceDelegateMinAggregateInputType
+    _max?: WorkspaceDelegateMaxAggregateInputType
+  }
+
+  export type WorkspaceDelegateGroupByOutputType = {
+    id: string
+    workspaceId: string
+    delegateUserId: string
+    delegatedBy: string
+    canApproveDepartments: boolean
+    canApproveMembers: boolean
+    canApproveChanges: boolean
+    canInviteMembers: boolean
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: WorkspaceDelegateCountAggregateOutputType | null
+    _min: WorkspaceDelegateMinAggregateOutputType | null
+    _max: WorkspaceDelegateMaxAggregateOutputType | null
+  }
+
+  type GetWorkspaceDelegateGroupByPayload<T extends WorkspaceDelegateGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WorkspaceDelegateGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WorkspaceDelegateGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WorkspaceDelegateGroupByOutputType[P]>
+            : GetScalarType<T[P], WorkspaceDelegateGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WorkspaceDelegateSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    delegateUserId?: boolean
+    delegatedBy?: boolean
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workspaceDelegate"]>
+
+  export type WorkspaceDelegateSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    delegateUserId?: boolean
+    delegatedBy?: boolean
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workspaceDelegate"]>
+
+  export type WorkspaceDelegateSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    workspaceId?: boolean
+    delegateUserId?: boolean
+    delegatedBy?: boolean
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["workspaceDelegate"]>
+
+  export type WorkspaceDelegateSelectScalar = {
+    id?: boolean
+    workspaceId?: boolean
+    delegateUserId?: boolean
+    delegatedBy?: boolean
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WorkspaceDelegateOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "workspaceId" | "delegateUserId" | "delegatedBy" | "canApproveDepartments" | "canApproveMembers" | "canApproveChanges" | "canInviteMembers" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["workspaceDelegate"]>
+  export type WorkspaceDelegateInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+  export type WorkspaceDelegateIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+  export type WorkspaceDelegateIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    workspace?: boolean | WorkspaceDefaultArgs<ExtArgs>
+  }
+
+  export type $WorkspaceDelegatePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "WorkspaceDelegate"
+    objects: {
+      workspace: Prisma.$WorkspacePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      workspaceId: string
+      delegateUserId: string
+      delegatedBy: string
+      canApproveDepartments: boolean
+      canApproveMembers: boolean
+      canApproveChanges: boolean
+      canInviteMembers: boolean
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["workspaceDelegate"]>
+    composites: {}
+  }
+
+  type WorkspaceDelegateGetPayload<S extends boolean | null | undefined | WorkspaceDelegateDefaultArgs> = $Result.GetResult<Prisma.$WorkspaceDelegatePayload, S>
+
+  type WorkspaceDelegateCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WorkspaceDelegateFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WorkspaceDelegateCountAggregateInputType | true
+    }
+
+  export interface WorkspaceDelegateDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['WorkspaceDelegate'], meta: { name: 'WorkspaceDelegate' } }
+    /**
+     * Find zero or one WorkspaceDelegate that matches the filter.
+     * @param {WorkspaceDelegateFindUniqueArgs} args - Arguments to find a WorkspaceDelegate
+     * @example
+     * // Get one WorkspaceDelegate
+     * const workspaceDelegate = await prisma.workspaceDelegate.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WorkspaceDelegateFindUniqueArgs>(args: SelectSubset<T, WorkspaceDelegateFindUniqueArgs<ExtArgs>>): Prisma__WorkspaceDelegateClient<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one WorkspaceDelegate that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WorkspaceDelegateFindUniqueOrThrowArgs} args - Arguments to find a WorkspaceDelegate
+     * @example
+     * // Get one WorkspaceDelegate
+     * const workspaceDelegate = await prisma.workspaceDelegate.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WorkspaceDelegateFindUniqueOrThrowArgs>(args: SelectSubset<T, WorkspaceDelegateFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WorkspaceDelegateClient<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WorkspaceDelegate that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkspaceDelegateFindFirstArgs} args - Arguments to find a WorkspaceDelegate
+     * @example
+     * // Get one WorkspaceDelegate
+     * const workspaceDelegate = await prisma.workspaceDelegate.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WorkspaceDelegateFindFirstArgs>(args?: SelectSubset<T, WorkspaceDelegateFindFirstArgs<ExtArgs>>): Prisma__WorkspaceDelegateClient<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first WorkspaceDelegate that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkspaceDelegateFindFirstOrThrowArgs} args - Arguments to find a WorkspaceDelegate
+     * @example
+     * // Get one WorkspaceDelegate
+     * const workspaceDelegate = await prisma.workspaceDelegate.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WorkspaceDelegateFindFirstOrThrowArgs>(args?: SelectSubset<T, WorkspaceDelegateFindFirstOrThrowArgs<ExtArgs>>): Prisma__WorkspaceDelegateClient<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more WorkspaceDelegates that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkspaceDelegateFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all WorkspaceDelegates
+     * const workspaceDelegates = await prisma.workspaceDelegate.findMany()
+     * 
+     * // Get first 10 WorkspaceDelegates
+     * const workspaceDelegates = await prisma.workspaceDelegate.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const workspaceDelegateWithIdOnly = await prisma.workspaceDelegate.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WorkspaceDelegateFindManyArgs>(args?: SelectSubset<T, WorkspaceDelegateFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a WorkspaceDelegate.
+     * @param {WorkspaceDelegateCreateArgs} args - Arguments to create a WorkspaceDelegate.
+     * @example
+     * // Create one WorkspaceDelegate
+     * const WorkspaceDelegate = await prisma.workspaceDelegate.create({
+     *   data: {
+     *     // ... data to create a WorkspaceDelegate
+     *   }
+     * })
+     * 
+     */
+    create<T extends WorkspaceDelegateCreateArgs>(args: SelectSubset<T, WorkspaceDelegateCreateArgs<ExtArgs>>): Prisma__WorkspaceDelegateClient<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many WorkspaceDelegates.
+     * @param {WorkspaceDelegateCreateManyArgs} args - Arguments to create many WorkspaceDelegates.
+     * @example
+     * // Create many WorkspaceDelegates
+     * const workspaceDelegate = await prisma.workspaceDelegate.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WorkspaceDelegateCreateManyArgs>(args?: SelectSubset<T, WorkspaceDelegateCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many WorkspaceDelegates and returns the data saved in the database.
+     * @param {WorkspaceDelegateCreateManyAndReturnArgs} args - Arguments to create many WorkspaceDelegates.
+     * @example
+     * // Create many WorkspaceDelegates
+     * const workspaceDelegate = await prisma.workspaceDelegate.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many WorkspaceDelegates and only return the `id`
+     * const workspaceDelegateWithIdOnly = await prisma.workspaceDelegate.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WorkspaceDelegateCreateManyAndReturnArgs>(args?: SelectSubset<T, WorkspaceDelegateCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a WorkspaceDelegate.
+     * @param {WorkspaceDelegateDeleteArgs} args - Arguments to delete one WorkspaceDelegate.
+     * @example
+     * // Delete one WorkspaceDelegate
+     * const WorkspaceDelegate = await prisma.workspaceDelegate.delete({
+     *   where: {
+     *     // ... filter to delete one WorkspaceDelegate
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WorkspaceDelegateDeleteArgs>(args: SelectSubset<T, WorkspaceDelegateDeleteArgs<ExtArgs>>): Prisma__WorkspaceDelegateClient<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one WorkspaceDelegate.
+     * @param {WorkspaceDelegateUpdateArgs} args - Arguments to update one WorkspaceDelegate.
+     * @example
+     * // Update one WorkspaceDelegate
+     * const workspaceDelegate = await prisma.workspaceDelegate.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WorkspaceDelegateUpdateArgs>(args: SelectSubset<T, WorkspaceDelegateUpdateArgs<ExtArgs>>): Prisma__WorkspaceDelegateClient<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more WorkspaceDelegates.
+     * @param {WorkspaceDelegateDeleteManyArgs} args - Arguments to filter WorkspaceDelegates to delete.
+     * @example
+     * // Delete a few WorkspaceDelegates
+     * const { count } = await prisma.workspaceDelegate.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WorkspaceDelegateDeleteManyArgs>(args?: SelectSubset<T, WorkspaceDelegateDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WorkspaceDelegates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkspaceDelegateUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many WorkspaceDelegates
+     * const workspaceDelegate = await prisma.workspaceDelegate.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WorkspaceDelegateUpdateManyArgs>(args: SelectSubset<T, WorkspaceDelegateUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more WorkspaceDelegates and returns the data updated in the database.
+     * @param {WorkspaceDelegateUpdateManyAndReturnArgs} args - Arguments to update many WorkspaceDelegates.
+     * @example
+     * // Update many WorkspaceDelegates
+     * const workspaceDelegate = await prisma.workspaceDelegate.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more WorkspaceDelegates and only return the `id`
+     * const workspaceDelegateWithIdOnly = await prisma.workspaceDelegate.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WorkspaceDelegateUpdateManyAndReturnArgs>(args: SelectSubset<T, WorkspaceDelegateUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one WorkspaceDelegate.
+     * @param {WorkspaceDelegateUpsertArgs} args - Arguments to update or create a WorkspaceDelegate.
+     * @example
+     * // Update or create a WorkspaceDelegate
+     * const workspaceDelegate = await prisma.workspaceDelegate.upsert({
+     *   create: {
+     *     // ... data to create a WorkspaceDelegate
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the WorkspaceDelegate we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WorkspaceDelegateUpsertArgs>(args: SelectSubset<T, WorkspaceDelegateUpsertArgs<ExtArgs>>): Prisma__WorkspaceDelegateClient<$Result.GetResult<Prisma.$WorkspaceDelegatePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of WorkspaceDelegates.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkspaceDelegateCountArgs} args - Arguments to filter WorkspaceDelegates to count.
+     * @example
+     * // Count the number of WorkspaceDelegates
+     * const count = await prisma.workspaceDelegate.count({
+     *   where: {
+     *     // ... the filter for the WorkspaceDelegates we want to count
+     *   }
+     * })
+    **/
+    count<T extends WorkspaceDelegateCountArgs>(
+      args?: Subset<T, WorkspaceDelegateCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WorkspaceDelegateCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a WorkspaceDelegate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkspaceDelegateAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WorkspaceDelegateAggregateArgs>(args: Subset<T, WorkspaceDelegateAggregateArgs>): Prisma.PrismaPromise<GetWorkspaceDelegateAggregateType<T>>
+
+    /**
+     * Group by WorkspaceDelegate.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WorkspaceDelegateGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WorkspaceDelegateGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WorkspaceDelegateGroupByArgs['orderBy'] }
+        : { orderBy?: WorkspaceDelegateGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WorkspaceDelegateGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWorkspaceDelegateGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the WorkspaceDelegate model
+   */
+  readonly fields: WorkspaceDelegateFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for WorkspaceDelegate.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WorkspaceDelegateClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    workspace<T extends WorkspaceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, WorkspaceDefaultArgs<ExtArgs>>): Prisma__WorkspaceClient<$Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the WorkspaceDelegate model
+   */
+  interface WorkspaceDelegateFieldRefs {
+    readonly id: FieldRef<"WorkspaceDelegate", 'String'>
+    readonly workspaceId: FieldRef<"WorkspaceDelegate", 'String'>
+    readonly delegateUserId: FieldRef<"WorkspaceDelegate", 'String'>
+    readonly delegatedBy: FieldRef<"WorkspaceDelegate", 'String'>
+    readonly canApproveDepartments: FieldRef<"WorkspaceDelegate", 'Boolean'>
+    readonly canApproveMembers: FieldRef<"WorkspaceDelegate", 'Boolean'>
+    readonly canApproveChanges: FieldRef<"WorkspaceDelegate", 'Boolean'>
+    readonly canInviteMembers: FieldRef<"WorkspaceDelegate", 'Boolean'>
+    readonly isActive: FieldRef<"WorkspaceDelegate", 'Boolean'>
+    readonly createdAt: FieldRef<"WorkspaceDelegate", 'DateTime'>
+    readonly updatedAt: FieldRef<"WorkspaceDelegate", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * WorkspaceDelegate findUnique
+   */
+  export type WorkspaceDelegateFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkspaceDelegate to fetch.
+     */
+    where: WorkspaceDelegateWhereUniqueInput
+  }
+
+  /**
+   * WorkspaceDelegate findUniqueOrThrow
+   */
+  export type WorkspaceDelegateFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkspaceDelegate to fetch.
+     */
+    where: WorkspaceDelegateWhereUniqueInput
+  }
+
+  /**
+   * WorkspaceDelegate findFirst
+   */
+  export type WorkspaceDelegateFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkspaceDelegate to fetch.
+     */
+    where?: WorkspaceDelegateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkspaceDelegates to fetch.
+     */
+    orderBy?: WorkspaceDelegateOrderByWithRelationInput | WorkspaceDelegateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WorkspaceDelegates.
+     */
+    cursor?: WorkspaceDelegateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkspaceDelegates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkspaceDelegates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkspaceDelegates.
+     */
+    distinct?: WorkspaceDelegateScalarFieldEnum | WorkspaceDelegateScalarFieldEnum[]
+  }
+
+  /**
+   * WorkspaceDelegate findFirstOrThrow
+   */
+  export type WorkspaceDelegateFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkspaceDelegate to fetch.
+     */
+    where?: WorkspaceDelegateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkspaceDelegates to fetch.
+     */
+    orderBy?: WorkspaceDelegateOrderByWithRelationInput | WorkspaceDelegateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for WorkspaceDelegates.
+     */
+    cursor?: WorkspaceDelegateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkspaceDelegates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkspaceDelegates.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of WorkspaceDelegates.
+     */
+    distinct?: WorkspaceDelegateScalarFieldEnum | WorkspaceDelegateScalarFieldEnum[]
+  }
+
+  /**
+   * WorkspaceDelegate findMany
+   */
+  export type WorkspaceDelegateFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * Filter, which WorkspaceDelegates to fetch.
+     */
+    where?: WorkspaceDelegateWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of WorkspaceDelegates to fetch.
+     */
+    orderBy?: WorkspaceDelegateOrderByWithRelationInput | WorkspaceDelegateOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing WorkspaceDelegates.
+     */
+    cursor?: WorkspaceDelegateWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` WorkspaceDelegates from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` WorkspaceDelegates.
+     */
+    skip?: number
+    distinct?: WorkspaceDelegateScalarFieldEnum | WorkspaceDelegateScalarFieldEnum[]
+  }
+
+  /**
+   * WorkspaceDelegate create
+   */
+  export type WorkspaceDelegateCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * The data needed to create a WorkspaceDelegate.
+     */
+    data: XOR<WorkspaceDelegateCreateInput, WorkspaceDelegateUncheckedCreateInput>
+  }
+
+  /**
+   * WorkspaceDelegate createMany
+   */
+  export type WorkspaceDelegateCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many WorkspaceDelegates.
+     */
+    data: WorkspaceDelegateCreateManyInput | WorkspaceDelegateCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * WorkspaceDelegate createManyAndReturn
+   */
+  export type WorkspaceDelegateCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * The data used to create many WorkspaceDelegates.
+     */
+    data: WorkspaceDelegateCreateManyInput | WorkspaceDelegateCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WorkspaceDelegate update
+   */
+  export type WorkspaceDelegateUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * The data needed to update a WorkspaceDelegate.
+     */
+    data: XOR<WorkspaceDelegateUpdateInput, WorkspaceDelegateUncheckedUpdateInput>
+    /**
+     * Choose, which WorkspaceDelegate to update.
+     */
+    where: WorkspaceDelegateWhereUniqueInput
+  }
+
+  /**
+   * WorkspaceDelegate updateMany
+   */
+  export type WorkspaceDelegateUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update WorkspaceDelegates.
+     */
+    data: XOR<WorkspaceDelegateUpdateManyMutationInput, WorkspaceDelegateUncheckedUpdateManyInput>
+    /**
+     * Filter which WorkspaceDelegates to update
+     */
+    where?: WorkspaceDelegateWhereInput
+    /**
+     * Limit how many WorkspaceDelegates to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * WorkspaceDelegate updateManyAndReturn
+   */
+  export type WorkspaceDelegateUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * The data used to update WorkspaceDelegates.
+     */
+    data: XOR<WorkspaceDelegateUpdateManyMutationInput, WorkspaceDelegateUncheckedUpdateManyInput>
+    /**
+     * Filter which WorkspaceDelegates to update
+     */
+    where?: WorkspaceDelegateWhereInput
+    /**
+     * Limit how many WorkspaceDelegates to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * WorkspaceDelegate upsert
+   */
+  export type WorkspaceDelegateUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * The filter to search for the WorkspaceDelegate to update in case it exists.
+     */
+    where: WorkspaceDelegateWhereUniqueInput
+    /**
+     * In case the WorkspaceDelegate found by the `where` argument doesn't exist, create a new WorkspaceDelegate with this data.
+     */
+    create: XOR<WorkspaceDelegateCreateInput, WorkspaceDelegateUncheckedCreateInput>
+    /**
+     * In case the WorkspaceDelegate was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WorkspaceDelegateUpdateInput, WorkspaceDelegateUncheckedUpdateInput>
+  }
+
+  /**
+   * WorkspaceDelegate delete
+   */
+  export type WorkspaceDelegateDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
+    /**
+     * Filter which WorkspaceDelegate to delete.
+     */
+    where: WorkspaceDelegateWhereUniqueInput
+  }
+
+  /**
+   * WorkspaceDelegate deleteMany
+   */
+  export type WorkspaceDelegateDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which WorkspaceDelegates to delete
+     */
+    where?: WorkspaceDelegateWhereInput
+    /**
+     * Limit how many WorkspaceDelegates to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * WorkspaceDelegate without action
+   */
+  export type WorkspaceDelegateDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the WorkspaceDelegate
+     */
+    select?: WorkspaceDelegateSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the WorkspaceDelegate
+     */
+    omit?: WorkspaceDelegateOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WorkspaceDelegateInclude<ExtArgs> | null
   }
 
 
@@ -14702,6 +17512,12 @@ export namespace Prisma {
     workspaceId: 'workspaceId',
     userId: 'userId',
     role: 'role',
+    departmentId: 'departmentId',
+    invitedBy: 'invitedBy',
+    approvalStatus: 'approvalStatus',
+    approvedBy: 'approvedBy',
+    approvedAt: 'approvedAt',
+    personalMessage: 'personalMessage',
     createdAt: 'createdAt'
   };
 
@@ -14713,6 +17529,9 @@ export namespace Prisma {
     workspaceId: 'workspaceId',
     email: 'email',
     role: 'role',
+    departmentId: 'departmentId',
+    invitedBy: 'invitedBy',
+    personalMessage: 'personalMessage',
     token: 'token',
     accepted: 'accepted',
     createdAt: 'createdAt',
@@ -14720,6 +17539,41 @@ export namespace Prisma {
   };
 
   export type WorkspaceInviteScalarFieldEnum = (typeof WorkspaceInviteScalarFieldEnum)[keyof typeof WorkspaceInviteScalarFieldEnum]
+
+
+  export const DepartmentScalarFieldEnum: {
+    id: 'id',
+    workspaceId: 'workspaceId',
+    name: 'name',
+    description: 'description',
+    headUserId: 'headUserId',
+    parentDepartmentId: 'parentDepartmentId',
+    status: 'status',
+    createdBy: 'createdBy',
+    approvedBy: 'approvedBy',
+    approvedAt: 'approvedAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DepartmentScalarFieldEnum = (typeof DepartmentScalarFieldEnum)[keyof typeof DepartmentScalarFieldEnum]
+
+
+  export const WorkspaceDelegateScalarFieldEnum: {
+    id: 'id',
+    workspaceId: 'workspaceId',
+    delegateUserId: 'delegateUserId',
+    delegatedBy: 'delegatedBy',
+    canApproveDepartments: 'canApproveDepartments',
+    canApproveMembers: 'canApproveMembers',
+    canApproveChanges: 'canApproveChanges',
+    canInviteMembers: 'canInviteMembers',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WorkspaceDelegateScalarFieldEnum = (typeof WorkspaceDelegateScalarFieldEnum)[keyof typeof WorkspaceDelegateScalarFieldEnum]
 
 
   export const BusinessDetailsScalarFieldEnum: {
@@ -15235,6 +18089,8 @@ export namespace Prisma {
     businessDetails?: XOR<BusinessDetailsNullableScalarRelationFilter, BusinessDetailsWhereInput> | null
     editRequests?: EditRequestListRelationFilter
     pendingChanges?: PendingChangeListRelationFilter
+    departments?: DepartmentListRelationFilter
+    delegates?: WorkspaceDelegateListRelationFilter
   }
 
   export type WorkspaceOrderByWithRelationInput = {
@@ -15258,6 +18114,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsOrderByWithRelationInput
     editRequests?: EditRequestOrderByRelationAggregateInput
     pendingChanges?: PendingChangeOrderByRelationAggregateInput
+    departments?: DepartmentOrderByRelationAggregateInput
+    delegates?: WorkspaceDelegateOrderByRelationAggregateInput
   }
 
   export type WorkspaceWhereUniqueInput = Prisma.AtLeast<{
@@ -15284,6 +18142,8 @@ export namespace Prisma {
     businessDetails?: XOR<BusinessDetailsNullableScalarRelationFilter, BusinessDetailsWhereInput> | null
     editRequests?: EditRequestListRelationFilter
     pendingChanges?: PendingChangeListRelationFilter
+    departments?: DepartmentListRelationFilter
+    delegates?: WorkspaceDelegateListRelationFilter
   }, "id" | "slug">
 
   export type WorkspaceOrderByWithAggregationInput = {
@@ -15336,8 +18196,15 @@ export namespace Prisma {
     workspaceId?: StringFilter<"WorkspaceMember"> | string
     userId?: StringFilter<"WorkspaceMember"> | string
     role?: StringFilter<"WorkspaceMember"> | string
+    departmentId?: StringNullableFilter<"WorkspaceMember"> | string | null
+    invitedBy?: StringNullableFilter<"WorkspaceMember"> | string | null
+    approvalStatus?: StringFilter<"WorkspaceMember"> | string
+    approvedBy?: StringNullableFilter<"WorkspaceMember"> | string | null
+    approvedAt?: DateTimeNullableFilter<"WorkspaceMember"> | Date | string | null
+    personalMessage?: StringNullableFilter<"WorkspaceMember"> | string | null
     createdAt?: DateTimeFilter<"WorkspaceMember"> | Date | string
     workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+    department?: XOR<DepartmentNullableScalarRelationFilter, DepartmentWhereInput> | null
   }
 
   export type WorkspaceMemberOrderByWithRelationInput = {
@@ -15345,8 +18212,15 @@ export namespace Prisma {
     workspaceId?: SortOrder
     userId?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    invitedBy?: SortOrderInput | SortOrder
+    approvalStatus?: SortOrder
+    approvedBy?: SortOrderInput | SortOrder
+    approvedAt?: SortOrderInput | SortOrder
+    personalMessage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     workspace?: WorkspaceOrderByWithRelationInput
+    department?: DepartmentOrderByWithRelationInput
   }
 
   export type WorkspaceMemberWhereUniqueInput = Prisma.AtLeast<{
@@ -15358,8 +18232,15 @@ export namespace Prisma {
     workspaceId?: StringFilter<"WorkspaceMember"> | string
     userId?: StringFilter<"WorkspaceMember"> | string
     role?: StringFilter<"WorkspaceMember"> | string
+    departmentId?: StringNullableFilter<"WorkspaceMember"> | string | null
+    invitedBy?: StringNullableFilter<"WorkspaceMember"> | string | null
+    approvalStatus?: StringFilter<"WorkspaceMember"> | string
+    approvedBy?: StringNullableFilter<"WorkspaceMember"> | string | null
+    approvedAt?: DateTimeNullableFilter<"WorkspaceMember"> | Date | string | null
+    personalMessage?: StringNullableFilter<"WorkspaceMember"> | string | null
     createdAt?: DateTimeFilter<"WorkspaceMember"> | Date | string
     workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+    department?: XOR<DepartmentNullableScalarRelationFilter, DepartmentWhereInput> | null
   }, "id" | "workspaceId_userId">
 
   export type WorkspaceMemberOrderByWithAggregationInput = {
@@ -15367,6 +18248,12 @@ export namespace Prisma {
     workspaceId?: SortOrder
     userId?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    invitedBy?: SortOrderInput | SortOrder
+    approvalStatus?: SortOrder
+    approvedBy?: SortOrderInput | SortOrder
+    approvedAt?: SortOrderInput | SortOrder
+    personalMessage?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     _count?: WorkspaceMemberCountOrderByAggregateInput
     _max?: WorkspaceMemberMaxOrderByAggregateInput
@@ -15381,6 +18268,12 @@ export namespace Prisma {
     workspaceId?: StringWithAggregatesFilter<"WorkspaceMember"> | string
     userId?: StringWithAggregatesFilter<"WorkspaceMember"> | string
     role?: StringWithAggregatesFilter<"WorkspaceMember"> | string
+    departmentId?: StringNullableWithAggregatesFilter<"WorkspaceMember"> | string | null
+    invitedBy?: StringNullableWithAggregatesFilter<"WorkspaceMember"> | string | null
+    approvalStatus?: StringWithAggregatesFilter<"WorkspaceMember"> | string
+    approvedBy?: StringNullableWithAggregatesFilter<"WorkspaceMember"> | string | null
+    approvedAt?: DateTimeNullableWithAggregatesFilter<"WorkspaceMember"> | Date | string | null
+    personalMessage?: StringNullableWithAggregatesFilter<"WorkspaceMember"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"WorkspaceMember"> | Date | string
   }
 
@@ -15392,6 +18285,9 @@ export namespace Prisma {
     workspaceId?: StringFilter<"WorkspaceInvite"> | string
     email?: StringFilter<"WorkspaceInvite"> | string
     role?: StringFilter<"WorkspaceInvite"> | string
+    departmentId?: StringNullableFilter<"WorkspaceInvite"> | string | null
+    invitedBy?: StringFilter<"WorkspaceInvite"> | string
+    personalMessage?: StringNullableFilter<"WorkspaceInvite"> | string | null
     token?: StringFilter<"WorkspaceInvite"> | string
     accepted?: BoolFilter<"WorkspaceInvite"> | boolean
     createdAt?: DateTimeFilter<"WorkspaceInvite"> | Date | string
@@ -15404,6 +18300,9 @@ export namespace Prisma {
     workspaceId?: SortOrder
     email?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    invitedBy?: SortOrder
+    personalMessage?: SortOrderInput | SortOrder
     token?: SortOrder
     accepted?: SortOrder
     createdAt?: SortOrder
@@ -15420,6 +18319,9 @@ export namespace Prisma {
     workspaceId?: StringFilter<"WorkspaceInvite"> | string
     email?: StringFilter<"WorkspaceInvite"> | string
     role?: StringFilter<"WorkspaceInvite"> | string
+    departmentId?: StringNullableFilter<"WorkspaceInvite"> | string | null
+    invitedBy?: StringFilter<"WorkspaceInvite"> | string
+    personalMessage?: StringNullableFilter<"WorkspaceInvite"> | string | null
     accepted?: BoolFilter<"WorkspaceInvite"> | boolean
     createdAt?: DateTimeFilter<"WorkspaceInvite"> | Date | string
     expiresAt?: DateTimeFilter<"WorkspaceInvite"> | Date | string
@@ -15431,6 +18333,9 @@ export namespace Prisma {
     workspaceId?: SortOrder
     email?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrderInput | SortOrder
+    invitedBy?: SortOrder
+    personalMessage?: SortOrderInput | SortOrder
     token?: SortOrder
     accepted?: SortOrder
     createdAt?: SortOrder
@@ -15448,10 +18353,198 @@ export namespace Prisma {
     workspaceId?: StringWithAggregatesFilter<"WorkspaceInvite"> | string
     email?: StringWithAggregatesFilter<"WorkspaceInvite"> | string
     role?: StringWithAggregatesFilter<"WorkspaceInvite"> | string
+    departmentId?: StringNullableWithAggregatesFilter<"WorkspaceInvite"> | string | null
+    invitedBy?: StringWithAggregatesFilter<"WorkspaceInvite"> | string
+    personalMessage?: StringNullableWithAggregatesFilter<"WorkspaceInvite"> | string | null
     token?: StringWithAggregatesFilter<"WorkspaceInvite"> | string
     accepted?: BoolWithAggregatesFilter<"WorkspaceInvite"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"WorkspaceInvite"> | Date | string
     expiresAt?: DateTimeWithAggregatesFilter<"WorkspaceInvite"> | Date | string
+  }
+
+  export type DepartmentWhereInput = {
+    AND?: DepartmentWhereInput | DepartmentWhereInput[]
+    OR?: DepartmentWhereInput[]
+    NOT?: DepartmentWhereInput | DepartmentWhereInput[]
+    id?: StringFilter<"Department"> | string
+    workspaceId?: StringFilter<"Department"> | string
+    name?: StringFilter<"Department"> | string
+    description?: StringNullableFilter<"Department"> | string | null
+    headUserId?: StringNullableFilter<"Department"> | string | null
+    parentDepartmentId?: StringNullableFilter<"Department"> | string | null
+    status?: StringFilter<"Department"> | string
+    createdBy?: StringFilter<"Department"> | string
+    approvedBy?: StringNullableFilter<"Department"> | string | null
+    approvedAt?: DateTimeNullableFilter<"Department"> | Date | string | null
+    createdAt?: DateTimeFilter<"Department"> | Date | string
+    updatedAt?: DateTimeFilter<"Department"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+    members?: WorkspaceMemberListRelationFilter
+    parentDepartment?: XOR<DepartmentNullableScalarRelationFilter, DepartmentWhereInput> | null
+    subDepartments?: DepartmentListRelationFilter
+  }
+
+  export type DepartmentOrderByWithRelationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    headUserId?: SortOrderInput | SortOrder
+    parentDepartmentId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdBy?: SortOrder
+    approvedBy?: SortOrderInput | SortOrder
+    approvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    workspace?: WorkspaceOrderByWithRelationInput
+    members?: WorkspaceMemberOrderByRelationAggregateInput
+    parentDepartment?: DepartmentOrderByWithRelationInput
+    subDepartments?: DepartmentOrderByRelationAggregateInput
+  }
+
+  export type DepartmentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: DepartmentWhereInput | DepartmentWhereInput[]
+    OR?: DepartmentWhereInput[]
+    NOT?: DepartmentWhereInput | DepartmentWhereInput[]
+    workspaceId?: StringFilter<"Department"> | string
+    name?: StringFilter<"Department"> | string
+    description?: StringNullableFilter<"Department"> | string | null
+    headUserId?: StringNullableFilter<"Department"> | string | null
+    parentDepartmentId?: StringNullableFilter<"Department"> | string | null
+    status?: StringFilter<"Department"> | string
+    createdBy?: StringFilter<"Department"> | string
+    approvedBy?: StringNullableFilter<"Department"> | string | null
+    approvedAt?: DateTimeNullableFilter<"Department"> | Date | string | null
+    createdAt?: DateTimeFilter<"Department"> | Date | string
+    updatedAt?: DateTimeFilter<"Department"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+    members?: WorkspaceMemberListRelationFilter
+    parentDepartment?: XOR<DepartmentNullableScalarRelationFilter, DepartmentWhereInput> | null
+    subDepartments?: DepartmentListRelationFilter
+  }, "id">
+
+  export type DepartmentOrderByWithAggregationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    headUserId?: SortOrderInput | SortOrder
+    parentDepartmentId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    createdBy?: SortOrder
+    approvedBy?: SortOrderInput | SortOrder
+    approvedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DepartmentCountOrderByAggregateInput
+    _max?: DepartmentMaxOrderByAggregateInput
+    _min?: DepartmentMinOrderByAggregateInput
+  }
+
+  export type DepartmentScalarWhereWithAggregatesInput = {
+    AND?: DepartmentScalarWhereWithAggregatesInput | DepartmentScalarWhereWithAggregatesInput[]
+    OR?: DepartmentScalarWhereWithAggregatesInput[]
+    NOT?: DepartmentScalarWhereWithAggregatesInput | DepartmentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Department"> | string
+    workspaceId?: StringWithAggregatesFilter<"Department"> | string
+    name?: StringWithAggregatesFilter<"Department"> | string
+    description?: StringNullableWithAggregatesFilter<"Department"> | string | null
+    headUserId?: StringNullableWithAggregatesFilter<"Department"> | string | null
+    parentDepartmentId?: StringNullableWithAggregatesFilter<"Department"> | string | null
+    status?: StringWithAggregatesFilter<"Department"> | string
+    createdBy?: StringWithAggregatesFilter<"Department"> | string
+    approvedBy?: StringNullableWithAggregatesFilter<"Department"> | string | null
+    approvedAt?: DateTimeNullableWithAggregatesFilter<"Department"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Department"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Department"> | Date | string
+  }
+
+  export type WorkspaceDelegateWhereInput = {
+    AND?: WorkspaceDelegateWhereInput | WorkspaceDelegateWhereInput[]
+    OR?: WorkspaceDelegateWhereInput[]
+    NOT?: WorkspaceDelegateWhereInput | WorkspaceDelegateWhereInput[]
+    id?: StringFilter<"WorkspaceDelegate"> | string
+    workspaceId?: StringFilter<"WorkspaceDelegate"> | string
+    delegateUserId?: StringFilter<"WorkspaceDelegate"> | string
+    delegatedBy?: StringFilter<"WorkspaceDelegate"> | string
+    canApproveDepartments?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canApproveMembers?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canApproveChanges?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canInviteMembers?: BoolFilter<"WorkspaceDelegate"> | boolean
+    isActive?: BoolFilter<"WorkspaceDelegate"> | boolean
+    createdAt?: DateTimeFilter<"WorkspaceDelegate"> | Date | string
+    updatedAt?: DateTimeFilter<"WorkspaceDelegate"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+  }
+
+  export type WorkspaceDelegateOrderByWithRelationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    delegateUserId?: SortOrder
+    delegatedBy?: SortOrder
+    canApproveDepartments?: SortOrder
+    canApproveMembers?: SortOrder
+    canApproveChanges?: SortOrder
+    canInviteMembers?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    workspace?: WorkspaceOrderByWithRelationInput
+  }
+
+  export type WorkspaceDelegateWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    workspaceId_delegateUserId?: WorkspaceDelegateWorkspaceIdDelegateUserIdCompoundUniqueInput
+    AND?: WorkspaceDelegateWhereInput | WorkspaceDelegateWhereInput[]
+    OR?: WorkspaceDelegateWhereInput[]
+    NOT?: WorkspaceDelegateWhereInput | WorkspaceDelegateWhereInput[]
+    workspaceId?: StringFilter<"WorkspaceDelegate"> | string
+    delegateUserId?: StringFilter<"WorkspaceDelegate"> | string
+    delegatedBy?: StringFilter<"WorkspaceDelegate"> | string
+    canApproveDepartments?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canApproveMembers?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canApproveChanges?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canInviteMembers?: BoolFilter<"WorkspaceDelegate"> | boolean
+    isActive?: BoolFilter<"WorkspaceDelegate"> | boolean
+    createdAt?: DateTimeFilter<"WorkspaceDelegate"> | Date | string
+    updatedAt?: DateTimeFilter<"WorkspaceDelegate"> | Date | string
+    workspace?: XOR<WorkspaceScalarRelationFilter, WorkspaceWhereInput>
+  }, "id" | "workspaceId_delegateUserId">
+
+  export type WorkspaceDelegateOrderByWithAggregationInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    delegateUserId?: SortOrder
+    delegatedBy?: SortOrder
+    canApproveDepartments?: SortOrder
+    canApproveMembers?: SortOrder
+    canApproveChanges?: SortOrder
+    canInviteMembers?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WorkspaceDelegateCountOrderByAggregateInput
+    _max?: WorkspaceDelegateMaxOrderByAggregateInput
+    _min?: WorkspaceDelegateMinOrderByAggregateInput
+  }
+
+  export type WorkspaceDelegateScalarWhereWithAggregatesInput = {
+    AND?: WorkspaceDelegateScalarWhereWithAggregatesInput | WorkspaceDelegateScalarWhereWithAggregatesInput[]
+    OR?: WorkspaceDelegateScalarWhereWithAggregatesInput[]
+    NOT?: WorkspaceDelegateScalarWhereWithAggregatesInput | WorkspaceDelegateScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"WorkspaceDelegate"> | string
+    workspaceId?: StringWithAggregatesFilter<"WorkspaceDelegate"> | string
+    delegateUserId?: StringWithAggregatesFilter<"WorkspaceDelegate"> | string
+    delegatedBy?: StringWithAggregatesFilter<"WorkspaceDelegate"> | string
+    canApproveDepartments?: BoolWithAggregatesFilter<"WorkspaceDelegate"> | boolean
+    canApproveMembers?: BoolWithAggregatesFilter<"WorkspaceDelegate"> | boolean
+    canApproveChanges?: BoolWithAggregatesFilter<"WorkspaceDelegate"> | boolean
+    canInviteMembers?: BoolWithAggregatesFilter<"WorkspaceDelegate"> | boolean
+    isActive?: BoolWithAggregatesFilter<"WorkspaceDelegate"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"WorkspaceDelegate"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"WorkspaceDelegate"> | Date | string
   }
 
   export type BusinessDetailsWhereInput = {
@@ -16248,6 +19341,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
     editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
     pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateInput = {
@@ -16271,6 +19366,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
     editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
     pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUpdateInput = {
@@ -16294,6 +19391,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
     editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateInput = {
@@ -16317,6 +19416,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
     editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceCreateManyInput = {
@@ -16377,8 +19478,14 @@ export namespace Prisma {
     id?: string
     userId: string
     role: string
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
     createdAt?: Date | string
     workspace: WorkspaceCreateNestedOneWithoutMembersInput
+    department?: DepartmentCreateNestedOneWithoutMembersInput
   }
 
   export type WorkspaceMemberUncheckedCreateInput = {
@@ -16386,6 +19493,12 @@ export namespace Prisma {
     workspaceId: string
     userId: string
     role: string
+    departmentId?: string | null
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
     createdAt?: Date | string
   }
 
@@ -16393,8 +19506,14 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     workspace?: WorkspaceUpdateOneRequiredWithoutMembersNestedInput
+    department?: DepartmentUpdateOneWithoutMembersNestedInput
   }
 
   export type WorkspaceMemberUncheckedUpdateInput = {
@@ -16402,6 +19521,12 @@ export namespace Prisma {
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16410,6 +19535,12 @@ export namespace Prisma {
     workspaceId: string
     userId: string
     role: string
+    departmentId?: string | null
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
     createdAt?: Date | string
   }
 
@@ -16417,6 +19548,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16425,6 +19561,12 @@ export namespace Prisma {
     workspaceId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -16432,6 +19574,9 @@ export namespace Prisma {
     id?: string
     email: string
     role: string
+    departmentId?: string | null
+    invitedBy: string
+    personalMessage?: string | null
     token?: string
     accepted?: boolean
     createdAt?: Date | string
@@ -16444,6 +19589,9 @@ export namespace Prisma {
     workspaceId: string
     email: string
     role: string
+    departmentId?: string | null
+    invitedBy: string
+    personalMessage?: string | null
     token?: string
     accepted?: boolean
     createdAt?: Date | string
@@ -16454,6 +19602,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: StringFieldUpdateOperationsInput | string
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     token?: StringFieldUpdateOperationsInput | string
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16466,6 +19617,9 @@ export namespace Prisma {
     workspaceId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: StringFieldUpdateOperationsInput | string
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     token?: StringFieldUpdateOperationsInput | string
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16477,6 +19631,9 @@ export namespace Prisma {
     workspaceId: string
     email: string
     role: string
+    departmentId?: string | null
+    invitedBy: string
+    personalMessage?: string | null
     token?: string
     accepted?: boolean
     createdAt?: Date | string
@@ -16487,6 +19644,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: StringFieldUpdateOperationsInput | string
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     token?: StringFieldUpdateOperationsInput | string
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16498,10 +19658,221 @@ export namespace Prisma {
     workspaceId?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: StringFieldUpdateOperationsInput | string
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     token?: StringFieldUpdateOperationsInput | string
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DepartmentCreateInput = {
+    id?: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutDepartmentsInput
+    members?: WorkspaceMemberCreateNestedManyWithoutDepartmentInput
+    parentDepartment?: DepartmentCreateNestedOneWithoutSubDepartmentsInput
+    subDepartments?: DepartmentCreateNestedManyWithoutParentDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateInput = {
+    id?: string
+    workspaceId: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    parentDepartmentId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutDepartmentInput
+    subDepartments?: DepartmentUncheckedCreateNestedManyWithoutParentDepartmentInput
+  }
+
+  export type DepartmentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutDepartmentsNestedInput
+    members?: WorkspaceMemberUpdateManyWithoutDepartmentNestedInput
+    parentDepartment?: DepartmentUpdateOneWithoutSubDepartmentsNestedInput
+    subDepartments?: DepartmentUpdateManyWithoutParentDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutDepartmentNestedInput
+    subDepartments?: DepartmentUncheckedUpdateManyWithoutParentDepartmentNestedInput
+  }
+
+  export type DepartmentCreateManyInput = {
+    id?: string
+    workspaceId: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    parentDepartmentId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DepartmentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DepartmentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkspaceDelegateCreateInput = {
+    id?: string
+    delegateUserId: string
+    delegatedBy: string
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutDelegatesInput
+  }
+
+  export type WorkspaceDelegateUncheckedCreateInput = {
+    id?: string
+    workspaceId: string
+    delegateUserId: string
+    delegatedBy: string
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkspaceDelegateUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delegateUserId?: StringFieldUpdateOperationsInput | string
+    delegatedBy?: StringFieldUpdateOperationsInput | string
+    canApproveDepartments?: BoolFieldUpdateOperationsInput | boolean
+    canApproveMembers?: BoolFieldUpdateOperationsInput | boolean
+    canApproveChanges?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutDelegatesNestedInput
+  }
+
+  export type WorkspaceDelegateUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    delegateUserId?: StringFieldUpdateOperationsInput | string
+    delegatedBy?: StringFieldUpdateOperationsInput | string
+    canApproveDepartments?: BoolFieldUpdateOperationsInput | boolean
+    canApproveMembers?: BoolFieldUpdateOperationsInput | boolean
+    canApproveChanges?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkspaceDelegateCreateManyInput = {
+    id?: string
+    workspaceId: string
+    delegateUserId: string
+    delegatedBy: string
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkspaceDelegateUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delegateUserId?: StringFieldUpdateOperationsInput | string
+    delegatedBy?: StringFieldUpdateOperationsInput | string
+    canApproveDepartments?: BoolFieldUpdateOperationsInput | boolean
+    canApproveMembers?: BoolFieldUpdateOperationsInput | boolean
+    canApproveChanges?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkspaceDelegateUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    delegateUserId?: StringFieldUpdateOperationsInput | string
+    delegatedBy?: StringFieldUpdateOperationsInput | string
+    canApproveDepartments?: BoolFieldUpdateOperationsInput | boolean
+    canApproveMembers?: BoolFieldUpdateOperationsInput | boolean
+    canApproveChanges?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BusinessDetailsCreateInput = {
@@ -17320,6 +20691,18 @@ export namespace Prisma {
     none?: PendingChangeWhereInput
   }
 
+  export type DepartmentListRelationFilter = {
+    every?: DepartmentWhereInput
+    some?: DepartmentWhereInput
+    none?: DepartmentWhereInput
+  }
+
+  export type WorkspaceDelegateListRelationFilter = {
+    every?: WorkspaceDelegateWhereInput
+    some?: WorkspaceDelegateWhereInput
+    none?: WorkspaceDelegateWhereInput
+  }
+
   export type WorkspaceMemberOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -17333,6 +20716,14 @@ export namespace Prisma {
   }
 
   export type PendingChangeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type DepartmentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WorkspaceDelegateOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17409,6 +20800,11 @@ export namespace Prisma {
     isNot?: WorkspaceWhereInput
   }
 
+  export type DepartmentNullableScalarRelationFilter = {
+    is?: DepartmentWhereInput | null
+    isNot?: DepartmentWhereInput | null
+  }
+
   export type WorkspaceMemberWorkspaceIdUserIdCompoundUniqueInput = {
     workspaceId: string
     userId: string
@@ -17419,6 +20815,12 @@ export namespace Prisma {
     workspaceId?: SortOrder
     userId?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrder
+    invitedBy?: SortOrder
+    approvalStatus?: SortOrder
+    approvedBy?: SortOrder
+    approvedAt?: SortOrder
+    personalMessage?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -17427,6 +20829,12 @@ export namespace Prisma {
     workspaceId?: SortOrder
     userId?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrder
+    invitedBy?: SortOrder
+    approvalStatus?: SortOrder
+    approvedBy?: SortOrder
+    approvedAt?: SortOrder
+    personalMessage?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -17435,6 +20843,12 @@ export namespace Prisma {
     workspaceId?: SortOrder
     userId?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrder
+    invitedBy?: SortOrder
+    approvalStatus?: SortOrder
+    approvedBy?: SortOrder
+    approvedAt?: SortOrder
+    personalMessage?: SortOrder
     createdAt?: SortOrder
   }
 
@@ -17443,6 +20857,9 @@ export namespace Prisma {
     workspaceId?: SortOrder
     email?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrder
+    invitedBy?: SortOrder
+    personalMessage?: SortOrder
     token?: SortOrder
     accepted?: SortOrder
     createdAt?: SortOrder
@@ -17454,6 +20871,9 @@ export namespace Prisma {
     workspaceId?: SortOrder
     email?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrder
+    invitedBy?: SortOrder
+    personalMessage?: SortOrder
     token?: SortOrder
     accepted?: SortOrder
     createdAt?: SortOrder
@@ -17465,10 +20885,105 @@ export namespace Prisma {
     workspaceId?: SortOrder
     email?: SortOrder
     role?: SortOrder
+    departmentId?: SortOrder
+    invitedBy?: SortOrder
+    personalMessage?: SortOrder
     token?: SortOrder
     accepted?: SortOrder
     createdAt?: SortOrder
     expiresAt?: SortOrder
+  }
+
+  export type DepartmentCountOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    headUserId?: SortOrder
+    parentDepartmentId?: SortOrder
+    status?: SortOrder
+    createdBy?: SortOrder
+    approvedBy?: SortOrder
+    approvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DepartmentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    headUserId?: SortOrder
+    parentDepartmentId?: SortOrder
+    status?: SortOrder
+    createdBy?: SortOrder
+    approvedBy?: SortOrder
+    approvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DepartmentMinOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    name?: SortOrder
+    description?: SortOrder
+    headUserId?: SortOrder
+    parentDepartmentId?: SortOrder
+    status?: SortOrder
+    createdBy?: SortOrder
+    approvedBy?: SortOrder
+    approvedAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkspaceDelegateWorkspaceIdDelegateUserIdCompoundUniqueInput = {
+    workspaceId: string
+    delegateUserId: string
+  }
+
+  export type WorkspaceDelegateCountOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    delegateUserId?: SortOrder
+    delegatedBy?: SortOrder
+    canApproveDepartments?: SortOrder
+    canApproveMembers?: SortOrder
+    canApproveChanges?: SortOrder
+    canInviteMembers?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkspaceDelegateMaxOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    delegateUserId?: SortOrder
+    delegatedBy?: SortOrder
+    canApproveDepartments?: SortOrder
+    canApproveMembers?: SortOrder
+    canApproveChanges?: SortOrder
+    canInviteMembers?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WorkspaceDelegateMinOrderByAggregateInput = {
+    id?: SortOrder
+    workspaceId?: SortOrder
+    delegateUserId?: SortOrder
+    delegatedBy?: SortOrder
+    canApproveDepartments?: SortOrder
+    canApproveMembers?: SortOrder
+    canApproveChanges?: SortOrder
+    canInviteMembers?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BusinessDetailsCountOrderByAggregateInput = {
@@ -17853,6 +21368,20 @@ export namespace Prisma {
     connect?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
   }
 
+  export type DepartmentCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<DepartmentCreateWithoutWorkspaceInput, DepartmentUncheckedCreateWithoutWorkspaceInput> | DepartmentCreateWithoutWorkspaceInput[] | DepartmentUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutWorkspaceInput | DepartmentCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: DepartmentCreateManyWorkspaceInputEnvelope
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+  }
+
+  export type WorkspaceDelegateCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<WorkspaceDelegateCreateWithoutWorkspaceInput, WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput> | WorkspaceDelegateCreateWithoutWorkspaceInput[] | WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput | WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: WorkspaceDelegateCreateManyWorkspaceInputEnvelope
+    connect?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+  }
+
   export type WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput = {
     create?: XOR<WorkspaceMemberCreateWithoutWorkspaceInput, WorkspaceMemberUncheckedCreateWithoutWorkspaceInput> | WorkspaceMemberCreateWithoutWorkspaceInput[] | WorkspaceMemberUncheckedCreateWithoutWorkspaceInput[]
     connectOrCreate?: WorkspaceMemberCreateOrConnectWithoutWorkspaceInput | WorkspaceMemberCreateOrConnectWithoutWorkspaceInput[]
@@ -17885,6 +21414,20 @@ export namespace Prisma {
     connectOrCreate?: PendingChangeCreateOrConnectWithoutWorkspaceInput | PendingChangeCreateOrConnectWithoutWorkspaceInput[]
     createMany?: PendingChangeCreateManyWorkspaceInputEnvelope
     connect?: PendingChangeWhereUniqueInput | PendingChangeWhereUniqueInput[]
+  }
+
+  export type DepartmentUncheckedCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<DepartmentCreateWithoutWorkspaceInput, DepartmentUncheckedCreateWithoutWorkspaceInput> | DepartmentCreateWithoutWorkspaceInput[] | DepartmentUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutWorkspaceInput | DepartmentCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: DepartmentCreateManyWorkspaceInputEnvelope
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+  }
+
+  export type WorkspaceDelegateUncheckedCreateNestedManyWithoutWorkspaceInput = {
+    create?: XOR<WorkspaceDelegateCreateWithoutWorkspaceInput, WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput> | WorkspaceDelegateCreateWithoutWorkspaceInput[] | WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput | WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput[]
+    createMany?: WorkspaceDelegateCreateManyWorkspaceInputEnvelope
+    connect?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -17957,6 +21500,34 @@ export namespace Prisma {
     deleteMany?: PendingChangeScalarWhereInput | PendingChangeScalarWhereInput[]
   }
 
+  export type DepartmentUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<DepartmentCreateWithoutWorkspaceInput, DepartmentUncheckedCreateWithoutWorkspaceInput> | DepartmentCreateWithoutWorkspaceInput[] | DepartmentUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutWorkspaceInput | DepartmentCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: DepartmentUpsertWithWhereUniqueWithoutWorkspaceInput | DepartmentUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: DepartmentCreateManyWorkspaceInputEnvelope
+    set?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    disconnect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    delete?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    update?: DepartmentUpdateWithWhereUniqueWithoutWorkspaceInput | DepartmentUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: DepartmentUpdateManyWithWhereWithoutWorkspaceInput | DepartmentUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: DepartmentScalarWhereInput | DepartmentScalarWhereInput[]
+  }
+
+  export type WorkspaceDelegateUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<WorkspaceDelegateCreateWithoutWorkspaceInput, WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput> | WorkspaceDelegateCreateWithoutWorkspaceInput[] | WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput | WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: WorkspaceDelegateUpsertWithWhereUniqueWithoutWorkspaceInput | WorkspaceDelegateUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: WorkspaceDelegateCreateManyWorkspaceInputEnvelope
+    set?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+    disconnect?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+    delete?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+    connect?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+    update?: WorkspaceDelegateUpdateWithWhereUniqueWithoutWorkspaceInput | WorkspaceDelegateUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: WorkspaceDelegateUpdateManyWithWhereWithoutWorkspaceInput | WorkspaceDelegateUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: WorkspaceDelegateScalarWhereInput | WorkspaceDelegateScalarWhereInput[]
+  }
+
   export type WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput = {
     create?: XOR<WorkspaceMemberCreateWithoutWorkspaceInput, WorkspaceMemberUncheckedCreateWithoutWorkspaceInput> | WorkspaceMemberCreateWithoutWorkspaceInput[] | WorkspaceMemberUncheckedCreateWithoutWorkspaceInput[]
     connectOrCreate?: WorkspaceMemberCreateOrConnectWithoutWorkspaceInput | WorkspaceMemberCreateOrConnectWithoutWorkspaceInput[]
@@ -18023,10 +21594,44 @@ export namespace Prisma {
     deleteMany?: PendingChangeScalarWhereInput | PendingChangeScalarWhereInput[]
   }
 
+  export type DepartmentUncheckedUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<DepartmentCreateWithoutWorkspaceInput, DepartmentUncheckedCreateWithoutWorkspaceInput> | DepartmentCreateWithoutWorkspaceInput[] | DepartmentUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutWorkspaceInput | DepartmentCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: DepartmentUpsertWithWhereUniqueWithoutWorkspaceInput | DepartmentUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: DepartmentCreateManyWorkspaceInputEnvelope
+    set?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    disconnect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    delete?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    update?: DepartmentUpdateWithWhereUniqueWithoutWorkspaceInput | DepartmentUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: DepartmentUpdateManyWithWhereWithoutWorkspaceInput | DepartmentUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: DepartmentScalarWhereInput | DepartmentScalarWhereInput[]
+  }
+
+  export type WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceNestedInput = {
+    create?: XOR<WorkspaceDelegateCreateWithoutWorkspaceInput, WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput> | WorkspaceDelegateCreateWithoutWorkspaceInput[] | WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput[]
+    connectOrCreate?: WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput | WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput[]
+    upsert?: WorkspaceDelegateUpsertWithWhereUniqueWithoutWorkspaceInput | WorkspaceDelegateUpsertWithWhereUniqueWithoutWorkspaceInput[]
+    createMany?: WorkspaceDelegateCreateManyWorkspaceInputEnvelope
+    set?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+    disconnect?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+    delete?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+    connect?: WorkspaceDelegateWhereUniqueInput | WorkspaceDelegateWhereUniqueInput[]
+    update?: WorkspaceDelegateUpdateWithWhereUniqueWithoutWorkspaceInput | WorkspaceDelegateUpdateWithWhereUniqueWithoutWorkspaceInput[]
+    updateMany?: WorkspaceDelegateUpdateManyWithWhereWithoutWorkspaceInput | WorkspaceDelegateUpdateManyWithWhereWithoutWorkspaceInput[]
+    deleteMany?: WorkspaceDelegateScalarWhereInput | WorkspaceDelegateScalarWhereInput[]
+  }
+
   export type WorkspaceCreateNestedOneWithoutMembersInput = {
     create?: XOR<WorkspaceCreateWithoutMembersInput, WorkspaceUncheckedCreateWithoutMembersInput>
     connectOrCreate?: WorkspaceCreateOrConnectWithoutMembersInput
     connect?: WorkspaceWhereUniqueInput
+  }
+
+  export type DepartmentCreateNestedOneWithoutMembersInput = {
+    create?: XOR<DepartmentCreateWithoutMembersInput, DepartmentUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutMembersInput
+    connect?: DepartmentWhereUniqueInput
   }
 
   export type WorkspaceUpdateOneRequiredWithoutMembersNestedInput = {
@@ -18035,6 +21640,16 @@ export namespace Prisma {
     upsert?: WorkspaceUpsertWithoutMembersInput
     connect?: WorkspaceWhereUniqueInput
     update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutMembersInput, WorkspaceUpdateWithoutMembersInput>, WorkspaceUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type DepartmentUpdateOneWithoutMembersNestedInput = {
+    create?: XOR<DepartmentCreateWithoutMembersInput, DepartmentUncheckedCreateWithoutMembersInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutMembersInput
+    upsert?: DepartmentUpsertWithoutMembersInput
+    disconnect?: DepartmentWhereInput | boolean
+    delete?: DepartmentWhereInput | boolean
+    connect?: DepartmentWhereUniqueInput
+    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutMembersInput, DepartmentUpdateWithoutMembersInput>, DepartmentUncheckedUpdateWithoutMembersInput>
   }
 
   export type WorkspaceCreateNestedOneWithoutInvitesInput = {
@@ -18049,6 +21664,134 @@ export namespace Prisma {
     upsert?: WorkspaceUpsertWithoutInvitesInput
     connect?: WorkspaceWhereUniqueInput
     update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutInvitesInput, WorkspaceUpdateWithoutInvitesInput>, WorkspaceUncheckedUpdateWithoutInvitesInput>
+  }
+
+  export type WorkspaceCreateNestedOneWithoutDepartmentsInput = {
+    create?: XOR<WorkspaceCreateWithoutDepartmentsInput, WorkspaceUncheckedCreateWithoutDepartmentsInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutDepartmentsInput
+    connect?: WorkspaceWhereUniqueInput
+  }
+
+  export type WorkspaceMemberCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<WorkspaceMemberCreateWithoutDepartmentInput, WorkspaceMemberUncheckedCreateWithoutDepartmentInput> | WorkspaceMemberCreateWithoutDepartmentInput[] | WorkspaceMemberUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: WorkspaceMemberCreateOrConnectWithoutDepartmentInput | WorkspaceMemberCreateOrConnectWithoutDepartmentInput[]
+    createMany?: WorkspaceMemberCreateManyDepartmentInputEnvelope
+    connect?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+  }
+
+  export type DepartmentCreateNestedOneWithoutSubDepartmentsInput = {
+    create?: XOR<DepartmentCreateWithoutSubDepartmentsInput, DepartmentUncheckedCreateWithoutSubDepartmentsInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutSubDepartmentsInput
+    connect?: DepartmentWhereUniqueInput
+  }
+
+  export type DepartmentCreateNestedManyWithoutParentDepartmentInput = {
+    create?: XOR<DepartmentCreateWithoutParentDepartmentInput, DepartmentUncheckedCreateWithoutParentDepartmentInput> | DepartmentCreateWithoutParentDepartmentInput[] | DepartmentUncheckedCreateWithoutParentDepartmentInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutParentDepartmentInput | DepartmentCreateOrConnectWithoutParentDepartmentInput[]
+    createMany?: DepartmentCreateManyParentDepartmentInputEnvelope
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+  }
+
+  export type WorkspaceMemberUncheckedCreateNestedManyWithoutDepartmentInput = {
+    create?: XOR<WorkspaceMemberCreateWithoutDepartmentInput, WorkspaceMemberUncheckedCreateWithoutDepartmentInput> | WorkspaceMemberCreateWithoutDepartmentInput[] | WorkspaceMemberUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: WorkspaceMemberCreateOrConnectWithoutDepartmentInput | WorkspaceMemberCreateOrConnectWithoutDepartmentInput[]
+    createMany?: WorkspaceMemberCreateManyDepartmentInputEnvelope
+    connect?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+  }
+
+  export type DepartmentUncheckedCreateNestedManyWithoutParentDepartmentInput = {
+    create?: XOR<DepartmentCreateWithoutParentDepartmentInput, DepartmentUncheckedCreateWithoutParentDepartmentInput> | DepartmentCreateWithoutParentDepartmentInput[] | DepartmentUncheckedCreateWithoutParentDepartmentInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutParentDepartmentInput | DepartmentCreateOrConnectWithoutParentDepartmentInput[]
+    createMany?: DepartmentCreateManyParentDepartmentInputEnvelope
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+  }
+
+  export type WorkspaceUpdateOneRequiredWithoutDepartmentsNestedInput = {
+    create?: XOR<WorkspaceCreateWithoutDepartmentsInput, WorkspaceUncheckedCreateWithoutDepartmentsInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutDepartmentsInput
+    upsert?: WorkspaceUpsertWithoutDepartmentsInput
+    connect?: WorkspaceWhereUniqueInput
+    update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutDepartmentsInput, WorkspaceUpdateWithoutDepartmentsInput>, WorkspaceUncheckedUpdateWithoutDepartmentsInput>
+  }
+
+  export type WorkspaceMemberUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<WorkspaceMemberCreateWithoutDepartmentInput, WorkspaceMemberUncheckedCreateWithoutDepartmentInput> | WorkspaceMemberCreateWithoutDepartmentInput[] | WorkspaceMemberUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: WorkspaceMemberCreateOrConnectWithoutDepartmentInput | WorkspaceMemberCreateOrConnectWithoutDepartmentInput[]
+    upsert?: WorkspaceMemberUpsertWithWhereUniqueWithoutDepartmentInput | WorkspaceMemberUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: WorkspaceMemberCreateManyDepartmentInputEnvelope
+    set?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+    disconnect?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+    delete?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+    connect?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+    update?: WorkspaceMemberUpdateWithWhereUniqueWithoutDepartmentInput | WorkspaceMemberUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: WorkspaceMemberUpdateManyWithWhereWithoutDepartmentInput | WorkspaceMemberUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: WorkspaceMemberScalarWhereInput | WorkspaceMemberScalarWhereInput[]
+  }
+
+  export type DepartmentUpdateOneWithoutSubDepartmentsNestedInput = {
+    create?: XOR<DepartmentCreateWithoutSubDepartmentsInput, DepartmentUncheckedCreateWithoutSubDepartmentsInput>
+    connectOrCreate?: DepartmentCreateOrConnectWithoutSubDepartmentsInput
+    upsert?: DepartmentUpsertWithoutSubDepartmentsInput
+    disconnect?: DepartmentWhereInput | boolean
+    delete?: DepartmentWhereInput | boolean
+    connect?: DepartmentWhereUniqueInput
+    update?: XOR<XOR<DepartmentUpdateToOneWithWhereWithoutSubDepartmentsInput, DepartmentUpdateWithoutSubDepartmentsInput>, DepartmentUncheckedUpdateWithoutSubDepartmentsInput>
+  }
+
+  export type DepartmentUpdateManyWithoutParentDepartmentNestedInput = {
+    create?: XOR<DepartmentCreateWithoutParentDepartmentInput, DepartmentUncheckedCreateWithoutParentDepartmentInput> | DepartmentCreateWithoutParentDepartmentInput[] | DepartmentUncheckedCreateWithoutParentDepartmentInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutParentDepartmentInput | DepartmentCreateOrConnectWithoutParentDepartmentInput[]
+    upsert?: DepartmentUpsertWithWhereUniqueWithoutParentDepartmentInput | DepartmentUpsertWithWhereUniqueWithoutParentDepartmentInput[]
+    createMany?: DepartmentCreateManyParentDepartmentInputEnvelope
+    set?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    disconnect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    delete?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    update?: DepartmentUpdateWithWhereUniqueWithoutParentDepartmentInput | DepartmentUpdateWithWhereUniqueWithoutParentDepartmentInput[]
+    updateMany?: DepartmentUpdateManyWithWhereWithoutParentDepartmentInput | DepartmentUpdateManyWithWhereWithoutParentDepartmentInput[]
+    deleteMany?: DepartmentScalarWhereInput | DepartmentScalarWhereInput[]
+  }
+
+  export type WorkspaceMemberUncheckedUpdateManyWithoutDepartmentNestedInput = {
+    create?: XOR<WorkspaceMemberCreateWithoutDepartmentInput, WorkspaceMemberUncheckedCreateWithoutDepartmentInput> | WorkspaceMemberCreateWithoutDepartmentInput[] | WorkspaceMemberUncheckedCreateWithoutDepartmentInput[]
+    connectOrCreate?: WorkspaceMemberCreateOrConnectWithoutDepartmentInput | WorkspaceMemberCreateOrConnectWithoutDepartmentInput[]
+    upsert?: WorkspaceMemberUpsertWithWhereUniqueWithoutDepartmentInput | WorkspaceMemberUpsertWithWhereUniqueWithoutDepartmentInput[]
+    createMany?: WorkspaceMemberCreateManyDepartmentInputEnvelope
+    set?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+    disconnect?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+    delete?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+    connect?: WorkspaceMemberWhereUniqueInput | WorkspaceMemberWhereUniqueInput[]
+    update?: WorkspaceMemberUpdateWithWhereUniqueWithoutDepartmentInput | WorkspaceMemberUpdateWithWhereUniqueWithoutDepartmentInput[]
+    updateMany?: WorkspaceMemberUpdateManyWithWhereWithoutDepartmentInput | WorkspaceMemberUpdateManyWithWhereWithoutDepartmentInput[]
+    deleteMany?: WorkspaceMemberScalarWhereInput | WorkspaceMemberScalarWhereInput[]
+  }
+
+  export type DepartmentUncheckedUpdateManyWithoutParentDepartmentNestedInput = {
+    create?: XOR<DepartmentCreateWithoutParentDepartmentInput, DepartmentUncheckedCreateWithoutParentDepartmentInput> | DepartmentCreateWithoutParentDepartmentInput[] | DepartmentUncheckedCreateWithoutParentDepartmentInput[]
+    connectOrCreate?: DepartmentCreateOrConnectWithoutParentDepartmentInput | DepartmentCreateOrConnectWithoutParentDepartmentInput[]
+    upsert?: DepartmentUpsertWithWhereUniqueWithoutParentDepartmentInput | DepartmentUpsertWithWhereUniqueWithoutParentDepartmentInput[]
+    createMany?: DepartmentCreateManyParentDepartmentInputEnvelope
+    set?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    disconnect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    delete?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    connect?: DepartmentWhereUniqueInput | DepartmentWhereUniqueInput[]
+    update?: DepartmentUpdateWithWhereUniqueWithoutParentDepartmentInput | DepartmentUpdateWithWhereUniqueWithoutParentDepartmentInput[]
+    updateMany?: DepartmentUpdateManyWithWhereWithoutParentDepartmentInput | DepartmentUpdateManyWithWhereWithoutParentDepartmentInput[]
+    deleteMany?: DepartmentScalarWhereInput | DepartmentScalarWhereInput[]
+  }
+
+  export type WorkspaceCreateNestedOneWithoutDelegatesInput = {
+    create?: XOR<WorkspaceCreateWithoutDelegatesInput, WorkspaceUncheckedCreateWithoutDelegatesInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutDelegatesInput
+    connect?: WorkspaceWhereUniqueInput
+  }
+
+  export type WorkspaceUpdateOneRequiredWithoutDelegatesNestedInput = {
+    create?: XOR<WorkspaceCreateWithoutDelegatesInput, WorkspaceUncheckedCreateWithoutDelegatesInput>
+    connectOrCreate?: WorkspaceCreateOrConnectWithoutDelegatesInput
+    upsert?: WorkspaceUpsertWithoutDelegatesInput
+    connect?: WorkspaceWhereUniqueInput
+    update?: XOR<XOR<WorkspaceUpdateToOneWithWhereWithoutDelegatesInput, WorkspaceUpdateWithoutDelegatesInput>, WorkspaceUncheckedUpdateWithoutDelegatesInput>
   }
 
   export type WorkspaceCreateNestedOneWithoutBusinessDetailsInput = {
@@ -18720,13 +22463,25 @@ export namespace Prisma {
     id?: string
     userId: string
     role: string
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
     createdAt?: Date | string
+    department?: DepartmentCreateNestedOneWithoutMembersInput
   }
 
   export type WorkspaceMemberUncheckedCreateWithoutWorkspaceInput = {
     id?: string
     userId: string
     role: string
+    departmentId?: string | null
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
     createdAt?: Date | string
   }
 
@@ -18744,6 +22499,9 @@ export namespace Prisma {
     id?: string
     email: string
     role: string
+    departmentId?: string | null
+    invitedBy: string
+    personalMessage?: string | null
     token?: string
     accepted?: boolean
     createdAt?: Date | string
@@ -18754,6 +22512,9 @@ export namespace Prisma {
     id?: string
     email: string
     role: string
+    departmentId?: string | null
+    invitedBy: string
+    personalMessage?: string | null
     token?: string
     accepted?: boolean
     createdAt?: Date | string
@@ -18881,6 +22642,84 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type DepartmentCreateWithoutWorkspaceInput = {
+    id?: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberCreateNestedManyWithoutDepartmentInput
+    parentDepartment?: DepartmentCreateNestedOneWithoutSubDepartmentsInput
+    subDepartments?: DepartmentCreateNestedManyWithoutParentDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutWorkspaceInput = {
+    id?: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    parentDepartmentId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutDepartmentInput
+    subDepartments?: DepartmentUncheckedCreateNestedManyWithoutParentDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutWorkspaceInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutWorkspaceInput, DepartmentUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type DepartmentCreateManyWorkspaceInputEnvelope = {
+    data: DepartmentCreateManyWorkspaceInput | DepartmentCreateManyWorkspaceInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WorkspaceDelegateCreateWithoutWorkspaceInput = {
+    id?: string
+    delegateUserId: string
+    delegatedBy: string
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput = {
+    id?: string
+    delegateUserId: string
+    delegatedBy: string
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkspaceDelegateCreateOrConnectWithoutWorkspaceInput = {
+    where: WorkspaceDelegateWhereUniqueInput
+    create: XOR<WorkspaceDelegateCreateWithoutWorkspaceInput, WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type WorkspaceDelegateCreateManyWorkspaceInputEnvelope = {
+    data: WorkspaceDelegateCreateManyWorkspaceInput | WorkspaceDelegateCreateManyWorkspaceInput[]
+    skipDuplicates?: boolean
+  }
+
   export type WorkspaceMemberUpsertWithWhereUniqueWithoutWorkspaceInput = {
     where: WorkspaceMemberWhereUniqueInput
     update: XOR<WorkspaceMemberUpdateWithoutWorkspaceInput, WorkspaceMemberUncheckedUpdateWithoutWorkspaceInput>
@@ -18905,6 +22744,12 @@ export namespace Prisma {
     workspaceId?: StringFilter<"WorkspaceMember"> | string
     userId?: StringFilter<"WorkspaceMember"> | string
     role?: StringFilter<"WorkspaceMember"> | string
+    departmentId?: StringNullableFilter<"WorkspaceMember"> | string | null
+    invitedBy?: StringNullableFilter<"WorkspaceMember"> | string | null
+    approvalStatus?: StringFilter<"WorkspaceMember"> | string
+    approvedBy?: StringNullableFilter<"WorkspaceMember"> | string | null
+    approvedAt?: DateTimeNullableFilter<"WorkspaceMember"> | Date | string | null
+    personalMessage?: StringNullableFilter<"WorkspaceMember"> | string | null
     createdAt?: DateTimeFilter<"WorkspaceMember"> | Date | string
   }
 
@@ -18932,6 +22777,9 @@ export namespace Prisma {
     workspaceId?: StringFilter<"WorkspaceInvite"> | string
     email?: StringFilter<"WorkspaceInvite"> | string
     role?: StringFilter<"WorkspaceInvite"> | string
+    departmentId?: StringNullableFilter<"WorkspaceInvite"> | string | null
+    invitedBy?: StringFilter<"WorkspaceInvite"> | string
+    personalMessage?: StringNullableFilter<"WorkspaceInvite"> | string | null
     token?: StringFilter<"WorkspaceInvite"> | string
     accepted?: BoolFilter<"WorkspaceInvite"> | boolean
     createdAt?: DateTimeFilter<"WorkspaceInvite"> | Date | string
@@ -19055,6 +22903,73 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"PendingChange"> | Date | string
   }
 
+  export type DepartmentUpsertWithWhereUniqueWithoutWorkspaceInput = {
+    where: DepartmentWhereUniqueInput
+    update: XOR<DepartmentUpdateWithoutWorkspaceInput, DepartmentUncheckedUpdateWithoutWorkspaceInput>
+    create: XOR<DepartmentCreateWithoutWorkspaceInput, DepartmentUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type DepartmentUpdateWithWhereUniqueWithoutWorkspaceInput = {
+    where: DepartmentWhereUniqueInput
+    data: XOR<DepartmentUpdateWithoutWorkspaceInput, DepartmentUncheckedUpdateWithoutWorkspaceInput>
+  }
+
+  export type DepartmentUpdateManyWithWhereWithoutWorkspaceInput = {
+    where: DepartmentScalarWhereInput
+    data: XOR<DepartmentUpdateManyMutationInput, DepartmentUncheckedUpdateManyWithoutWorkspaceInput>
+  }
+
+  export type DepartmentScalarWhereInput = {
+    AND?: DepartmentScalarWhereInput | DepartmentScalarWhereInput[]
+    OR?: DepartmentScalarWhereInput[]
+    NOT?: DepartmentScalarWhereInput | DepartmentScalarWhereInput[]
+    id?: StringFilter<"Department"> | string
+    workspaceId?: StringFilter<"Department"> | string
+    name?: StringFilter<"Department"> | string
+    description?: StringNullableFilter<"Department"> | string | null
+    headUserId?: StringNullableFilter<"Department"> | string | null
+    parentDepartmentId?: StringNullableFilter<"Department"> | string | null
+    status?: StringFilter<"Department"> | string
+    createdBy?: StringFilter<"Department"> | string
+    approvedBy?: StringNullableFilter<"Department"> | string | null
+    approvedAt?: DateTimeNullableFilter<"Department"> | Date | string | null
+    createdAt?: DateTimeFilter<"Department"> | Date | string
+    updatedAt?: DateTimeFilter<"Department"> | Date | string
+  }
+
+  export type WorkspaceDelegateUpsertWithWhereUniqueWithoutWorkspaceInput = {
+    where: WorkspaceDelegateWhereUniqueInput
+    update: XOR<WorkspaceDelegateUpdateWithoutWorkspaceInput, WorkspaceDelegateUncheckedUpdateWithoutWorkspaceInput>
+    create: XOR<WorkspaceDelegateCreateWithoutWorkspaceInput, WorkspaceDelegateUncheckedCreateWithoutWorkspaceInput>
+  }
+
+  export type WorkspaceDelegateUpdateWithWhereUniqueWithoutWorkspaceInput = {
+    where: WorkspaceDelegateWhereUniqueInput
+    data: XOR<WorkspaceDelegateUpdateWithoutWorkspaceInput, WorkspaceDelegateUncheckedUpdateWithoutWorkspaceInput>
+  }
+
+  export type WorkspaceDelegateUpdateManyWithWhereWithoutWorkspaceInput = {
+    where: WorkspaceDelegateScalarWhereInput
+    data: XOR<WorkspaceDelegateUpdateManyMutationInput, WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceInput>
+  }
+
+  export type WorkspaceDelegateScalarWhereInput = {
+    AND?: WorkspaceDelegateScalarWhereInput | WorkspaceDelegateScalarWhereInput[]
+    OR?: WorkspaceDelegateScalarWhereInput[]
+    NOT?: WorkspaceDelegateScalarWhereInput | WorkspaceDelegateScalarWhereInput[]
+    id?: StringFilter<"WorkspaceDelegate"> | string
+    workspaceId?: StringFilter<"WorkspaceDelegate"> | string
+    delegateUserId?: StringFilter<"WorkspaceDelegate"> | string
+    delegatedBy?: StringFilter<"WorkspaceDelegate"> | string
+    canApproveDepartments?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canApproveMembers?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canApproveChanges?: BoolFilter<"WorkspaceDelegate"> | boolean
+    canInviteMembers?: BoolFilter<"WorkspaceDelegate"> | boolean
+    isActive?: BoolFilter<"WorkspaceDelegate"> | boolean
+    createdAt?: DateTimeFilter<"WorkspaceDelegate"> | Date | string
+    updatedAt?: DateTimeFilter<"WorkspaceDelegate"> | Date | string
+  }
+
   export type WorkspaceCreateWithoutMembersInput = {
     id?: string
     name: string
@@ -19075,6 +22990,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
     editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
     pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutMembersInput = {
@@ -19097,11 +23014,50 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
     editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
     pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutMembersInput = {
     where: WorkspaceWhereUniqueInput
     create: XOR<WorkspaceCreateWithoutMembersInput, WorkspaceUncheckedCreateWithoutMembersInput>
+  }
+
+  export type DepartmentCreateWithoutMembersInput = {
+    id?: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutDepartmentsInput
+    parentDepartment?: DepartmentCreateNestedOneWithoutSubDepartmentsInput
+    subDepartments?: DepartmentCreateNestedManyWithoutParentDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutMembersInput = {
+    id?: string
+    workspaceId: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    parentDepartmentId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subDepartments?: DepartmentUncheckedCreateNestedManyWithoutParentDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutMembersInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutMembersInput, DepartmentUncheckedCreateWithoutMembersInput>
   }
 
   export type WorkspaceUpsertWithoutMembersInput = {
@@ -19135,6 +23091,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
     editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutMembersInput = {
@@ -19157,6 +23115,51 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
     editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type DepartmentUpsertWithoutMembersInput = {
+    update: XOR<DepartmentUpdateWithoutMembersInput, DepartmentUncheckedUpdateWithoutMembersInput>
+    create: XOR<DepartmentCreateWithoutMembersInput, DepartmentUncheckedCreateWithoutMembersInput>
+    where?: DepartmentWhereInput
+  }
+
+  export type DepartmentUpdateToOneWithWhereWithoutMembersInput = {
+    where?: DepartmentWhereInput
+    data: XOR<DepartmentUpdateWithoutMembersInput, DepartmentUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type DepartmentUpdateWithoutMembersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutDepartmentsNestedInput
+    parentDepartment?: DepartmentUpdateOneWithoutSubDepartmentsNestedInput
+    subDepartments?: DepartmentUpdateManyWithoutParentDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutMembersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subDepartments?: DepartmentUncheckedUpdateManyWithoutParentDepartmentNestedInput
   }
 
   export type WorkspaceCreateWithoutInvitesInput = {
@@ -19179,6 +23182,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
     editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
     pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutInvitesInput = {
@@ -19201,6 +23206,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
     editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
     pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutInvitesInput = {
@@ -19239,6 +23246,8 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
     editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutInvitesInput = {
@@ -19261,6 +23270,422 @@ export namespace Prisma {
     businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
     editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceCreateWithoutDepartmentsInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceUncheckedCreateWithoutDepartmentsInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateUncheckedCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceCreateOrConnectWithoutDepartmentsInput = {
+    where: WorkspaceWhereUniqueInput
+    create: XOR<WorkspaceCreateWithoutDepartmentsInput, WorkspaceUncheckedCreateWithoutDepartmentsInput>
+  }
+
+  export type WorkspaceMemberCreateWithoutDepartmentInput = {
+    id?: string
+    userId: string
+    role: string
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
+    createdAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutMembersInput
+  }
+
+  export type WorkspaceMemberUncheckedCreateWithoutDepartmentInput = {
+    id?: string
+    workspaceId: string
+    userId: string
+    role: string
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
+    createdAt?: Date | string
+  }
+
+  export type WorkspaceMemberCreateOrConnectWithoutDepartmentInput = {
+    where: WorkspaceMemberWhereUniqueInput
+    create: XOR<WorkspaceMemberCreateWithoutDepartmentInput, WorkspaceMemberUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type WorkspaceMemberCreateManyDepartmentInputEnvelope = {
+    data: WorkspaceMemberCreateManyDepartmentInput | WorkspaceMemberCreateManyDepartmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type DepartmentCreateWithoutSubDepartmentsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutDepartmentsInput
+    members?: WorkspaceMemberCreateNestedManyWithoutDepartmentInput
+    parentDepartment?: DepartmentCreateNestedOneWithoutSubDepartmentsInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutSubDepartmentsInput = {
+    id?: string
+    workspaceId: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    parentDepartmentId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutSubDepartmentsInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutSubDepartmentsInput, DepartmentUncheckedCreateWithoutSubDepartmentsInput>
+  }
+
+  export type DepartmentCreateWithoutParentDepartmentInput = {
+    id?: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    workspace: WorkspaceCreateNestedOneWithoutDepartmentsInput
+    members?: WorkspaceMemberCreateNestedManyWithoutDepartmentInput
+    subDepartments?: DepartmentCreateNestedManyWithoutParentDepartmentInput
+  }
+
+  export type DepartmentUncheckedCreateWithoutParentDepartmentInput = {
+    id?: string
+    workspaceId: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutDepartmentInput
+    subDepartments?: DepartmentUncheckedCreateNestedManyWithoutParentDepartmentInput
+  }
+
+  export type DepartmentCreateOrConnectWithoutParentDepartmentInput = {
+    where: DepartmentWhereUniqueInput
+    create: XOR<DepartmentCreateWithoutParentDepartmentInput, DepartmentUncheckedCreateWithoutParentDepartmentInput>
+  }
+
+  export type DepartmentCreateManyParentDepartmentInputEnvelope = {
+    data: DepartmentCreateManyParentDepartmentInput | DepartmentCreateManyParentDepartmentInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type WorkspaceUpsertWithoutDepartmentsInput = {
+    update: XOR<WorkspaceUpdateWithoutDepartmentsInput, WorkspaceUncheckedUpdateWithoutDepartmentsInput>
+    create: XOR<WorkspaceCreateWithoutDepartmentsInput, WorkspaceUncheckedCreateWithoutDepartmentsInput>
+    where?: WorkspaceWhereInput
+  }
+
+  export type WorkspaceUpdateToOneWithWhereWithoutDepartmentsInput = {
+    where?: WorkspaceWhereInput
+    data: XOR<WorkspaceUpdateWithoutDepartmentsInput, WorkspaceUncheckedUpdateWithoutDepartmentsInput>
+  }
+
+  export type WorkspaceUpdateWithoutDepartmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceUncheckedUpdateWithoutDepartmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceMemberUpsertWithWhereUniqueWithoutDepartmentInput = {
+    where: WorkspaceMemberWhereUniqueInput
+    update: XOR<WorkspaceMemberUpdateWithoutDepartmentInput, WorkspaceMemberUncheckedUpdateWithoutDepartmentInput>
+    create: XOR<WorkspaceMemberCreateWithoutDepartmentInput, WorkspaceMemberUncheckedCreateWithoutDepartmentInput>
+  }
+
+  export type WorkspaceMemberUpdateWithWhereUniqueWithoutDepartmentInput = {
+    where: WorkspaceMemberWhereUniqueInput
+    data: XOR<WorkspaceMemberUpdateWithoutDepartmentInput, WorkspaceMemberUncheckedUpdateWithoutDepartmentInput>
+  }
+
+  export type WorkspaceMemberUpdateManyWithWhereWithoutDepartmentInput = {
+    where: WorkspaceMemberScalarWhereInput
+    data: XOR<WorkspaceMemberUpdateManyMutationInput, WorkspaceMemberUncheckedUpdateManyWithoutDepartmentInput>
+  }
+
+  export type DepartmentUpsertWithoutSubDepartmentsInput = {
+    update: XOR<DepartmentUpdateWithoutSubDepartmentsInput, DepartmentUncheckedUpdateWithoutSubDepartmentsInput>
+    create: XOR<DepartmentCreateWithoutSubDepartmentsInput, DepartmentUncheckedCreateWithoutSubDepartmentsInput>
+    where?: DepartmentWhereInput
+  }
+
+  export type DepartmentUpdateToOneWithWhereWithoutSubDepartmentsInput = {
+    where?: DepartmentWhereInput
+    data: XOR<DepartmentUpdateWithoutSubDepartmentsInput, DepartmentUncheckedUpdateWithoutSubDepartmentsInput>
+  }
+
+  export type DepartmentUpdateWithoutSubDepartmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutDepartmentsNestedInput
+    members?: WorkspaceMemberUpdateManyWithoutDepartmentNestedInput
+    parentDepartment?: DepartmentUpdateOneWithoutSubDepartmentsNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutSubDepartmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutDepartmentNestedInput
+  }
+
+  export type DepartmentUpsertWithWhereUniqueWithoutParentDepartmentInput = {
+    where: DepartmentWhereUniqueInput
+    update: XOR<DepartmentUpdateWithoutParentDepartmentInput, DepartmentUncheckedUpdateWithoutParentDepartmentInput>
+    create: XOR<DepartmentCreateWithoutParentDepartmentInput, DepartmentUncheckedCreateWithoutParentDepartmentInput>
+  }
+
+  export type DepartmentUpdateWithWhereUniqueWithoutParentDepartmentInput = {
+    where: DepartmentWhereUniqueInput
+    data: XOR<DepartmentUpdateWithoutParentDepartmentInput, DepartmentUncheckedUpdateWithoutParentDepartmentInput>
+  }
+
+  export type DepartmentUpdateManyWithWhereWithoutParentDepartmentInput = {
+    where: DepartmentScalarWhereInput
+    data: XOR<DepartmentUpdateManyMutationInput, DepartmentUncheckedUpdateManyWithoutParentDepartmentInput>
+  }
+
+  export type WorkspaceCreateWithoutDelegatesInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceUncheckedCreateWithoutDelegatesInput = {
+    id?: string
+    name: string
+    type: string
+    industry?: string | null
+    country?: string | null
+    employees?: string | null
+    currency?: string | null
+    description?: string | null
+    status?: string | null
+    startDate?: Date | string | null
+    endDate?: Date | string | null
+    ownerId: string
+    slug: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    members?: WorkspaceMemberUncheckedCreateNestedManyWithoutWorkspaceInput
+    invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
+    businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
+    editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
+    pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutWorkspaceInput
+  }
+
+  export type WorkspaceCreateOrConnectWithoutDelegatesInput = {
+    where: WorkspaceWhereUniqueInput
+    create: XOR<WorkspaceCreateWithoutDelegatesInput, WorkspaceUncheckedCreateWithoutDelegatesInput>
+  }
+
+  export type WorkspaceUpsertWithoutDelegatesInput = {
+    update: XOR<WorkspaceUpdateWithoutDelegatesInput, WorkspaceUncheckedUpdateWithoutDelegatesInput>
+    create: XOR<WorkspaceCreateWithoutDelegatesInput, WorkspaceUncheckedCreateWithoutDelegatesInput>
+    where?: WorkspaceWhereInput
+  }
+
+  export type WorkspaceUpdateToOneWithWhereWithoutDelegatesInput = {
+    where?: WorkspaceWhereInput
+    data: XOR<WorkspaceUpdateWithoutDelegatesInput, WorkspaceUncheckedUpdateWithoutDelegatesInput>
+  }
+
+  export type WorkspaceUpdateWithoutDelegatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUpdateManyWithoutWorkspaceNestedInput
+  }
+
+  export type WorkspaceUncheckedUpdateWithoutDelegatesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    industry?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    employees?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
+    startDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    endDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ownerId?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutWorkspaceNestedInput
+    invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
+    businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
+    editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
+    pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceCreateWithoutBusinessDetailsInput = {
@@ -19283,6 +23708,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
     editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
     pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutBusinessDetailsInput = {
@@ -19305,6 +23732,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
     editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
     pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutBusinessDetailsInput = {
@@ -19343,6 +23772,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
     editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutBusinessDetailsInput = {
@@ -19365,6 +23796,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
     editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceCreateWithoutEditRequestsInput = {
@@ -19387,6 +23820,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
     businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
     pendingChanges?: PendingChangeCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutEditRequestsInput = {
@@ -19409,6 +23844,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
     businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
     pendingChanges?: PendingChangeUncheckedCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutEditRequestsInput = {
@@ -19447,6 +23884,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
     businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutEditRequestsInput = {
@@ -19469,6 +23908,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
     businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
     pendingChanges?: PendingChangeUncheckedUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceCreateWithoutPendingChangesInput = {
@@ -19491,6 +23932,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteCreateNestedManyWithoutWorkspaceInput
     businessDetails?: BusinessDetailsCreateNestedOneWithoutWorkspaceInput
     editRequests?: EditRequestCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceUncheckedCreateWithoutPendingChangesInput = {
@@ -19513,6 +23956,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUncheckedCreateNestedManyWithoutWorkspaceInput
     businessDetails?: BusinessDetailsUncheckedCreateNestedOneWithoutWorkspaceInput
     editRequests?: EditRequestUncheckedCreateNestedManyWithoutWorkspaceInput
+    departments?: DepartmentUncheckedCreateNestedManyWithoutWorkspaceInput
+    delegates?: WorkspaceDelegateUncheckedCreateNestedManyWithoutWorkspaceInput
   }
 
   export type WorkspaceCreateOrConnectWithoutPendingChangesInput = {
@@ -19551,6 +23996,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUpdateManyWithoutWorkspaceNestedInput
     businessDetails?: BusinessDetailsUpdateOneWithoutWorkspaceNestedInput
     editRequests?: EditRequestUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type WorkspaceUncheckedUpdateWithoutPendingChangesInput = {
@@ -19573,6 +24020,8 @@ export namespace Prisma {
     invites?: WorkspaceInviteUncheckedUpdateManyWithoutWorkspaceNestedInput
     businessDetails?: BusinessDetailsUncheckedUpdateOneWithoutWorkspaceNestedInput
     editRequests?: EditRequestUncheckedUpdateManyWithoutWorkspaceNestedInput
+    departments?: DepartmentUncheckedUpdateManyWithoutWorkspaceNestedInput
+    delegates?: WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceNestedInput
   }
 
   export type ConversationCreateWithoutMessagesInput = {
@@ -19777,6 +24226,12 @@ export namespace Prisma {
     id?: string
     userId: string
     role: string
+    departmentId?: string | null
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
     createdAt?: Date | string
   }
 
@@ -19784,6 +24239,9 @@ export namespace Prisma {
     id?: string
     email: string
     role: string
+    departmentId?: string | null
+    invitedBy: string
+    personalMessage?: string | null
     token?: string
     accepted?: boolean
     createdAt?: Date | string
@@ -19810,17 +24268,56 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type DepartmentCreateManyWorkspaceInput = {
+    id?: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    parentDepartmentId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkspaceDelegateCreateManyWorkspaceInput = {
+    id?: string
+    delegateUserId: string
+    delegatedBy: string
+    canApproveDepartments?: boolean
+    canApproveMembers?: boolean
+    canApproveChanges?: boolean
+    canInviteMembers?: boolean
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type WorkspaceMemberUpdateWithoutWorkspaceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    department?: DepartmentUpdateOneWithoutMembersNestedInput
   }
 
   export type WorkspaceMemberUncheckedUpdateWithoutWorkspaceInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19828,6 +24325,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -19835,6 +24338,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: StringFieldUpdateOperationsInput | string
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     token?: StringFieldUpdateOperationsInput | string
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19845,6 +24351,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: StringFieldUpdateOperationsInput | string
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     token?: StringFieldUpdateOperationsInput | string
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19855,6 +24364,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     role?: StringFieldUpdateOperationsInput | string
+    departmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    invitedBy?: StringFieldUpdateOperationsInput | string
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
     token?: StringFieldUpdateOperationsInput | string
     accepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19917,6 +24429,203 @@ export namespace Prisma {
     oldValue?: NullableStringFieldUpdateOperationsInput | string | null
     newValue?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DepartmentUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUpdateManyWithoutDepartmentNestedInput
+    parentDepartment?: DepartmentUpdateOneWithoutSubDepartmentsNestedInput
+    subDepartments?: DepartmentUpdateManyWithoutParentDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutDepartmentNestedInput
+    subDepartments?: DepartmentUncheckedUpdateManyWithoutParentDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateManyWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    parentDepartmentId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkspaceDelegateUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delegateUserId?: StringFieldUpdateOperationsInput | string
+    delegatedBy?: StringFieldUpdateOperationsInput | string
+    canApproveDepartments?: BoolFieldUpdateOperationsInput | boolean
+    canApproveMembers?: BoolFieldUpdateOperationsInput | boolean
+    canApproveChanges?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkspaceDelegateUncheckedUpdateWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delegateUserId?: StringFieldUpdateOperationsInput | string
+    delegatedBy?: StringFieldUpdateOperationsInput | string
+    canApproveDepartments?: BoolFieldUpdateOperationsInput | boolean
+    canApproveMembers?: BoolFieldUpdateOperationsInput | boolean
+    canApproveChanges?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkspaceDelegateUncheckedUpdateManyWithoutWorkspaceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    delegateUserId?: StringFieldUpdateOperationsInput | string
+    delegatedBy?: StringFieldUpdateOperationsInput | string
+    canApproveDepartments?: BoolFieldUpdateOperationsInput | boolean
+    canApproveMembers?: BoolFieldUpdateOperationsInput | boolean
+    canApproveChanges?: BoolFieldUpdateOperationsInput | boolean
+    canInviteMembers?: BoolFieldUpdateOperationsInput | boolean
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkspaceMemberCreateManyDepartmentInput = {
+    id?: string
+    workspaceId: string
+    userId: string
+    role: string
+    invitedBy?: string | null
+    approvalStatus?: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    personalMessage?: string | null
+    createdAt?: Date | string
+  }
+
+  export type DepartmentCreateManyParentDepartmentInput = {
+    id?: string
+    workspaceId: string
+    name: string
+    description?: string | null
+    headUserId?: string | null
+    status?: string
+    createdBy: string
+    approvedBy?: string | null
+    approvedAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WorkspaceMemberUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type WorkspaceMemberUncheckedUpdateWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WorkspaceMemberUncheckedUpdateManyWithoutDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    invitedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvalStatus?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    personalMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DepartmentUpdateWithoutParentDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    workspace?: WorkspaceUpdateOneRequiredWithoutDepartmentsNestedInput
+    members?: WorkspaceMemberUpdateManyWithoutDepartmentNestedInput
+    subDepartments?: DepartmentUpdateManyWithoutParentDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateWithoutParentDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    members?: WorkspaceMemberUncheckedUpdateManyWithoutDepartmentNestedInput
+    subDepartments?: DepartmentUncheckedUpdateManyWithoutParentDepartmentNestedInput
+  }
+
+  export type DepartmentUncheckedUpdateManyWithoutParentDepartmentInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    workspaceId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    headUserId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdBy?: StringFieldUpdateOperationsInput | string
+    approvedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    approvedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
