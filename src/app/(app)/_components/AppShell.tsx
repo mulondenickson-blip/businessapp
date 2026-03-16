@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useClerk } from "@clerk/nextjs";
 
@@ -35,6 +35,7 @@ export default function AppShell({
   children,
 }: Props) {
   const pathname = usePathname();
+  const router = useRouter();
   const { signOut } = useClerk();
   const [profileOpen, setProfileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -49,8 +50,42 @@ export default function AppShell({
   const allNavItems = [...mainNavItems, ...bottomNavItems];
   const currentPage = allNavItems.find((n) => n.href === pathname)?.label ?? "MUNIX";
 
+  // Show back button when not on a main nav page
+  const isMainPage = allNavItems.some((n) => n.href === pathname);
+  const showBackButton = !isMainPage;
+
+  // Determine back button label based on current path
+  function getBackLabel(): string {
+    if (pathname.startsWith("/workspace/")) {
+      const parts = pathname.split("/");
+      if (parts.length > 4) {
+        // Inside a workspace sub-page e.g. /workspace/[id]/team
+        return "Back to Workspace";
+      }
+      return "My Workspaces";
+    }
+    if (pathname.startsWith("/create-workspace")) return "Dashboard";
+    if (pathname.startsWith("/profile")) return "Dashboard";
+    if (pathname.startsWith("/account-settings")) return "Dashboard";
+    return "Back";
+  }
+
+  function handleBack() {
+    if (pathname.startsWith("/workspace/")) {
+      const parts = pathname.split("/");
+      if (parts.length > 4) {
+        // e.g. /workspace/[id]/team → go back to /workspace/[id]
+        router.push(`/workspace/${parts[2]}`);
+        return;
+      }
+      router.push("/workspaces");
+      return;
+    }
+    router.back();
+  }
+
   function NavLink({ href, icon, label }: { href: string; icon: string; label: string }) {
-    const isActive = pathname === href;
+    const isActive = pathname === href || pathname.startsWith(href + "/");
     return (
       <Link
         href={href}
@@ -98,7 +133,7 @@ export default function AppShell({
           ))}
         </nav>
 
-        {/* Bottom Nav — Settings & Help */}
+        {/* Bottom Nav */}
         <div className="px-2 py-2 border-t border-gray-100 space-y-1">
           {bottomNavItems.map((item) => (
             <NavLink key={item.href} {...item} />
@@ -134,7 +169,20 @@ export default function AppShell({
 
         {/* Top Bar */}
         <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
-          <div className="text-sm font-medium text-gray-700">{currentPage}</div>
+          <div className="flex items-center gap-3">
+            {/* Back Button */}
+            {showBackButton && (
+              <button
+                onClick={handleBack}
+                className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-indigo-600 transition font-medium"
+              >
+                ← {getBackLabel()}
+              </button>
+            )}
+            {!showBackButton && (
+              <div className="text-sm font-medium text-gray-700">{currentPage}</div>
+            )}
+          </div>
 
           <div className="flex items-center gap-3">
 
