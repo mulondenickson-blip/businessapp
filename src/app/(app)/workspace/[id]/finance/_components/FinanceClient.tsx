@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import {
   LayoutDashboard,
   ArrowUpDown,
@@ -249,7 +250,6 @@ export default function FinanceClient({
   const [isSaving, setIsSaving] = useState(false);
   const [saveError, setSaveError] = useState<string | null>(null);
 
-  // Setup form state
   const [fiscalYearStart, setFiscalYearStart] = useState(
     financeSettings?.fiscalYearStart ?? "January"
   );
@@ -273,8 +273,6 @@ export default function FinanceClient({
   function toggleFeature(key: string) {
     setFeatures((prev) => {
       const updated = { ...prev, [key]: !prev[key as keyof typeof prev] };
-
-      // Auto enable dependencies
       if (key === "enableDoubleEntry" && updated.enableDoubleEntry) {
         updated.enableAccounts = true;
         updated.enableJournalEntries = true;
@@ -288,7 +286,6 @@ export default function FinanceClient({
         updated.enableDoubleEntry = true;
         updated.enableJournalEntries = true;
       }
-
       return updated;
     });
   }
@@ -300,11 +297,7 @@ export default function FinanceClient({
       const res = await fetch(`/api/workspaces/${workspace.id}/finance`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          fiscalYearStart,
-          defaultCurrency,
-          ...features,
-        }),
+        body: JSON.stringify({ fiscalYearStart, defaultCurrency, ...features }),
       });
       if (!res.ok) throw new Error("Failed to save settings");
       setShowSetup(false);
@@ -319,6 +312,23 @@ export default function FinanceClient({
 
   const currency = financeSettings?.defaultCurrency ?? workspace.currency ?? "USD";
 
+  // Build nav items with correct hrefs
+  function getNavItems() {
+    const base = `/workspace/${workspace.id}/finance`;
+    return [
+      { label: "Overview", icon: LayoutDashboard, href: base },
+      ...(financeSettings?.enableInvoicing ? [{ label: "Invoices", icon: FileText, href: `${base}/invoices` }] : []),
+      ...(financeSettings?.enableAccounts ? [{ label: "Accounts", icon: Wallet, href: `${base}/accounts` }] : []),
+      { label: "Transactions", icon: ArrowUpDown, href: `${base}/transactions` },
+      ...(financeSettings?.enableBudgets ? [{ label: "Budgets", icon: PiggyBank, href: `${base}/budgets` }] : []),
+      ...(financeSettings?.enablePayroll ? [{ label: "Payroll", icon: Users, href: `${base}/payroll` }] : []),
+      ...(financeSettings?.enableTax ? [{ label: "Tax", icon: Receipt, href: `${base}/tax` }] : []),
+      ...(financeSettings?.enableJournalEntries ? [{ label: "Journal", icon: BookOpen, href: `${base}/journal` }] : []),
+      ...(financeSettings?.enableAuditTrail ? [{ label: "Audit Trail", icon: ShieldCheck, href: `${base}/audit-trail` }] : []),
+      { label: "Reports", icon: BarChart3, href: `${base}/reports` },
+    ];
+  }
+
   // ─── SETUP SCREEN ───────────────────────────────────────
   if (showSetup && isOwner) {
     return (
@@ -330,46 +340,28 @@ export default function FinanceClient({
           </p>
         </div>
 
-        {/* Basic Settings */}
         <div className="rounded-xl border border-gray-100 bg-white p-6 mb-6">
           <h2 className="text-base font-semibold text-gray-900 mb-5">Basic Settings</h2>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
-              <label className="text-xs font-medium text-gray-700 mb-1 block">
-                Default Currency
-              </label>
-              <select
-                value={defaultCurrency}
-                onChange={(e) => setDefaultCurrency(e.target.value)}
-                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
-              >
-                {CURRENCIES.map((c) => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
+              <label className="text-xs font-medium text-gray-700 mb-1 block">Default Currency</label>
+              <select value={defaultCurrency} onChange={(e) => setDefaultCurrency(e.target.value)}
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
+                {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-medium text-gray-700 mb-1 block">
-                Fiscal Year Starts
-              </label>
-              <select
-                value={fiscalYearStart}
-                onChange={(e) => setFiscalYearStart(e.target.value)}
-                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
-              >
-                {FISCAL_MONTHS.map((m) => (
-                  <option key={m} value={m}>{m}</option>
-                ))}
+              <label className="text-xs font-medium text-gray-700 mb-1 block">Fiscal Year Starts</label>
+              <select value={fiscalYearStart} onChange={(e) => setFiscalYearStart(e.target.value)}
+                className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20">
+                {FISCAL_MONTHS.map((m) => <option key={m} value={m}>{m}</option>)}
               </select>
             </div>
           </div>
         </div>
 
-        {/* Feature Selection */}
         <div className="rounded-xl border border-gray-100 bg-white p-6 mb-6">
-          <h2 className="text-base font-semibold text-gray-900 mb-2">
-            Select Features
-          </h2>
+          <h2 className="text-base font-semibold text-gray-900 mb-2">Select Features</h2>
           <p className="text-xs text-gray-500 mb-5">
             Choose the features you want to use. You can add or remove them anytime from Finance Settings.
           </p>
@@ -377,60 +369,33 @@ export default function FinanceClient({
             {FEATURES.map((feature) => {
               const Icon = feature.icon;
               const isEnabled = features[feature.key as keyof typeof features];
-              const isAutoEnabled =
-                feature.requires.length > 0 &&
-                feature.requires.some(
-                  (req) => features[req as keyof typeof features]
-                );
-
+              const isAutoEnabled = feature.requires.length > 0 &&
+                feature.requires.some((req) => features[req as keyof typeof features]);
               return (
-                <div
-                  key={feature.key}
-                  onClick={() => toggleFeature(feature.key)}
-                  className={[
-                    "flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition",
-                    isEnabled
-                      ? "border-indigo-200 bg-indigo-50"
-                      : "border-gray-100 hover:border-gray-200 bg-white",
-                  ].join(" ")}
-                >
-                  <div className={[
-                    "h-10 w-10 rounded-xl flex items-center justify-center flex-shrink-0 transition",
-                    isEnabled ? "bg-indigo-600" : "bg-gray-100",
-                  ].join(" ")}>
+                <div key={feature.key} onClick={() => toggleFeature(feature.key)}
+                  className={["flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition",
+                    isEnabled ? "border-indigo-200 bg-indigo-50" : "border-gray-100 hover:border-gray-200 bg-white"].join(" ")}>
+                  <div className={["h-10 w-10 rounded-xl flex items-center justify-center flex-shrink-0 transition",
+                    isEnabled ? "bg-indigo-600" : "bg-gray-100"].join(" ")}>
                     <Icon className={`h-5 w-5 ${isEnabled ? "text-white" : "text-gray-500"}`} />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-gray-900">
-                        {feature.label}
-                      </span>
+                      <span className="text-sm font-semibold text-gray-900">{feature.label}</span>
                       {isAutoEnabled && (
-                        <span className="text-xs bg-amber-100 text-amber-600 px-2 py-0.5 rounded-full">
-                          Auto-enabled
-                        </span>
+                        <span className="text-xs bg-amber-100 text-amber-600 px-2 py-0.5 rounded-full">Auto-enabled</span>
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 mt-0.5">
-                      {feature.description}
-                    </p>
+                    <p className="text-xs text-gray-500 mt-0.5">{feature.description}</p>
                     {feature.requires.length > 0 && (
                       <p className="text-xs text-indigo-500 mt-1">
-                        Requires: {feature.requires.map((r) =>
-                          FEATURES.find((f) => f.key === r)?.label
-                        ).join(", ")}
+                        Requires: {feature.requires.map((r) => FEATURES.find((f) => f.key === r)?.label).join(", ")}
                       </p>
                     )}
                   </div>
-                  <div className={[
-                    "h-5 w-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition",
-                    isEnabled
-                      ? "border-indigo-600 bg-indigo-600"
-                      : "border-gray-300 bg-white",
-                  ].join(" ")}>
-                    {isEnabled && (
-                      <CheckCircle2 className="h-3 w-3 text-white" />
-                    )}
+                  <div className={["h-5 w-5 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition",
+                    isEnabled ? "border-indigo-600 bg-indigo-600" : "border-gray-300 bg-white"].join(" ")}>
+                    {isEnabled && <CheckCircle2 className="h-3 w-3 text-white" />}
                   </div>
                 </div>
               );
@@ -439,26 +404,17 @@ export default function FinanceClient({
         </div>
 
         {saveError && (
-          <div className="mb-4 rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-600">
-            {saveError}
-          </div>
+          <div className="mb-4 rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-600">{saveError}</div>
         )}
-
-        <button
-          onClick={() => void handleSaveSettings()}
-          disabled={isSaving}
-          className={[
-            "w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition",
-            isSaving ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700",
-          ].join(" ")}
-        >
+        <button onClick={() => void handleSaveSettings()} disabled={isSaving}
+          className={["w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition",
+            isSaving ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700"].join(" ")}>
           {isSaving ? "Setting up..." : "Complete Finance Setup →"}
         </button>
       </div>
     );
   }
 
-  // ─── NOT OWNER AND NOT SET UP ────────────────────────────
   if (!financeSettings?.isSetup) {
     return (
       <div className="max-w-lg mx-auto text-center py-20">
@@ -485,17 +441,13 @@ export default function FinanceClient({
             {workspace.name} · {currency} · Fiscal year starts {financeSettings.fiscalYearStart}
           </p>
         </div>
-        <div className="flex items-center gap-2">
-          {isOwner && (
-            <button
-              onClick={() => setShowSettings(true)}
-              className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 transition"
-            >
-              <Settings className="h-4 w-4" />
-              Finance Settings
-            </button>
-          )}
-        </div>
+        {isOwner && (
+          <button onClick={() => setShowSettings(true)}
+            className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
+            <Settings className="h-4 w-4" />
+            Finance Settings
+          </button>
+        )}
       </div>
 
       {/* Finance Settings Modal */}
@@ -504,32 +456,21 @@ export default function FinanceClient({
           <div className="bg-white rounded-2xl border border-gray-100 shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
               <h2 className="text-base font-bold text-gray-900">Finance Settings</h2>
-              <button
-                onClick={() => setShowSettings(false)}
-                className="text-gray-400 hover:text-gray-600 transition"
-              >
-                ✕
-              </button>
+              <button onClick={() => setShowSettings(false)} className="text-gray-400 hover:text-gray-600 transition">✕</button>
             </div>
             <div className="p-6">
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="text-xs font-medium text-gray-700 mb-1 block">Default Currency</label>
-                  <select
-                    value={defaultCurrency}
-                    onChange={(e) => setDefaultCurrency(e.target.value)}
-                    className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500"
-                  >
+                  <select value={defaultCurrency} onChange={(e) => setDefaultCurrency(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500">
                     {CURRENCIES.map((c) => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
                   <label className="text-xs font-medium text-gray-700 mb-1 block">Fiscal Year Starts</label>
-                  <select
-                    value={fiscalYearStart}
-                    onChange={(e) => setFiscalYearStart(e.target.value)}
-                    className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500"
-                  >
+                  <select value={fiscalYearStart} onChange={(e) => setFiscalYearStart(e.target.value)}
+                    className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500">
                     {FISCAL_MONTHS.map((m) => <option key={m} value={m}>{m}</option>)}
                   </select>
                 </div>
@@ -540,14 +481,9 @@ export default function FinanceClient({
                   const Icon = feature.icon;
                   const isEnabled = features[feature.key as keyof typeof features];
                   return (
-                    <div
-                      key={feature.key}
-                      onClick={() => toggleFeature(feature.key)}
-                      className={[
-                        "flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition",
-                        isEnabled ? "border-indigo-200 bg-indigo-50" : "border-gray-100 hover:border-gray-200",
-                      ].join(" ")}
-                    >
+                    <div key={feature.key} onClick={() => toggleFeature(feature.key)}
+                      className={["flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition",
+                        isEnabled ? "border-indigo-200 bg-indigo-50" : "border-gray-100 hover:border-gray-200"].join(" ")}>
                       <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${isEnabled ? "bg-indigo-600" : "bg-gray-100"}`}>
                         <Icon className={`h-4 w-4 ${isEnabled ? "text-white" : "text-gray-500"}`} />
                       </div>
@@ -560,22 +496,15 @@ export default function FinanceClient({
                 })}
               </div>
               {saveError && (
-                <div className="mb-4 rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-600">
-                  {saveError}
-                </div>
+                <div className="mb-4 rounded-lg border border-rose-200 bg-rose-50 p-3 text-sm text-rose-600">{saveError}</div>
               )}
               <div className="flex gap-3">
-                <button
-                  onClick={() => void handleSaveSettings()}
-                  disabled={isSaving}
-                  className="flex-1 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700 transition disabled:opacity-50"
-                >
+                <button onClick={() => void handleSaveSettings()} disabled={isSaving}
+                  className="flex-1 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700 transition disabled:opacity-50">
                   {isSaving ? "Saving..." : "Save Settings"}
                 </button>
-                <button
-                  onClick={() => setShowSettings(false)}
-                  className="flex-1 rounded-xl border border-gray-200 px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition"
-                >
+                <button onClick={() => setShowSettings(false)}
+                  className="flex-1 rounded-xl border border-gray-200 px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">
                   Cancel
                 </button>
               </div>
@@ -584,27 +513,17 @@ export default function FinanceClient({
         </div>
       )}
 
-      {/* Finance Sub Navigation */}
+      {/* Finance Tab Navigation */}
       <div className="flex items-center gap-1 mb-6 overflow-x-auto pb-1">
-        {[
-          { label: "Overview", icon: LayoutDashboard },
-          ...(financeSettings.enableInvoicing ? [{ label: "Invoices", icon: FileText }] : []),
-          ...(financeSettings.enableAccounts ? [{ label: "Accounts", icon: Wallet }] : []),
-          { label: "Transactions", icon: ArrowUpDown },
-          ...(financeSettings.enableBudgets ? [{ label: "Budgets", icon: PiggyBank }] : []),
-          ...(financeSettings.enablePayroll ? [{ label: "Payroll", icon: Users }] : []),
-          ...(financeSettings.enableTax ? [{ label: "Tax", icon: Receipt }] : []),
-          ...(financeSettings.enableJournalEntries ? [{ label: "Journal", icon: BookOpen }] : []),
-          ...(financeSettings.enableAuditTrail ? [{ label: "Audit Trail", icon: ShieldCheck }] : []),
-          { label: "Reports", icon: BarChart3 },
-        ].map((item) => (
-          <button
+        {getNavItems().map((item) => (
+          <Link
             key={item.label}
+            href={item.href}
             className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium text-gray-500 hover:text-indigo-600 hover:bg-indigo-50 whitespace-nowrap transition"
           >
             <item.icon className="h-4 w-4" />
             {item.label}
-          </button>
+          </Link>
         ))}
       </div>
 
@@ -612,36 +531,16 @@ export default function FinanceClient({
       {dashboardData && (
         <>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4 mb-6">
-            <StatCard
-              label="Cash Balance"
-              value={formatCurrency(dashboardData.cashBalance, currency)}
-              icon={DollarSign}
-              color="bg-indigo-50 text-indigo-600"
-            />
-            <StatCard
-              label="Monthly Income"
-              value={formatCurrency(dashboardData.monthlyIncome, currency)}
-              icon={TrendingUp}
-              trend="up"
-              color="bg-green-50 text-green-600"
-            />
-            <StatCard
-              label="Monthly Expenses"
-              value={formatCurrency(dashboardData.monthlyExpenses, currency)}
-              icon={TrendingDown}
-              trend="down"
-              color="bg-rose-50 text-rose-600"
-            />
-            <StatCard
-              label="Net Profit"
-              value={formatCurrency(dashboardData.netProfit, currency)}
-              icon={BarChart3}
-              trend={dashboardData.netProfit >= 0 ? "up" : "down"}
-              color="bg-purple-50 text-purple-600"
-            />
+            <StatCard label="Cash Balance" value={formatCurrency(dashboardData.cashBalance, currency)}
+              icon={DollarSign} color="bg-indigo-50 text-indigo-600" />
+            <StatCard label="Monthly Income" value={formatCurrency(dashboardData.monthlyIncome, currency)}
+              icon={TrendingUp} trend="up" color="bg-green-50 text-green-600" />
+            <StatCard label="Monthly Expenses" value={formatCurrency(dashboardData.monthlyExpenses, currency)}
+              icon={TrendingDown} trend="down" color="bg-rose-50 text-rose-600" />
+            <StatCard label="Net Profit" value={formatCurrency(dashboardData.netProfit, currency)}
+              icon={BarChart3} trend={dashboardData.netProfit >= 0 ? "up" : "down"} color="bg-purple-50 text-purple-600" />
           </div>
 
-          {/* Outstanding Invoices Alert */}
           {financeSettings.enableInvoicing && dashboardData.outstandingInvoices > 0 && (
             <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 flex items-center gap-3">
               <AlertCircle className="h-5 w-5 text-amber-500 flex-shrink-0" />
@@ -660,14 +559,13 @@ export default function FinanceClient({
             <div className="rounded-xl border border-gray-100 bg-white p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-sm font-semibold text-gray-900">Recent Transactions</h2>
-                <button className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
+                <Link href={`/workspace/${workspace.id}/finance/transactions`}
+                  className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
                   View all →
-                </button>
+                </Link>
               </div>
               {dashboardData.recentTransactions.length === 0 ? (
-                <div className="py-8 text-center text-sm text-gray-400">
-                  No transactions yet
-                </div>
+                <div className="py-8 text-center text-sm text-gray-400">No transactions yet</div>
               ) : (
                 <div className="space-y-3">
                   {dashboardData.recentTransactions.slice(0, 5).map((t) => (
@@ -676,13 +574,10 @@ export default function FinanceClient({
                         <div className={`h-8 w-8 rounded-lg flex items-center justify-center ${t.type === "income" ? "bg-green-50" : "bg-rose-50"}`}>
                           {t.type === "income"
                             ? <TrendingUp className="h-4 w-4 text-green-600" />
-                            : <TrendingDown className="h-4 w-4 text-rose-600" />
-                          }
+                            : <TrendingDown className="h-4 w-4 text-rose-600" />}
                         </div>
                         <div>
-                          <div className="text-xs font-medium text-gray-900 truncate max-w-[140px]">
-                            {t.description}
-                          </div>
+                          <div className="text-xs font-medium text-gray-900 truncate max-w-[140px]">{t.description}</div>
                           <div className="text-xs text-gray-400">{t.category}</div>
                         </div>
                       </div>
@@ -700,14 +595,13 @@ export default function FinanceClient({
               <div className="rounded-xl border border-gray-100 bg-white p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-sm font-semibold text-gray-900">Recent Invoices</h2>
-                  <button className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
+                  <Link href={`/workspace/${workspace.id}/finance/invoices`}
+                    className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
                     View all →
-                  </button>
+                  </Link>
                 </div>
                 {dashboardData.recentInvoices.length === 0 ? (
-                  <div className="py-8 text-center text-sm text-gray-400">
-                    No invoices yet
-                  </div>
+                  <div className="py-8 text-center text-sm text-gray-400">No invoices yet</div>
                 ) : (
                   <div className="space-y-3">
                     {dashboardData.recentInvoices.map((inv) => {
@@ -745,9 +639,10 @@ export default function FinanceClient({
               <div className="rounded-xl border border-gray-100 bg-white p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-sm font-semibold text-gray-900">Budget Overview</h2>
-                  <button className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
+                  <Link href={`/workspace/${workspace.id}/finance/budgets`}
+                    className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
                     View all →
-                  </button>
+                  </Link>
                 </div>
                 <div className="space-y-4">
                   {dashboardData.budgets.slice(0, 4).map((budget) => {
@@ -761,10 +656,8 @@ export default function FinanceClient({
                           </span>
                         </div>
                         <div className="w-full bg-gray-100 rounded-full h-1.5">
-                          <div
-                            className={`h-1.5 rounded-full transition-all ${pct >= 90 ? "bg-rose-500" : pct >= 70 ? "bg-amber-500" : "bg-indigo-600"}`}
-                            style={{ width: `${pct}%` }}
-                          />
+                          <div className={`h-1.5 rounded-full transition-all ${pct >= 90 ? "bg-rose-500" : pct >= 70 ? "bg-amber-500" : "bg-indigo-600"}`}
+                            style={{ width: `${pct}%` }} />
                         </div>
                       </div>
                     );
@@ -778,9 +671,10 @@ export default function FinanceClient({
               <div className="rounded-xl border border-gray-100 bg-white p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-sm font-semibold text-gray-900">Accounts</h2>
-                  <button className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
+                  <Link href={`/workspace/${workspace.id}/finance/accounts`}
+                    className="text-xs text-indigo-600 hover:text-indigo-700 font-medium transition">
                     View all →
-                  </button>
+                  </Link>
                 </div>
                 <div className="space-y-3">
                   {dashboardData.accounts.map((account) => (
@@ -806,7 +700,7 @@ export default function FinanceClient({
         </>
       )}
 
-      {/* Empty State — No transactions yet */}
+      {/* Empty State */}
       {dashboardData && dashboardData.recentTransactions.length === 0 && (
         <div className="rounded-xl border border-dashed border-gray-200 bg-white p-16 text-center mt-6">
           <div className="h-16 w-16 rounded-2xl bg-indigo-50 flex items-center justify-center mx-auto mb-4">
@@ -817,13 +711,15 @@ export default function FinanceClient({
             Start by recording your first transaction or creating an invoice.
           </p>
           <div className="flex items-center justify-center gap-3">
-            <button className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 transition">
+            <Link href={`/workspace/${workspace.id}/finance/transactions`}
+              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-indigo-700 transition">
               + Add Transaction
-            </button>
+            </Link>
             {financeSettings.enableInvoicing && (
-              <button className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">
+              <Link href={`/workspace/${workspace.id}/finance/invoices`}
+                className="inline-flex items-center gap-2 rounded-xl border border-gray-200 px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">
                 + Create Invoice
-              </button>
+              </Link>
             )}
           </div>
         </div>
