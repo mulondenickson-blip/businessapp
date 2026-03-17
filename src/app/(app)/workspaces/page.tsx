@@ -90,7 +90,7 @@ export default async function WorkspacesPage() {
               return (
                 <Link
                   key={ws.id}
-                  href={`/workspace/${ws.id}/overview`}
+                  href={`/workspace/${ws.id}`}
                   className="group rounded-2xl border border-gray-100 bg-white p-6 hover:border-indigo-200 hover:shadow-md transition"
                 >
                   <div className="flex items-start justify-between mb-4">

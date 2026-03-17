@@ -48,41 +48,9 @@ export default function AppShell({
     .slice(0, 2);
 
   const allNavItems = [...mainNavItems, ...bottomNavItems];
-  const currentPage = allNavItems.find((n) => n.href === pathname)?.label ?? "MUNIX";
-
-  // Show back button when not on a main nav page
   const isMainPage = allNavItems.some((n) => n.href === pathname);
   const showBackButton = !isMainPage;
-
-  // Determine back button label based on current path
-  function getBackLabel(): string {
-    if (pathname.startsWith("/workspace/")) {
-      const parts = pathname.split("/");
-      if (parts.length > 4) {
-        // Inside a workspace sub-page e.g. /workspace/[id]/team
-        return "Back to Workspace";
-      }
-      return "My Workspaces";
-    }
-    if (pathname.startsWith("/create-workspace")) return "Dashboard";
-    if (pathname.startsWith("/profile")) return "Dashboard";
-    if (pathname.startsWith("/account-settings")) return "Dashboard";
-    return "Back";
-  }
-
-  function handleBack() {
-    if (pathname.startsWith("/workspace/")) {
-      const parts = pathname.split("/");
-      if (parts.length > 4) {
-        // e.g. /workspace/[id]/team → go back to /workspace/[id]
-        router.push(`/workspace/${parts[2]}`);
-        return;
-      }
-      router.push("/workspaces");
-      return;
-    }
-    router.back();
-  }
+  const currentPage = allNavItems.find((n) => n.href === pathname)?.label ?? "MUNIX";
 
   function NavLink({ href, icon, label }: { href: string; icon: string; label: string }) {
     const isActive = pathname === href || pathname.startsWith(href + "/");
@@ -170,23 +138,19 @@ export default function AppShell({
         {/* Top Bar */}
         <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
-            {/* Back Button */}
-            {showBackButton && (
+            {showBackButton ? (
               <button
-                onClick={handleBack}
+                onClick={() => router.back()}
                 className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-indigo-600 transition font-medium"
               >
-                ← {getBackLabel()}
+                ← Back
               </button>
-            )}
-            {!showBackButton && (
+            ) : (
               <div className="text-sm font-medium text-gray-700">{currentPage}</div>
             )}
           </div>
 
           <div className="flex items-center gap-3">
-
-            {/* Profile Avatar + Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setProfileOpen(!profileOpen)}
@@ -199,11 +163,8 @@ export default function AppShell({
                 )}
               </button>
 
-              {/* Profile Dropdown */}
               {profileOpen && (
                 <div className="absolute right-0 top-12 w-64 bg-white rounded-xl border border-gray-200 shadow-lg z-50">
-
-                  {/* User Info */}
                   <div className="px-4 py-4 border-b border-gray-100">
                     <div className="flex items-center gap-3">
                       <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-sm font-bold text-indigo-600 overflow-hidden flex-shrink-0">
@@ -219,8 +180,6 @@ export default function AppShell({
                       </div>
                     </div>
                   </div>
-
-                  {/* Menu Items */}
                   <div className="py-2">
                     <Link
                       href="/profile"
@@ -237,7 +196,6 @@ export default function AppShell({
                       <span>🔐</span> Account Settings
                     </Link>
                   </div>
-
                   <div className="border-t border-gray-100 py-2">
                     <button
                       onClick={() => void signOut({ redirectUrl: "/" })}
@@ -258,7 +216,6 @@ export default function AppShell({
         </main>
       </div>
 
-      {/* Overlay to close dropdown */}
       {profileOpen && (
         <div
           className="fixed inset-0 z-10"
