@@ -102,6 +102,14 @@ model Workspace {
   pendingChanges  PendingChange[]
   departments     Department[]
   delegates       WorkspaceDelegate[]
+  financeSettings FinanceSettings?
+  accounts        FinanceAccount[]
+  transactions    Transaction[]
+  invoices        Invoice[]
+  budgets         Budget[]
+  payrollRecords  PayrollRecord[]
+  journalEntries  JournalEntry[]
+  taxRecords      TaxRecord[]
 
   @@index([ownerId])
 }
@@ -111,19 +119,12 @@ model WorkspaceMember {
   workspaceId     String
   userId          String
   role            String
-  // Roles: owner, co-owner, admin, member, viewer
   departmentId    String?
-  // Which department this member belongs to
   invitedBy       String?
-  // userId of who invited this member
   approvalStatus  String    @default("approved")
-  // Status: pending, approved, rejected
-  // owner is always approved by default
   approvedBy      String?
-  // userId of who approved this member
   approvedAt      DateTime?
   personalMessage String?
-  // Message sent with the invite
   createdAt       DateTime  @default(now())
 
   workspace  Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
@@ -142,7 +143,6 @@ model WorkspaceInvite {
   role            String
   departmentId    String?
   invitedBy       String
-  // userId of who sent this invite
   personalMessage String?
   token           String   @unique @default(cuid())
   accepted        Boolean  @default(false)
@@ -162,11 +162,8 @@ model Department {
   name               String
   description        String?
   headUserId         String?
-  // userId of department head
   parentDepartmentId String?
-  // For sub-departments
   status             String    @default("pending")
-  // Status: pending, active, archived
   createdBy          String
   approvedBy         String?
   approvedAt         DateTime?
@@ -187,9 +184,7 @@ model WorkspaceDelegate {
   id                    String   @id @default(cuid())
   workspaceId           String
   delegateUserId        String
-  // userId of the person being delegated to
   delegatedBy           String
-  // userId of owner who delegated
   canApproveDepartments Boolean  @default(true)
   canApproveMembers     Boolean  @default(true)
   canApproveChanges     Boolean  @default(true)
@@ -237,7 +232,6 @@ model EditRequest {
   requesterId String
   reason      String
   status      String   @default("pending")
-  // Status: pending, approved, denied
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -256,7 +250,6 @@ model PendingChange {
   oldValue    String?
   newValue    String
   status      String   @default("pending")
-  // Status: pending, approved, rejected
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -294,4 +287,287 @@ model Conversation {
   @@unique([participantOne, participantTwo])
   @@index([participantOne])
   @@index([participantTwo])
+}
+
+// ─── FINANCE MODELS ───────────────────────────────────────
+
+model FinanceSettings {
+  id              String  @id @default(cuid())
+  workspaceId     String  @unique
+  isSetup         Boolean @default(false)
+  fiscalYearStart String  @default("January")
+  defaultCurrency String  @default("USD")
+
+  // Feature flags — user selects these
+  enableInvoicing       Boolean @default(false)
+  enableAccounts        Boolean @default(false)
+  enableBudgets         Boolean @default(false)
+  enableTax             Boolean @default(false)
+  enablePayroll         Boolean @default(false)
+  enablePayables        Boolean @default(false)
+  enableMultiCurrency   Boolean @default(false)
+  enableDoubleEntry     Boolean @default(false)
+  enableJournalEntries  Boolean @default(false)
+  enableAuditTrail      Boolean @default(false)
+  enableAdvancedReports Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+}
+
+model FinanceAccount {
+  id          String   @id @default(cuid())
+  workspaceId String
+  name        String
+  // e.g. Main Bank Account, Petty Cash
+  type        String
+  // Types: cash, bank, credit, receivable,
+  //        payable, equity, revenue, expense
+  code        String?
+  // Account code e.g. 1001
+  currency    String   @default("USD")
+  balance     Float    @default(0)
+  description String?
+  isActive    Boolean  @default(true)
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  workspace    Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  journalLines JournalLine[]
+
+  @@index([workspaceId])
+  @@index([type])
+}
+
+model Transaction {
+  id            String   @id @default(cuid())
+  workspaceId   String
+  accountId     String?
+  type          String
+  // Types: income, expense, transfer
+  amount        Float
+  currency      String   @default("USD")
+  exchangeRate  Float    @default(1)
+  category      String
+  // AI will suggest categories
+  subCategory   String?
+  description   String
+  reference     String?
+  // Invoice number, receipt number etc
+  date          DateTime
+  attachmentUrl String?
+  // Receipt photo uploaded via Gemini
+  taxAmount     Float?
+  taxRate       Float?
+  departmentId  String?
+  createdBy     String
+  aiCategorized Boolean  @default(false)
+  // Whether AI auto-categorized this
+  aiInsight     String?
+  // AI generated insight about this transaction
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  workspace Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  account   FinanceAccount? @relation(fields: [accountId], references: [id])
+
+  @@index([workspaceId])
+  @@index([type])
+  @@index([category])
+  @@index([date])
+  @@index([createdBy])
+}
+
+model Invoice {
+  id            String    @id @default(cuid())
+  workspaceId   String
+  invoiceNumber String
+  clientName    String
+  clientEmail   String?
+  clientAddress String?
+  clientPhone   String?
+  items         String
+  // JSON array of line items
+  subtotal      Float
+  taxRate       Float     @default(0)
+  taxAmount     Float     @default(0)
+  discount      Float     @default(0)
+  total         Float
+  currency      String    @default("USD")
+  status        String    @default("draft")
+  // Status: draft, sent, paid, overdue, cancelled
+  dueDate       DateTime?
+  paidDate      DateTime?
+  paidAmount    Float?
+  notes         String?
+  terms         String?
+  attachmentUrl String?
+  aiGenerated   Boolean   @default(false)
+  // Whether AI helped generate this invoice
+  createdBy     String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([status])
+  @@index([clientName])
+  @@index([dueDate])
+}
+
+model Budget {
+  id            String   @id @default(cuid())
+  workspaceId   String
+  name          String
+  category      String
+  amount        Float
+  spent         Float    @default(0)
+  currency      String   @default("USD")
+  period        String
+  // monthly, quarterly, yearly
+  startDate     DateTime
+  endDate       DateTime
+  departmentId  String?
+  alertAt       Float    @default(80)
+  // Alert when spent reaches X% of budget
+  notes         String?
+  aiRecommended Boolean  @default(false)
+  // Whether AI recommended this budget
+  createdBy     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([category])
+  @@index([period])
+}
+
+model PayrollRecord {
+  id              String    @id @default(cuid())
+  workspaceId     String
+  employeeId      String
+  // userId of employee
+  employeeName    String
+  period          String
+  // e.g. "January 2025"
+  basicSalary     Float
+  allowances      String?
+  // JSON: {housing, transport, medical}
+  deductions      String?
+  // JSON: {tax, pension, loan}
+  grossPay        Float
+  totalDeductions Float
+  netPay          Float
+  currency        String    @default("USD")
+  status          String    @default("pending")
+  // Status: pending, approved, paid
+  paidDate        DateTime?
+  payslipUrl      String?
+  notes           String?
+  createdBy       String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([employeeId])
+  @@index([period])
+  @@index([status])
+}
+
+model JournalEntry {
+  id          String    @id @default(cuid())
+  workspaceId String
+  entryNumber String
+  date        DateTime
+  description String
+  reference   String?
+  status      String    @default("draft")
+  // Status: draft, posted, reversed
+  createdBy   String
+  postedBy    String?
+  postedAt    DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  workspace Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  lines     JournalLine[]
+
+  @@index([workspaceId])
+  @@index([date])
+  @@index([status])
+}
+
+model JournalLine {
+  id             String   @id @default(cuid())
+  journalEntryId String
+  accountId      String
+  description    String?
+  debit          Float    @default(0)
+  credit         Float    @default(0)
+  createdAt      DateTime @default(now())
+
+  journalEntry JournalEntry   @relation(fields: [journalEntryId], references: [id], onDelete: Cascade)
+  account      FinanceAccount @relation(fields: [accountId], references: [id])
+
+  @@index([journalEntryId])
+  @@index([accountId])
+}
+
+model TaxRecord {
+  id           String    @id @default(cuid())
+  workspaceId  String
+  name         String
+  // e.g. VAT, Income Tax, Withholding Tax
+  taxType      String
+  rate         Float
+  period       String
+  // e.g. "Q1 2025"
+  totalTaxable Float
+  taxAmount    Float
+  status       String    @default("pending")
+  // Status: pending, filed, paid
+  dueDate      DateTime?
+  filedDate    DateTime?
+  paidDate     DateTime?
+  notes        String?
+  createdBy    String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([taxType])
+  @@index([status])
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  workspaceId String
+  userId      String
+  action      String
+  // e.g. created, updated, deleted, viewed
+  entityType  String
+  // e.g. Transaction, Invoice, JournalEntry
+  entityId    String
+  oldValues   String?
+  // JSON of old values
+  newValues   String?
+  // JSON of new values
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  @@index([workspaceId])
+  @@index([userId])
+  @@index([entityType])
+  @@index([createdAt])
 }

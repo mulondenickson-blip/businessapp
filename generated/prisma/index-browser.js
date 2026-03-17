@@ -313,6 +313,193 @@ exports.Prisma.ConversationScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.FinanceSettingsScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  isSetup: 'isSetup',
+  fiscalYearStart: 'fiscalYearStart',
+  defaultCurrency: 'defaultCurrency',
+  enableInvoicing: 'enableInvoicing',
+  enableAccounts: 'enableAccounts',
+  enableBudgets: 'enableBudgets',
+  enableTax: 'enableTax',
+  enablePayroll: 'enablePayroll',
+  enablePayables: 'enablePayables',
+  enableMultiCurrency: 'enableMultiCurrency',
+  enableDoubleEntry: 'enableDoubleEntry',
+  enableJournalEntries: 'enableJournalEntries',
+  enableAuditTrail: 'enableAuditTrail',
+  enableAdvancedReports: 'enableAdvancedReports',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.FinanceAccountScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  type: 'type',
+  code: 'code',
+  currency: 'currency',
+  balance: 'balance',
+  description: 'description',
+  isActive: 'isActive',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TransactionScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  accountId: 'accountId',
+  type: 'type',
+  amount: 'amount',
+  currency: 'currency',
+  exchangeRate: 'exchangeRate',
+  category: 'category',
+  subCategory: 'subCategory',
+  description: 'description',
+  reference: 'reference',
+  date: 'date',
+  attachmentUrl: 'attachmentUrl',
+  taxAmount: 'taxAmount',
+  taxRate: 'taxRate',
+  departmentId: 'departmentId',
+  createdBy: 'createdBy',
+  aiCategorized: 'aiCategorized',
+  aiInsight: 'aiInsight',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InvoiceScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  invoiceNumber: 'invoiceNumber',
+  clientName: 'clientName',
+  clientEmail: 'clientEmail',
+  clientAddress: 'clientAddress',
+  clientPhone: 'clientPhone',
+  items: 'items',
+  subtotal: 'subtotal',
+  taxRate: 'taxRate',
+  taxAmount: 'taxAmount',
+  discount: 'discount',
+  total: 'total',
+  currency: 'currency',
+  status: 'status',
+  dueDate: 'dueDate',
+  paidDate: 'paidDate',
+  paidAmount: 'paidAmount',
+  notes: 'notes',
+  terms: 'terms',
+  attachmentUrl: 'attachmentUrl',
+  aiGenerated: 'aiGenerated',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.BudgetScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  category: 'category',
+  amount: 'amount',
+  spent: 'spent',
+  currency: 'currency',
+  period: 'period',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  departmentId: 'departmentId',
+  alertAt: 'alertAt',
+  notes: 'notes',
+  aiRecommended: 'aiRecommended',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PayrollRecordScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  employeeId: 'employeeId',
+  employeeName: 'employeeName',
+  period: 'period',
+  basicSalary: 'basicSalary',
+  allowances: 'allowances',
+  deductions: 'deductions',
+  grossPay: 'grossPay',
+  totalDeductions: 'totalDeductions',
+  netPay: 'netPay',
+  currency: 'currency',
+  status: 'status',
+  paidDate: 'paidDate',
+  payslipUrl: 'payslipUrl',
+  notes: 'notes',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.JournalEntryScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  entryNumber: 'entryNumber',
+  date: 'date',
+  description: 'description',
+  reference: 'reference',
+  status: 'status',
+  createdBy: 'createdBy',
+  postedBy: 'postedBy',
+  postedAt: 'postedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.JournalLineScalarFieldEnum = {
+  id: 'id',
+  journalEntryId: 'journalEntryId',
+  accountId: 'accountId',
+  description: 'description',
+  debit: 'debit',
+  credit: 'credit',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.TaxRecordScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  taxType: 'taxType',
+  rate: 'rate',
+  period: 'period',
+  totalTaxable: 'totalTaxable',
+  taxAmount: 'taxAmount',
+  status: 'status',
+  dueDate: 'dueDate',
+  filedDate: 'filedDate',
+  paidDate: 'paidDate',
+  notes: 'notes',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.AuditLogScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  userId: 'userId',
+  action: 'action',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  oldValues: 'oldValues',
+  newValues: 'newValues',
+  ipAddress: 'ipAddress',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -342,7 +529,17 @@ exports.Prisma.ModelName = {
   EditRequest: 'EditRequest',
   PendingChange: 'PendingChange',
   Message: 'Message',
-  Conversation: 'Conversation'
+  Conversation: 'Conversation',
+  FinanceSettings: 'FinanceSettings',
+  FinanceAccount: 'FinanceAccount',
+  Transaction: 'Transaction',
+  Invoice: 'Invoice',
+  Budget: 'Budget',
+  PayrollRecord: 'PayrollRecord',
+  JournalEntry: 'JournalEntry',
+  JournalLine: 'JournalLine',
+  TaxRecord: 'TaxRecord',
+  AuditLog: 'AuditLog'
 };
 
 /**
