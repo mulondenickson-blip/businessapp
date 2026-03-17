@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import {
   Plus,
   Search,
-  Filter,
   Download,
   TrendingUp,
   TrendingDown,
@@ -13,7 +12,6 @@ import {
   Upload,
   Sparkles,
   X,
-  ChevronDown,
   Trash2,
   Receipt,
 } from "lucide-react";
@@ -105,7 +103,6 @@ export default function TransactionsClient({
   financeSettings,
 }: Props) {
   const router = useRouter();
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const receiptInputRef = useRef<HTMLInputElement>(null);
 
   const [transactions, setTransactions] = useState(initial);
@@ -117,7 +114,6 @@ export default function TransactionsClient({
   const [isScanning, setIsScanning] = useState(false);
   const [scanSuccess, setScanSuccess] = useState(false);
 
-  // Form state
   const [type, setType] = useState<"income" | "expense" | "transfer">("expense");
   const [amount, setAmount] = useState("");
   const [currency, setCurrency] = useState(financeSettings.defaultCurrency);
@@ -125,12 +121,11 @@ export default function TransactionsClient({
   const [category, setCategory] = useState("auto");
   const [subCategory, setSubCategory] = useState("");
   const [reference, setReference] = useState("");
-  const [date, setDate] = useState(new Date().toISOString().split("T")[0] ?? "");
+  const [date, setDate] = useState(() => new Date().toISOString().split("T")[0] ?? "");
   const [accountId, setAccountId] = useState("");
   const [taxRate, setTaxRate] = useState("");
   const [departmentId, setDepartmentId] = useState("");
   const [attachmentUrl, setAttachmentUrl] = useState("");
-  const [isUploadingReceipt, setIsUploadingReceipt] = useState(false);
 
   const filtered = transactions.filter((t) => {
     const matchesType = filterType === "all" || t.type === filterType;
@@ -152,36 +147,20 @@ export default function TransactionsClient({
   async function handleReceiptScan(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-
     setIsScanning(true);
     setScanSuccess(false);
-
     try {
-      // First upload to Cloudinary
       const formData = new FormData();
       formData.append("file", file);
-      const uploadRes = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
+      const uploadRes = await fetch("/api/upload", { method: "POST", body: formData });
       const uploadData = await uploadRes.json() as { url?: string };
       if (uploadData.url) setAttachmentUrl(uploadData.url);
 
-      // Then scan with Gemini
       const scanFormData = new FormData();
       scanFormData.append("file", file);
-      const scanRes = await fetch("/api/scan-receipt", {
-        method: "POST",
-        body: scanFormData,
-      });
+      const scanRes = await fetch("/api/scan-receipt", { method: "POST", body: scanFormData });
       const scanData = await scanRes.json() as {
-        data?: {
-          amount?: number;
-          date?: string;
-          description?: string;
-          vendor?: string;
-          currency?: string;
-        };
+        data?: { amount?: number; date?: string; description?: string; vendor?: string; currency?: string };
       };
 
       if (scanData.data) {
@@ -204,7 +183,6 @@ export default function TransactionsClient({
     if (!amount || !description || !date) return;
     setIsSubmitting(true);
     setSubmitError(null);
-
     try {
       const res = await fetch(`/api/workspaces/${workspace.id}/transactions`, {
         method: "POST",
@@ -225,12 +203,10 @@ export default function TransactionsClient({
           attachmentUrl: attachmentUrl || undefined,
         }),
       });
-
       if (!res.ok) {
         const data = await res.json() as { error?: string };
         throw new Error(data.error ?? "Failed to save transaction");
       }
-
       const data = await res.json() as { transaction: Transaction };
       setTransactions((prev) => [data.transaction, ...prev]);
       resetForm();
@@ -245,7 +221,6 @@ export default function TransactionsClient({
 
   async function handleDelete(transactionId: string) {
     if (!confirm("Are you sure you want to delete this transaction?")) return;
-
     try {
       await fetch(`/api/workspaces/${workspace.id}/transactions`, {
         method: "DELETE",
@@ -278,13 +253,8 @@ export default function TransactionsClient({
   function exportCSV() {
     const headers = ["Date", "Type", "Description", "Category", "Amount", "Currency", "Reference"];
     const rows = filtered.map((t) => [
-      formatDate(t.date),
-      t.type,
-      t.description,
-      t.category,
-      t.amount,
-      t.currency,
-      t.reference ?? "",
+      formatDate(t.date), t.type, t.description, t.category,
+      t.amount, t.currency, t.reference ?? "",
     ]);
     const csv = [headers, ...rows].map((r) => r.join(",")).join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
@@ -366,9 +336,7 @@ export default function TransactionsClient({
               onClick={() => setFilterType(f)}
               className={[
                 "px-3 py-1.5 rounded-lg text-xs font-medium transition capitalize",
-                filterType === f
-                  ? "bg-white text-indigo-600 shadow-sm"
-                  : "text-gray-500 hover:text-gray-700",
+                filterType === f ? "bg-white text-indigo-600 shadow-sm" : "text-gray-500 hover:text-gray-700",
               ].join(" ")}
             >
               {f}
@@ -422,9 +390,7 @@ export default function TransactionsClient({
                     {t.aiInsight && (
                       <div className="flex items-center gap-1 mt-0.5">
                         <Sparkles className="h-3 w-3 text-indigo-400" />
-                        <span className="text-xs text-indigo-500 truncate max-w-[180px]">
-                          {t.aiInsight}
-                        </span>
+                        <span className="text-xs text-indigo-500 truncate max-w-[180px]">{t.aiInsight}</span>
                       </div>
                     )}
                     {t.reference && (
@@ -434,21 +400,15 @@ export default function TransactionsClient({
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-1.5">
                       <span className="text-xs text-gray-600">{t.category}</span>
-                      {t.aiCategorized && (
-                        <Sparkles className="h-3 w-3 text-indigo-400" title="AI categorized" />
-                      )}
+                      {t.aiCategorized && <Sparkles className="h-3 w-3 text-indigo-400" title="AI categorized" />}
                     </div>
-                    {t.subCategory && (
-                      <div className="text-xs text-gray-400">{t.subCategory}</div>
-                    )}
+                    {t.subCategory && <div className="text-xs text-gray-400">{t.subCategory}</div>}
                   </td>
                   <td className="px-4 py-3">
                     <span className={[
                       "inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full font-medium capitalize",
-                      t.type === "income"
-                        ? "bg-green-100 text-green-700"
-                        : t.type === "expense"
-                        ? "bg-rose-100 text-rose-700"
+                      t.type === "income" ? "bg-green-100 text-green-700"
+                        : t.type === "expense" ? "bg-rose-100 text-rose-700"
                         : "bg-blue-100 text-blue-700",
                     ].join(" ")}>
                       {t.type === "income" && <TrendingUp className="h-3 w-3" />}
@@ -482,14 +442,9 @@ export default function TransactionsClient({
       {showForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
           <div className="bg-white rounded-2xl border border-gray-100 shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto">
-
-            {/* Modal Header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 sticky top-0 bg-white z-10">
               <h2 className="text-base font-bold text-gray-900">Add Transaction</h2>
-              <button
-                onClick={() => { setShowForm(false); resetForm(); }}
-                className="text-gray-400 hover:text-gray-600 transition"
-              >
+              <button onClick={() => { setShowForm(false); resetForm(); }} className="text-gray-400 hover:text-gray-600 transition">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -503,26 +458,15 @@ export default function TransactionsClient({
                     <Sparkles className="h-4 w-4 text-indigo-600" />
                     <span className="text-sm font-semibold text-indigo-900">AI Receipt Scanner</span>
                   </div>
-                  {scanSuccess && (
-                    <span className="text-xs text-green-600 font-medium">✓ Receipt scanned!</span>
-                  )}
+                  {scanSuccess && <span className="text-xs text-green-600 font-medium">✓ Receipt scanned!</span>}
                 </div>
                 <p className="text-xs text-indigo-600 mb-3">
                   Upload a receipt photo and Gemini AI will auto-fill the form for you.
                 </p>
-                <input
-                  ref={receiptInputRef}
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => void handleReceiptScan(e)}
-                />
-                <button
-                  type="button"
-                  onClick={() => receiptInputRef.current?.click()}
-                  disabled={isScanning}
-                  className="inline-flex items-center gap-2 rounded-lg border border-indigo-200 bg-white px-3 py-2 text-xs font-medium text-indigo-600 hover:bg-indigo-100 transition disabled:opacity-50"
-                >
+                <input ref={receiptInputRef} type="file" accept="image/*" className="hidden"
+                  onChange={(e) => void handleReceiptScan(e)} />
+                <button type="button" onClick={() => receiptInputRef.current?.click()} disabled={isScanning}
+                  className="inline-flex items-center gap-2 rounded-lg border border-indigo-200 bg-white px-3 py-2 text-xs font-medium text-indigo-600 hover:bg-indigo-100 transition disabled:opacity-50">
                   <Upload className="h-3.5 w-3.5" />
                   {isScanning ? "Scanning receipt..." : "Upload Receipt"}
                 </button>
@@ -533,130 +477,80 @@ export default function TransactionsClient({
                 <label className="text-xs font-medium text-gray-700 mb-2 block">Transaction Type</label>
                 <div className="grid grid-cols-3 gap-2">
                   {(["income", "expense", "transfer"] as const).map((t) => (
-                    <button
-                      key={t}
-                      type="button"
-                      onClick={() => setType(t)}
-                      className={[
-                        "py-2 rounded-lg text-xs font-semibold capitalize transition border",
+                    <button key={t} type="button" onClick={() => setType(t)}
+                      className={["py-2 rounded-lg text-xs font-semibold capitalize transition border",
                         type === t
-                          ? t === "income"
-                            ? "bg-green-600 text-white border-green-600"
-                            : t === "expense"
-                            ? "bg-rose-600 text-white border-rose-600"
+                          ? t === "income" ? "bg-green-600 text-white border-green-600"
+                            : t === "expense" ? "bg-rose-600 text-white border-rose-600"
                             : "bg-blue-600 text-white border-blue-600"
                           : "bg-white text-gray-600 border-gray-200 hover:border-gray-300",
-                      ].join(" ")}
-                    >
+                      ].join(" ")}>
                       {t}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Amount */}
+              {/* Amount + Currency */}
               <div className="grid grid-cols-3 gap-3">
                 <div className="col-span-2">
                   <label className="text-xs font-medium text-gray-700 mb-1 block">Amount <span className="text-rose-500">*</span></label>
-                  <input
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    placeholder="0.00"
-                    className={inputClass}
-                  />
+                  <input value={amount} onChange={(e) => setAmount(e.target.value)}
+                    type="number" min="0" step="0.01" placeholder="0.00" className={inputClass} />
                 </div>
                 <div>
                   <label className="text-xs font-medium text-gray-700 mb-1 block">Currency</label>
-                  <input
-                    value={currency}
-                    onChange={(e) => setCurrency(e.target.value)}
-                    className={inputClass}
-                    disabled={!financeSettings.enableMultiCurrency}
-                  />
+                  <input value={currency} onChange={(e) => setCurrency(e.target.value)}
+                    className={inputClass} disabled={!financeSettings.enableMultiCurrency} />
                 </div>
               </div>
 
               {/* Description */}
               <div>
                 <label className="text-xs font-medium text-gray-700 mb-1 block">Description <span className="text-rose-500">*</span></label>
-                <input
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="What is this transaction for?"
-                  className={inputClass}
-                />
+                <input value={description} onChange={(e) => setDescription(e.target.value)}
+                  placeholder="What is this transaction for?" className={inputClass} />
               </div>
 
               {/* Category */}
               <div>
                 <label className="text-xs font-medium text-gray-700 mb-1 block">
-                  Category
-                  <span className="ml-2 text-xs text-indigo-500 font-normal">
-                    (leave as Auto for AI suggestion)
-                  </span>
+                  Category <span className="ml-1 text-xs text-indigo-500 font-normal">(leave as Auto for AI suggestion)</span>
                 </label>
-                <select
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
-                  className={inputClass}
-                >
+                <select value={category} onChange={(e) => setCategory(e.target.value)} className={inputClass}>
                   <option value="auto">🤖 Auto (AI will categorize)</option>
-                  {CATEGORIES.map((c) => (
-                    <option key={c} value={c}>{c}</option>
-                  ))}
+                  {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
 
               {/* Sub Category */}
               <div>
                 <label className="text-xs font-medium text-gray-700 mb-1 block">Sub-Category (Optional)</label>
-                <input
-                  value={subCategory}
-                  onChange={(e) => setSubCategory(e.target.value)}
-                  placeholder="More specific category"
-                  className={inputClass}
-                />
+                <input value={subCategory} onChange={(e) => setSubCategory(e.target.value)}
+                  placeholder="More specific category" className={inputClass} />
               </div>
 
               {/* Date */}
               <div>
                 <label className="text-xs font-medium text-gray-700 mb-1 block">Date <span className="text-rose-500">*</span></label>
-                <input
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  className={inputClass}
-                />
+                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} className={inputClass} />
               </div>
 
               {/* Reference */}
               <div>
                 <label className="text-xs font-medium text-gray-700 mb-1 block">Reference (Optional)</label>
-                <input
-                  value={reference}
-                  onChange={(e) => setReference(e.target.value)}
-                  placeholder="Invoice number, receipt number..."
-                  className={inputClass}
-                />
+                <input value={reference} onChange={(e) => setReference(e.target.value)}
+                  placeholder="Invoice number, receipt number..." className={inputClass} />
               </div>
 
               {/* Account */}
               {financeSettings.enableAccounts && accounts.length > 0 && (
                 <div>
                   <label className="text-xs font-medium text-gray-700 mb-1 block">Account (Optional)</label>
-                  <select
-                    value={accountId}
-                    onChange={(e) => setAccountId(e.target.value)}
-                    className={inputClass}
-                  >
+                  <select value={accountId} onChange={(e) => setAccountId(e.target.value)} className={inputClass}>
                     <option value="">Select account</option>
                     {accounts.map((a) => (
-                      <option key={a.id} value={a.id}>
-                        {a.name} ({formatCurrency(a.balance, a.currency)})
-                      </option>
+                      <option key={a.id} value={a.id}>{a.name} ({formatCurrency(a.balance, a.currency)})</option>
                     ))}
                   </select>
                 </div>
@@ -666,16 +560,8 @@ export default function TransactionsClient({
               {financeSettings.enableTax && (
                 <div>
                   <label className="text-xs font-medium text-gray-700 mb-1 block">Tax Rate % (Optional)</label>
-                  <input
-                    value={taxRate}
-                    onChange={(e) => setTaxRate(e.target.value)}
-                    type="number"
-                    min="0"
-                    max="100"
-                    step="0.1"
-                    placeholder="e.g. 18"
-                    className={inputClass}
-                  />
+                  <input value={taxRate} onChange={(e) => setTaxRate(e.target.value)}
+                    type="number" min="0" max="100" step="0.1" placeholder="e.g. 18" className={inputClass} />
                   {taxRate && amount && (
                     <p className="text-xs text-gray-400 mt-1">
                       Tax amount: {formatCurrency(parseFloat(amount) * (parseFloat(taxRate) / 100), currency)}
@@ -688,15 +574,9 @@ export default function TransactionsClient({
               {departments.length > 0 && (
                 <div>
                   <label className="text-xs font-medium text-gray-700 mb-1 block">Department (Optional)</label>
-                  <select
-                    value={departmentId}
-                    onChange={(e) => setDepartmentId(e.target.value)}
-                    className={inputClass}
-                  >
+                  <select value={departmentId} onChange={(e) => setDepartmentId(e.target.value)} className={inputClass}>
                     <option value="">No department</option>
-                    {departments.map((d) => (
-                      <option key={d.id} value={d.id}>{d.name}</option>
-                    ))}
+                    {departments.map((d) => <option key={d.id} value={d.id}>{d.name}</option>)}
                   </select>
                 </div>
               )}
@@ -707,11 +587,8 @@ export default function TransactionsClient({
                   <div className="flex items-center gap-2">
                     <Receipt className="h-4 w-4 text-indigo-600" />
                     <span className="text-xs font-medium text-gray-700">Receipt attached</span>
-                    <button
-                      type="button"
-                      onClick={() => setAttachmentUrl("")}
-                      className="ml-auto text-gray-400 hover:text-rose-500 transition"
-                    >
+                    <button type="button" onClick={() => setAttachmentUrl("")}
+                      className="ml-auto text-gray-400 hover:text-rose-500 transition">
                       <X className="h-3.5 w-3.5" />
                     </button>
                   </div>
@@ -724,26 +601,16 @@ export default function TransactionsClient({
                 </div>
               )}
 
-              {/* Submit */}
               <div className="flex gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={() => void handleSubmit()}
+                <button type="button" onClick={() => void handleSubmit()}
                   disabled={isSubmitting || !amount || !description || !date}
-                  className={[
-                    "flex-1 rounded-xl px-5 py-3 text-sm font-semibold text-white transition",
+                  className={["flex-1 rounded-xl px-5 py-3 text-sm font-semibold text-white transition",
                     isSubmitting || !amount || !description || !date
-                      ? "bg-indigo-400 cursor-not-allowed"
-                      : "bg-indigo-600 hover:bg-indigo-700",
-                  ].join(" ")}
-                >
+                      ? "bg-indigo-400 cursor-not-allowed" : "bg-indigo-600 hover:bg-indigo-700"].join(" ")}>
                   {isSubmitting ? "Saving..." : "Save Transaction"}
                 </button>
-                <button
-                  type="button"
-                  onClick={() => { setShowForm(false); resetForm(); }}
-                  className="flex-1 rounded-xl border border-gray-200 px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition"
-                >
+                <button type="button" onClick={() => { setShowForm(false); resetForm(); }}
+                  className="flex-1 rounded-xl border border-gray-200 px-5 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">
                   Cancel
                 </button>
               </div>
