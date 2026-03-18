@@ -62,6 +62,11 @@ export async function POST(
       enableJournalEntries: boolean;
       enableAuditTrail: boolean;
       enableAdvancedReports: boolean;
+      enableInventory: boolean;
+      enablePurchaseOrders: boolean;
+      enableSalesOrders: boolean;
+      enableCustomers: boolean;
+      enableSuppliers: boolean;
     };
 
     // Auto-enable dependencies
@@ -71,6 +76,14 @@ export async function POST(
       body.enableJournalEntries = true;
     }
     if (body.enableAdvancedReports) body.enableDoubleEntry = true;
+    if (body.enablePurchaseOrders) {
+      body.enableSuppliers = true;
+      body.enableInventory = true;
+    }
+    if (body.enableSalesOrders) {
+      body.enableCustomers = true;
+      body.enableInventory = true;
+    }
 
     const settings = await prisma.financeSettings.upsert({
       where: { workspaceId: id },
