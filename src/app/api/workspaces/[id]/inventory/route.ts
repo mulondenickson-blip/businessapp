@@ -46,13 +46,11 @@ export async function GET(
 
     const { searchParams } = new URL(request.url);
     const category = searchParams.get("category");
-    const lowStock = searchParams.get("lowStock") === "true";
     const search = searchParams.get("search");
 
     const where: Record<string, unknown> = { workspaceId: id };
     if (category) where.category = category;
     if (search) where.name = { contains: search, mode: "insensitive" };
-    if (lowStock) where.currentStock = { lte: prisma.product.fields.minimumStock };
 
     const products = await prisma.product.findMany({
       where,
@@ -101,7 +99,6 @@ export async function POST(
       imageUrl?: string;
     };
 
-    // Generate AI insight
     const aiInsight = await generateProductInsight(
       body.name,
       body.category ?? "General",
@@ -132,7 +129,6 @@ export async function POST(
       },
     });
 
-    // Log initial stock movement if stock > 0
     if (body.currentStock > 0) {
       await prisma.stockMovement.create({
         data: {
@@ -148,7 +144,6 @@ export async function POST(
       });
     }
 
-    // Log activity
     const profile = await prisma.userProfile.findUnique({
       where: { clerkId: userId },
     });
