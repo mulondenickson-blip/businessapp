@@ -10,7 +10,6 @@ import {
   Sparkles,
   X,
   Trash2,
-  Edit,
   TrendingUp,
   TrendingDown,
   BarChart3,
@@ -39,7 +38,7 @@ type Product = {
   imageUrl: string | null;
   isActive: boolean;
   aiInsight: string | null;
-  supplier: Supplier | null;
+  supplier: { id: string; name: string } | null;
   createdAt: Date;
 };
 
@@ -106,7 +105,6 @@ export default function InventoryClient({
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
-  // Form state
   const [name, setName] = useState("");
   const [sku, setSku] = useState("");
   const [barcode, setBarcode] = useState("");
@@ -121,7 +119,6 @@ export default function InventoryClient({
   const [supplierId, setSupplierId] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  // Adjustment form
   const [adjustType, setAdjustType] = useState<"add" | "remove" | "set">("add");
   const [adjustQty, setAdjustQty] = useState("");
   const [adjustNotes, setAdjustNotes] = useState("");
@@ -132,8 +129,8 @@ export default function InventoryClient({
     const matchesSearch =
       !searchQuery ||
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.sku?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      p.category?.toLowerCase().includes(searchQuery.toLowerCase());
+      (p.sku?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false) ||
+      (p.category?.toLowerCase().includes(searchQuery.toLowerCase()) ?? false);
     if (filterType === "low_stock") return matchesSearch && p.currentStock <= p.minimumStock && p.currentStock > 0;
     if (filterType === "out_of_stock") return matchesSearch && p.currentStock === 0;
     return matchesSearch;
@@ -254,7 +251,6 @@ export default function InventoryClient({
   }
 
   const inputClass = "w-full rounded-lg border border-gray-200 px-3 py-2 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20";
-
   const UNITS = ["piece", "kg", "gram", "litre", "ml", "box", "dozen", "metre", "pack", "bag", "bottle", "carton"];
   const CATEGORIES = ["Electronics", "Clothing", "Food & Beverage", "Health & Beauty", "Home & Garden", "Sports", "Stationery", "Tools", "Toys", "Other"];
 
@@ -322,9 +318,7 @@ export default function InventoryClient({
             <div className="text-sm font-semibold text-amber-800">
               {lowStockCount} product{lowStockCount > 1 ? "s" : ""} running low on stock
             </div>
-            <div className="text-xs text-amber-600">
-              Consider restocking soon to avoid stockouts.
-            </div>
+            <div className="text-xs text-amber-600">Consider restocking soon to avoid stockouts.</div>
           </div>
           <button
             onClick={() => setFilterType("low_stock")}
@@ -412,6 +406,11 @@ export default function InventoryClient({
                             </span>
                           </div>
                         )}
+                        {product.supplier && (
+                          <div className="text-xs text-gray-400 mt-0.5">
+                            {product.supplier.name}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </td>
@@ -468,8 +467,6 @@ export default function InventoryClient({
               </button>
             </div>
             <div className="p-6 space-y-4">
-
-              {/* Product Image */}
               <div className="flex items-center gap-4">
                 <div
                   onClick={() => imageInputRef.current?.click()}
@@ -481,7 +478,8 @@ export default function InventoryClient({
                     <Upload className="h-6 w-6 text-gray-400" />
                   )}
                 </div>
-                <input ref={imageInputRef} type="file" accept="image/*" className="hidden" onChange={(e) => void handleImageUpload(e)} />
+                <input ref={imageInputRef} type="file" accept="image/*" className="hidden"
+                  onChange={(e) => void handleImageUpload(e)} />
                 <div>
                   <button type="button" onClick={() => imageInputRef.current?.click()}
                     className="text-sm text-indigo-600 hover:text-indigo-700 font-medium transition">
@@ -527,7 +525,7 @@ export default function InventoryClient({
                   <input value={sellingPrice} onChange={(e) => setSellingPrice(e.target.value)}
                     type="number" min="0" step="0.01" placeholder="0.00" className={inputClass} />
                 </div>
-                {costPrice && sellingPrice && (
+                {costPrice && sellingPrice && parseFloat(sellingPrice) > 0 && (
                   <div className="sm:col-span-2">
                     <div className="rounded-lg bg-green-50 border border-green-100 px-3 py-2 text-xs text-green-700">
                       Profit margin: {(((parseFloat(sellingPrice) - parseFloat(costPrice)) / parseFloat(sellingPrice)) * 100).toFixed(1)}%
