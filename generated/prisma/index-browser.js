@@ -330,6 +330,11 @@ exports.Prisma.FinanceSettingsScalarFieldEnum = {
   enableJournalEntries: 'enableJournalEntries',
   enableAuditTrail: 'enableAuditTrail',
   enableAdvancedReports: 'enableAdvancedReports',
+  enableInventory: 'enableInventory',
+  enablePurchaseOrders: 'enablePurchaseOrders',
+  enableSalesOrders: 'enableSalesOrders',
+  enableCustomers: 'enableCustomers',
+  enableSuppliers: 'enableSuppliers',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -377,6 +382,7 @@ exports.Prisma.InvoiceScalarFieldEnum = {
   id: 'id',
   workspaceId: 'workspaceId',
   invoiceNumber: 'invoiceNumber',
+  customerId: 'customerId',
   clientName: 'clientName',
   clientEmail: 'clientEmail',
   clientAddress: 'clientAddress',
@@ -500,6 +506,148 @@ exports.Prisma.AuditLogScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  sku: 'sku',
+  barcode: 'barcode',
+  category: 'category',
+  description: 'description',
+  unit: 'unit',
+  costPrice: 'costPrice',
+  sellingPrice: 'sellingPrice',
+  currentStock: 'currentStock',
+  minimumStock: 'minimumStock',
+  maximumStock: 'maximumStock',
+  supplierId: 'supplierId',
+  imageUrl: 'imageUrl',
+  isActive: 'isActive',
+  aiInsight: 'aiInsight',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.StockMovementScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  productId: 'productId',
+  type: 'type',
+  quantity: 'quantity',
+  unitCost: 'unitCost',
+  totalCost: 'totalCost',
+  reference: 'reference',
+  notes: 'notes',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.CustomerScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  alternatePhone: 'alternatePhone',
+  address: 'address',
+  city: 'city',
+  country: 'country',
+  taxNumber: 'taxNumber',
+  creditLimit: 'creditLimit',
+  outstandingBalance: 'outstandingBalance',
+  totalPurchases: 'totalPurchases',
+  notes: 'notes',
+  isActive: 'isActive',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SupplierScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  alternatePhone: 'alternatePhone',
+  address: 'address',
+  city: 'city',
+  country: 'country',
+  taxNumber: 'taxNumber',
+  paymentTerms: 'paymentTerms',
+  outstandingBalance: 'outstandingBalance',
+  totalPurchases: 'totalPurchases',
+  notes: 'notes',
+  isActive: 'isActive',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseOrderScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  orderNumber: 'orderNumber',
+  supplierId: 'supplierId',
+  status: 'status',
+  subtotal: 'subtotal',
+  taxAmount: 'taxAmount',
+  discount: 'discount',
+  total: 'total',
+  currency: 'currency',
+  expectedDate: 'expectedDate',
+  receivedDate: 'receivedDate',
+  notes: 'notes',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PurchaseOrderItemScalarFieldEnum = {
+  id: 'id',
+  purchaseOrderId: 'purchaseOrderId',
+  productId: 'productId',
+  description: 'description',
+  quantity: 'quantity',
+  unitCost: 'unitCost',
+  totalCost: 'totalCost',
+  receivedQty: 'receivedQty',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.SalesOrderScalarFieldEnum = {
+  id: 'id',
+  workspaceId: 'workspaceId',
+  orderNumber: 'orderNumber',
+  customerId: 'customerId',
+  customerName: 'customerName',
+  status: 'status',
+  subtotal: 'subtotal',
+  taxAmount: 'taxAmount',
+  discount: 'discount',
+  total: 'total',
+  currency: 'currency',
+  deliveryDate: 'deliveryDate',
+  deliveredDate: 'deliveredDate',
+  deliveryAddress: 'deliveryAddress',
+  notes: 'notes',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SalesOrderItemScalarFieldEnum = {
+  id: 'id',
+  salesOrderId: 'salesOrderId',
+  productId: 'productId',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -539,7 +687,15 @@ exports.Prisma.ModelName = {
   JournalEntry: 'JournalEntry',
   JournalLine: 'JournalLine',
   TaxRecord: 'TaxRecord',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  Product: 'Product',
+  StockMovement: 'StockMovement',
+  Customer: 'Customer',
+  Supplier: 'Supplier',
+  PurchaseOrder: 'PurchaseOrder',
+  PurchaseOrderItem: 'PurchaseOrderItem',
+  SalesOrder: 'SalesOrder',
+  SalesOrderItem: 'SalesOrderItem'
 };
 
 /**

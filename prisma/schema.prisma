@@ -110,6 +110,12 @@ model Workspace {
     payrollRecords      PayrollRecord[]
     journalEntries      JournalEntry[]
     taxRecords          TaxRecord[]
+    products            Product[]
+    customers           Customer[]
+    suppliers           Supplier[]
+    purchaseOrders      PurchaseOrder[]
+    salesOrders         SalesOrder[]
+    stockMovements      StockMovement[]
 
     @@index([ownerId])
 }
@@ -292,41 +298,46 @@ model Conversation {
 // ─── FINANCE MODELS ───────────────────────────────────────
 
 model FinanceSettings {
-    id                      String   @id @default(cuid())
-    workspaceId             String   @unique
-    isSetup                 Boolean  @default(false)
-    fiscalYearStart         String   @default("January")
-    defaultCurrency         String   @default("USD")
+    id                        String   @id @default(cuid())
+    workspaceId               String   @unique
+    isSetup                   Boolean  @default(false)
+    fiscalYearStart           String   @default("January")
+    defaultCurrency           String   @default("USD")
 
-    // Feature flags — user selects these
-    enableInvoicing         Boolean  @default(false)
-    enableAccounts          Boolean  @default(false)
-    enableBudgets           Boolean  @default(false)
-    enableTax               Boolean  @default(false)
-    enablePayroll           Boolean  @default(false)
-    enablePayables          Boolean  @default(false)
-    enableMultiCurrency     Boolean  @default(false)
-    enableDoubleEntry       Boolean  @default(false)
-    enableJournalEntries    Boolean  @default(false)
-    enableAuditTrail        Boolean  @default(false)
-    enableAdvancedReports   Boolean  @default(false)
+    // Core features
+    enableInvoicing           Boolean  @default(false)
+    enableAccounts            Boolean  @default(false)
+    enableBudgets             Boolean  @default(false)
+    enableTax                 Boolean  @default(false)
+    enablePayroll             Boolean  @default(false)
+    enablePayables            Boolean  @default(false)
+    enableMultiCurrency       Boolean  @default(false)
+    enableDoubleEntry         Boolean  @default(false)
+    enableJournalEntries      Boolean  @default(false)
+    enableAuditTrail          Boolean  @default(false)
+    enableAdvancedReports     Boolean  @default(false)
 
-    createdAt               DateTime @default(now())
-    updatedAt               DateTime @updatedAt
+    // New features
+    enableInventory           Boolean  @default(false)
+    enablePurchaseOrders      Boolean  @default(false)
+    enableSalesOrders         Boolean  @default(false)
+    enableCustomers           Boolean  @default(false)
+    enableSuppliers           Boolean  @default(false)
 
-    workspace               Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    createdAt                 DateTime @default(now())
+    updatedAt                 DateTime @updatedAt
+
+    workspace                 Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 }
 
 model FinanceAccount {
     id            String   @id @default(cuid())
     workspaceId   String
     name          String
-    // e.g. Main Bank Account, Petty Cash
     type          String
     // Types: cash, bank, credit, receivable,
     //        payable, equity, revenue, expense
     code          String?
-    // Account code e.g. 1001
     currency      String   @default("USD")
     balance       Float    @default(0)
     description   String?
@@ -353,22 +364,17 @@ model Transaction {
     currency        String   @default("USD")
     exchangeRate    Float    @default(1)
     category        String
-    // AI will suggest categories
     subCategory     String?
     description     String
     reference       String?
-    // Invoice number, receipt number etc
     date            DateTime
     attachmentUrl   String?
-    // Receipt photo uploaded via Gemini
     taxAmount       Float?
     taxRate         Float?
     departmentId    String?
     createdBy       String
     aiCategorized   Boolean  @default(false)
-    // Whether AI auto-categorized this
     aiInsight       String?
-    // AI generated insight about this transaction
     createdAt       DateTime @default(now())
     updatedAt       DateTime @updatedAt
 
@@ -386,6 +392,7 @@ model Invoice {
     id              String   @id @default(cuid())
     workspaceId     String
     invoiceNumber   String
+    customerId      String?
     clientName      String
     clientEmail     String?
     clientAddress   String?
@@ -407,12 +414,12 @@ model Invoice {
     terms           String?
     attachmentUrl   String?
     aiGenerated     Boolean  @default(false)
-    // Whether AI helped generate this invoice
     createdBy       String
     createdAt       DateTime @default(now())
     updatedAt       DateTime @updatedAt
 
-    workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    workspace       Workspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    customer        Customer?  @relation(fields: [customerId], references: [id])
 
     @@index([workspaceId])
     @@index([status])
@@ -429,15 +436,12 @@ model Budget {
     spent         Float    @default(0)
     currency      String   @default("USD")
     period        String
-    // monthly, quarterly, yearly
     startDate     DateTime
     endDate       DateTime
     departmentId  String?
     alertAt       Float    @default(80)
-    // Alert when spent reaches X% of budget
     notes         String?
     aiRecommended Boolean  @default(false)
-    // Whether AI recommended this budget
     createdBy     String
     createdAt     DateTime @default(now())
     updatedAt     DateTime @updatedAt
@@ -453,21 +457,16 @@ model PayrollRecord {
     id              String   @id @default(cuid())
     workspaceId     String
     employeeId      String
-    // userId of employee
     employeeName    String
     period          String
-    // e.g. "January 2025"
     basicSalary     Float
     allowances      String?
-    // JSON: {housing, transport, medical}
     deductions      String?
-    // JSON: {tax, pension, loan}
     grossPay        Float
     totalDeductions Float
     netPay          Float
     currency        String   @default("USD")
     status          String   @default("pending")
-    // Status: pending, approved, paid
     paidDate        DateTime?
     payslipUrl      String?
     notes           String?
@@ -491,7 +490,6 @@ model JournalEntry {
     description   String
     reference     String?
     status        String   @default("draft")
-    // Status: draft, posted, reversed
     createdBy     String
     postedBy      String?
     postedAt      DateTime?
@@ -526,15 +524,12 @@ model TaxRecord {
     id            String   @id @default(cuid())
     workspaceId   String
     name          String
-    // e.g. VAT, Income Tax, Withholding Tax
     taxType       String
     rate          Float
     period        String
-    // e.g. "Q1 2025"
     totalTaxable  Float
     taxAmount     Float
     status        String   @default("pending")
-    // Status: pending, filed, paid
     dueDate       DateTime?
     filedDate     DateTime?
     paidDate      DateTime?
@@ -555,14 +550,10 @@ model AuditLog {
     workspaceId   String
     userId        String
     action        String
-    // e.g. created, updated, deleted, viewed
     entityType    String
-    // e.g. Transaction, Invoice, JournalEntry
     entityId      String
     oldValues     String?
-    // JSON of old values
     newValues     String?
-    // JSON of new values
     ipAddress     String?
     createdAt     DateTime @default(now())
 
@@ -570,4 +561,224 @@ model AuditLog {
     @@index([userId])
     @@index([entityType])
     @@index([createdAt])
+}
+
+// ─── INVENTORY & COMMERCE MODELS ──────────────────────────
+
+model Product {
+    id              String   @id @default(cuid())
+    workspaceId     String
+    name            String
+    sku             String?
+    // Stock Keeping Unit
+    barcode         String?
+    category        String?
+    description     String?
+    unit            String   @default("piece")
+    // e.g. piece, kg, litre, box, dozen
+    costPrice       Float    @default(0)
+    // How much you buy it for
+    sellingPrice    Float    @default(0)
+    // How much you sell it for
+    currentStock    Float    @default(0)
+    minimumStock    Float    @default(0)
+    // Alert when stock falls below this
+    maximumStock    Float?
+    supplierId      String?
+    imageUrl        String?
+    isActive        Boolean  @default(true)
+    aiInsight       String?
+    // AI generated insight e.g. fast moving item
+    createdBy       String
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+
+    workspace       Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    supplier        Supplier?       @relation(fields: [supplierId], references: [id])
+    stockMovements  StockMovement[]
+    purchaseItems   PurchaseOrderItem[]
+    salesItems      SalesOrderItem[]
+
+    @@index([workspaceId])
+    @@index([sku])
+    @@index([category])
+    @@index([supplierId])
+}
+
+model StockMovement {
+    id            String   @id @default(cuid())
+    workspaceId   String
+    productId     String
+    type          String
+    // Types: purchase, sale, adjustment,
+    //        return, damage, transfer
+    quantity      Float
+    unitCost      Float?
+    totalCost     Float?
+    reference     String?
+    // Order number or reference
+    notes         String?
+    createdBy     String
+    createdAt     DateTime @default(now())
+
+    workspace     Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    product       Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+    @@index([workspaceId])
+    @@index([productId])
+    @@index([type])
+    @@index([createdAt])
+}
+
+model Customer {
+    id               String   @id @default(cuid())
+    workspaceId      String
+    name             String
+    email            String?
+    phone            String?
+    alternatePhone   String?
+    address          String?
+    city             String?
+    country          String?
+    taxNumber        String?
+    creditLimit      Float    @default(0)
+    outstandingBalance Float  @default(0)
+    totalPurchases   Float    @default(0)
+    notes            String?
+    isActive         Boolean  @default(true)
+    createdBy        String
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+
+    workspace        Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    salesOrders      SalesOrder[]
+    invoices         Invoice[]
+
+    @@index([workspaceId])
+    @@index([name])
+    @@index([email])
+}
+
+model Supplier {
+    id               String   @id @default(cuid())
+    workspaceId      String
+    name             String
+    email            String?
+    phone            String?
+    alternatePhone   String?
+    address          String?
+    city             String?
+    country          String?
+    taxNumber        String?
+    paymentTerms     String?
+    // e.g. Net 30, Net 60, Cash on delivery
+    outstandingBalance Float  @default(0)
+    totalPurchases   Float    @default(0)
+    notes            String?
+    isActive         Boolean  @default(true)
+    createdBy        String
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+
+    workspace        Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    purchaseOrders   PurchaseOrder[]
+    products         Product[]
+
+    @@index([workspaceId])
+    @@index([name])
+}
+
+model PurchaseOrder {
+    id              String   @id @default(cuid())
+    workspaceId     String
+    orderNumber     String
+    supplierId      String
+    status          String   @default("draft")
+    // Status: draft, sent, confirmed,
+    //         received, partial, cancelled
+    subtotal        Float    @default(0)
+    taxAmount       Float    @default(0)
+    discount        Float    @default(0)
+    total           Float    @default(0)
+    currency        String   @default("USD")
+    expectedDate    DateTime?
+    receivedDate    DateTime?
+    notes           String?
+    createdBy       String
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+
+    workspace       Workspace           @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    supplier        Supplier            @relation(fields: [supplierId], references: [id])
+    items           PurchaseOrderItem[]
+
+    @@index([workspaceId])
+    @@index([supplierId])
+    @@index([status])
+}
+
+model PurchaseOrderItem {
+    id              String   @id @default(cuid())
+    purchaseOrderId String
+    productId       String
+    description     String?
+    quantity        Float
+    unitCost        Float
+    totalCost       Float
+    receivedQty     Float    @default(0)
+    createdAt       DateTime @default(now())
+
+    purchaseOrder   PurchaseOrder @relation(fields: [purchaseOrderId], references: [id], onDelete: Cascade)
+    product         Product       @relation(fields: [productId], references: [id])
+
+    @@index([purchaseOrderId])
+    @@index([productId])
+}
+
+model SalesOrder {
+    id              String   @id @default(cuid())
+    workspaceId     String
+    orderNumber     String
+    customerId      String?
+    customerName    String
+    status          String   @default("draft")
+    // Status: draft, confirmed, processing,
+    //         shipped, delivered, cancelled
+    subtotal        Float    @default(0)
+    taxAmount       Float    @default(0)
+    discount        Float    @default(0)
+    total           Float    @default(0)
+    currency        String   @default("USD")
+    deliveryDate    DateTime?
+    deliveredDate   DateTime?
+    deliveryAddress String?
+    notes           String?
+    createdBy       String
+    createdAt       DateTime @default(now())
+    updatedAt       DateTime @updatedAt
+
+    workspace       Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+    customer        Customer?        @relation(fields: [customerId], references: [id])
+    items           SalesOrderItem[]
+
+    @@index([workspaceId])
+    @@index([customerId])
+    @@index([status])
+}
+
+model SalesOrderItem {
+    id            String   @id @default(cuid())
+    salesOrderId  String
+    productId     String
+    description   String?
+    quantity      Float
+    unitPrice     Float
+    totalPrice    Float
+    createdAt     DateTime @default(now())
+
+    salesOrder    SalesOrder @relation(fields: [salesOrderId], references: [id], onDelete: Cascade)
+    product       Product    @relation(fields: [productId], references: [id])
+
+    @@index([salesOrderId])
+    @@index([productId])
 }

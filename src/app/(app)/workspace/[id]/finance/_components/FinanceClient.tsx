@@ -10,6 +10,7 @@ import {
   Wallet,
   PiggyBank,
   Users,
+  UserCheck,
   BookOpen,
   Receipt,
   Globe,
@@ -22,6 +23,10 @@ import {
   DollarSign,
   AlertCircle,
   CheckCircle2,
+  Package,
+  ShoppingCart,
+  ShoppingBag,
+  Truck,
 } from "lucide-react";
 
 type FinanceSettings = {
@@ -40,6 +45,11 @@ type FinanceSettings = {
   enableJournalEntries: boolean;
   enableAuditTrail: boolean;
   enableAdvancedReports: boolean;
+  enableInventory: boolean;
+  enablePurchaseOrders: boolean;
+  enableSalesOrders: boolean;
+  enableCustomers: boolean;
+  enableSuppliers: boolean;
 } | null;
 
 type Transaction = {
@@ -124,6 +134,41 @@ const FEATURES = [
     requires: [],
   },
   {
+    key: "enableCustomers",
+    label: "Customer Management",
+    description: "Manage customer records, purchase history and outstanding balances",
+    icon: Users,
+    requires: [],
+  },
+  {
+    key: "enableSuppliers",
+    label: "Supplier Management",
+    description: "Manage supplier records, payment terms and outstanding balances",
+    icon: Truck,
+    requires: [],
+  },
+  {
+    key: "enableInventory",
+    label: "Inventory & Stock",
+    description: "Track products, stock levels, valuations and low stock alerts",
+    icon: Package,
+    requires: [],
+  },
+  {
+    key: "enablePurchaseOrders",
+    label: "Purchase Orders",
+    description: "Create and manage orders to suppliers, track deliveries",
+    icon: ShoppingCart,
+    requires: ["enableSuppliers", "enableInventory"],
+  },
+  {
+    key: "enableSalesOrders",
+    label: "Sales Orders",
+    description: "Create and manage customer orders, track fulfilment",
+    icon: ShoppingBag,
+    requires: ["enableCustomers", "enableInventory"],
+  },
+  {
     key: "enableAccounts",
     label: "Accounts Management",
     description: "Manage bank accounts, cash, credit and other accounts",
@@ -148,7 +193,7 @@ const FEATURES = [
     key: "enablePayroll",
     label: "Payroll Management",
     description: "Process employee salaries, allowances, deductions and payslips",
-    icon: Users,
+    icon: UserCheck,
     requires: [],
   },
   {
@@ -268,6 +313,11 @@ export default function FinanceClient({
     enableJournalEntries: financeSettings?.enableJournalEntries ?? false,
     enableAuditTrail: financeSettings?.enableAuditTrail ?? false,
     enableAdvancedReports: financeSettings?.enableAdvancedReports ?? false,
+    enableInventory: financeSettings?.enableInventory ?? false,
+    enablePurchaseOrders: financeSettings?.enablePurchaseOrders ?? false,
+    enableSalesOrders: financeSettings?.enableSalesOrders ?? false,
+    enableCustomers: financeSettings?.enableCustomers ?? false,
+    enableSuppliers: financeSettings?.enableSuppliers ?? false,
   });
 
   function toggleFeature(key: string) {
@@ -285,6 +335,14 @@ export default function FinanceClient({
         updated.enableAccounts = true;
         updated.enableDoubleEntry = true;
         updated.enableJournalEntries = true;
+      }
+      if (key === "enablePurchaseOrders" && updated.enablePurchaseOrders) {
+        updated.enableSuppliers = true;
+        updated.enableInventory = true;
+      }
+      if (key === "enableSalesOrders" && updated.enableSalesOrders) {
+        updated.enableCustomers = true;
+        updated.enableInventory = true;
       }
       return updated;
     });
@@ -312,16 +370,20 @@ export default function FinanceClient({
 
   const currency = financeSettings?.defaultCurrency ?? workspace.currency ?? "USD";
 
-  // Build nav items with correct hrefs
   function getNavItems() {
     const base = `/workspace/${workspace.id}/finance`;
     return [
       { label: "Overview", icon: LayoutDashboard, href: base },
+      ...(financeSettings?.enableInventory ? [{ label: "Inventory", icon: Package, href: `${base}/inventory` }] : []),
+      ...(financeSettings?.enableCustomers ? [{ label: "Customers", icon: Users, href: `${base}/customers` }] : []),
+      ...(financeSettings?.enableSuppliers ? [{ label: "Suppliers", icon: Truck, href: `${base}/suppliers` }] : []),
+      ...(financeSettings?.enablePurchaseOrders ? [{ label: "Purchases", icon: ShoppingCart, href: `${base}/purchases` }] : []),
+      ...(financeSettings?.enableSalesOrders ? [{ label: "Sales", icon: ShoppingBag, href: `${base}/sales` }] : []),
       ...(financeSettings?.enableInvoicing ? [{ label: "Invoices", icon: FileText, href: `${base}/invoices` }] : []),
       ...(financeSettings?.enableAccounts ? [{ label: "Accounts", icon: Wallet, href: `${base}/accounts` }] : []),
       { label: "Transactions", icon: ArrowUpDown, href: `${base}/transactions` },
       ...(financeSettings?.enableBudgets ? [{ label: "Budgets", icon: PiggyBank, href: `${base}/budgets` }] : []),
-      ...(financeSettings?.enablePayroll ? [{ label: "Payroll", icon: Users, href: `${base}/payroll` }] : []),
+      ...(financeSettings?.enablePayroll ? [{ label: "Payroll", icon: UserCheck, href: `${base}/payroll` }] : []),
       ...(financeSettings?.enableTax ? [{ label: "Tax", icon: Receipt, href: `${base}/tax` }] : []),
       ...(financeSettings?.enableJournalEntries ? [{ label: "Journal", icon: BookOpen, href: `${base}/journal` }] : []),
       ...(financeSettings?.enableAuditTrail ? [{ label: "Audit Trail", icon: ShieldCheck, href: `${base}/audit-trail` }] : []),
